@@ -58,11 +58,15 @@ class Note(db.Model):
     text = db.Column(db.Text, nullable=True)
     notebook_id = db.Column(db.Integer, db.ForeignKey('notebooks.id'))
     # tags = db.relationship("Tag", back_populates='name',
-    #                        secondary="notes_to_tags")
+    #                        secondary="Notes_To_Tags")
 
 
-Notes_To_Tags = db.Table('notes_to_tags', db.Model.metadata, db.Column("tags_id", db.Integer, db.ForeignKey("tags.id"), primary_key=True),
-                         db.Column("notes_id", db.Integer, db.ForeignKey("notes.id"), primary_key=True))
+# Notes_To_Tags = db.Table('notes_to_tags', db.Model.metadata, db.Column("tags_id", db.Integer, db.ForeignKey("tags.id"), primary_key=True),
+#                          db.Column("notes_id", db.Integer, db.ForeignKey("notes.id"), primary_key=True))
+class Notes_To_Tags(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    tags_id = db.Column(db.Integer, db.ForeignKey('tags.id'))
+    notes_id = db.Column(db.Integer, db.ForeignKey('notes.id'))
 
 
 class Tag(db.Model):

@@ -2,6 +2,8 @@ from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .notebooks import seed_notebooks
 from .notes import seed_notes
+from .tags import seed_tags
+from .notes_to_tags import seed_notes_to_tags
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -14,6 +16,8 @@ def seed():
     seed_users()
     seed_notebooks()
     seed_notes()
+    seed_tags()
+    seed_notes_to_tags()
     # Add other seed functions here
 
 
