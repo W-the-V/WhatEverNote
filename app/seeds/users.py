@@ -18,10 +18,14 @@ def seed_users():
 
     while x >= 0:
         name = fake.first_name()
+        email = fake.email()
+        email = email.split("@")
+        email[0] = email[0] + f'{random.randint(0, 9999)}@'
+        email = ''.join(email)
         u = User(firstName=name,
                  lastName=fake.last_name(),
                  username=f'{name}{random.randint(0,9999)}',
-                 email=f'{fake.email()}{random.randint(0,9999)}',
+                 email=email,
                  password='password')
         db.session.add(u)
         db.session.commit()
