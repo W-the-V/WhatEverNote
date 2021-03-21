@@ -1,5 +1,5 @@
 from flask.cli import AppGroup
-from .users import seed_users, undo_users
+from .users import seed_users, db
 from .notebooks import seed_notebooks
 from .notes import seed_notes
 from .tags import seed_tags
@@ -24,5 +24,7 @@ def seed():
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():
-    undo_users()
+    db.session.execute('TRUNCATE users CASCADE;')
+    db.session.execute('TRUNCATE tags CASCADE;')
+    db.session.commit()
     # Add other undo functions here

@@ -16,7 +16,8 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     theme = db.Column(db.Boolean(), nullable=True)
     bgroundimg = db.Column(db.Integer(), nullable=True)
-    notebooks = db.relationship("Notebook", backref='notebook', lazy=True)
+    notebooks = db.relationship("Notebook", backref='User', lazy=False)
+    tags = db.relationship("Tag", backref='User', lazy=False)
 
     @property
     def password(self):
@@ -47,7 +48,7 @@ class Notebook(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = db.Column(db.String(50), nullable=False)
-    notes = db.relationship("Note", backref='note', lazy=True)
+    notes = db.relationship("Note", backref='notebook', lazy=False)
 
 
 class Note(db.Model):
@@ -67,10 +68,13 @@ class Notes_To_Tags(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     tags_id = db.Column(db.Integer, db.ForeignKey('tags.id'))
     notes_id = db.Column(db.Integer, db.ForeignKey('notes.id'))
+    notes = db.relationship("Note", backref='tag', lazy=False)
+    tags = db.relationship("Tag", backref='note', lazy=False)
 
 
 class Tag(db.Model):
     __tablename__ = 'tags'
 
     id = db.Column(db.Integer, primary_key=True)
+    userId = db.Column(db.Integer, db.ForeignKey('users.id'))
     name = db.Column(db.String(30), nullable=True)

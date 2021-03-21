@@ -11,8 +11,8 @@ def seed_notebooks():
                       "By Thursday", "By Friday", "Necessities", "IMPORTANT", ]
     users = User.query.all()
 
-    just_demo = True
     x = 10
+    just_demo = False
 
     if not just_demo:
         while x >= 0:

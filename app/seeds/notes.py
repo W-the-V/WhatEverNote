@@ -8,8 +8,8 @@ def seed_notes():
     note_names = ["URGENT", "For tomorrow", "Finish these later!"]
     notebooks = Notebook.query.all()
 
-    just_demo = True
     x = 10
+    just_demo = False
 
     if not just_demo:
         while x >= 0:
