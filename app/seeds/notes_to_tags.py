@@ -1,4 +1,4 @@
-from app.models import db, User, Notebook, Note, Tag, Notes_To_Tags
+from app.models import db, Note, Tag, Notes_To_Tags
 from faker import Faker
 import random
 fake = Faker()
@@ -9,6 +9,7 @@ def seed_notes_to_tags():
     notes = Note.query.all()
 
     x = 10
+
     while x >= 0:
         n = Notes_To_Tags(
             tags_id=tags[random.randint(1, len(tags) - 1)].id,

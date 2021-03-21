@@ -10,11 +10,25 @@ def seed_notebooks():
                       "By Tomorrow", "By Monday", "By Tuesday", "By Wednesday",
                       "By Thursday", "By Friday", "Necessities", "IMPORTANT", ]
     users = User.query.all()
+
+    just_demo = True
     x = 10
-    while x >= 0:
-        n = Notebook(
-            userId=users[random.randint(0, len(users) - 1)].id,
-            name=notebook_names[random.randint(0, len(notebook_names) - 1)])
-        db.session.add(n)
-        db.session.commit()
-        x -= 1
+
+    if not just_demo:
+        while x >= 0:
+            n = Notebook(
+                userId=users[random.randint(0, len(users) - 1)].id,
+                name=notebook_names[random.randint
+                                    (0, len(notebook_names) - 1)])
+            db.session.add(n)
+            db.session.commit()
+            x -= 1
+    else:
+        while x >= 0:
+            n = Notebook(
+                userId=User.query.filter_by(firstName="Demo").first().id,
+                name=notebook_names[random.randint
+                                    (0, len(notebook_names) - 1)])
+            db.session.add(n)
+            db.session.commit()
+            x -= 1

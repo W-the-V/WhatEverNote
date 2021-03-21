@@ -15,6 +15,7 @@ def seed_users():
         db.session.commit()
 
     x = 10
+
     while x >= 0:
         name = fake.first_name()
         u = User(firstName=name,
