@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { NavLink, Redirect } from "react-router-dom";
 import { login } from "../../services/auth";
-import "./index.css"
-import mousepic from "../../images/mouse.png"
+import "./index.css";
+import mousepic from "../../images/mouse.png";
 
-const LoginForm = ({ authenticated, setAuthenticated }) => {
+const LoginForm = ({
+  authenticated,
+  setAuthenticated,
+  setSignup,
+  setLogin,
+}) => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,6 +22,10 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     } else {
       setErrors(user.errors);
     }
+  };
+  const signupButton = () => {
+    setLogin(false);
+    setSignup(true);
   };
 
   const updateEmail = (e) => {
@@ -65,16 +74,20 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
             onChange={updatePassword}
           />
         </div>
-          <button type="submit">Continue</button>
+        <button className="form__button" type="submit">
+          Continue
+        </button>
       </form>
       <div className="login_footer__container">
         <div className="Remember_me__holder">
           <input type="checkbox" />
-          <label>   Remember me for 30 days</label>
+          <label> Remember me for 30 days</label>
         </div>
         <div className="donthaveaccount__holder">
           <span>Don't have an account?</span>
-          <NavLink to="/sign-up">Create account</NavLink>
+          <button className="Login__button" onClick={signupButton}>
+            Create account
+          </button>
         </div>
       </div>
     </div>
