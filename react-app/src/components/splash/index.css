@@ -101,6 +101,10 @@
     font-family: sans-serif;
     line-height: 3;
 }
+splash__quote__text:hover{
+    color:black;
+}
+
 .splash_mag__container ul{
     display: flex;
     flex-direction: row;
@@ -127,4 +131,21 @@
     font-size: 35px;
     font-family: 'Frank Ruhl Libre', serif;
 
+}
+
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: .5s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
