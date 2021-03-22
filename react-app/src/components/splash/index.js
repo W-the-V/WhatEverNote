@@ -7,9 +7,12 @@ import laptopPic from "../../images/laptopEvernote.png";
 import "./index.css";
 import SignUpForm from "../auth/SignUpForm";
 import LoginForm from "../auth/LoginForm";
+import {useSplash} from "../../context/SplashContext"
+
 
 
 const Splash = () => {
+  const [quote, setQuote] = useState("forbes")
   const [authenticated, setAuthenticated] = useState(false);
   const [signup, setSignup] = useState(false);
   const [login, setLogin] = useState(false);
@@ -35,6 +38,7 @@ const Splash = () => {
   };
   if (authenticated) {
     
+
     return (
       <Redirect
         to="/home"
@@ -126,6 +130,28 @@ const Splash = () => {
                 notes.
               </span>
             </div>
+            <div className="splash__section3__container">
+                <div className="splash__green__quote">"</div>
+                <div className="splash__quote">
+                    {quote === "forbes" ? <span className="splash__quote__text.fade-in">"Such a great App... Whatever"</span> : null}
+                    {quote === "inc" ? <span className="splash__quote__text.fade-in">"Another hot review"</span> : null}
+                    {quote === "verge" ? <span className="splash__quote__text fade-in">"Verge loves this company"</span> : null}
+                    {quote === "business" ? <span>"Business thinks we're  bomb"</span> : null}
+                    {quote === "well-good" ? <span>"Another hot review"</span> : null}
+
+                    <span>-An Expert</span>
+                </div>
+                <div className="splash_mag__container">
+                    <ul>
+                        <li>FakeMag</li>
+                        <li onClick={() => setQuote("forbes")}>FakeMag2</li>
+                        <li onClick={() => setQuote("inc")}>FakeMag3</li>
+                        <li onClick={() => setQuote("verge")}>FakeMag4</li>
+                        <li onClick={() => setQuote("business")}>FakeMag5</li>
+                        <li onClick={() => setQuote("well-good")}>FakeMag6</li>
+                    </ul>
+                </div>
+
             <div className="splash__bullet">
               <span className="splash__bullet__header">
                 YOUR NOTES, YOUR WAY
@@ -134,6 +160,7 @@ const Splash = () => {
                 Express yourself with formatting tools that help you write how
                 you think.
               </span>
+
             </div>
             <div className="splash__bullet">
               <span className="splash__bullet__header">FIND THINGS FAST</span>
