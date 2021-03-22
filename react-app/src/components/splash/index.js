@@ -5,6 +5,8 @@ import laptopPic from "../../images/laptopEvernote.png"
 import SplashNav from "../SplashNav"
 import "./index.css"
 
+
+
 const Splash=()=> {
     return (
         <>
