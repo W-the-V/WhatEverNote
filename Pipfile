@@ -23,6 +23,7 @@ flask-migrate = "*"
 email-validator = "*"
 flask-login = "*"
 psycopg2-binary = "*"
+faker = "*"
 
 [dev-packages]
 psycopg2-binary = "==2.8.6"

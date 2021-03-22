@@ -2,11 +2,14 @@ import { NavLink } from "react-router-dom"
 import React from "react"
 import mousePic from "../../images/mouse.png"
 import laptopPic from "../../images/laptopEvernote.png"
+import SplashNav from "../SplashNav"
 import "./index.css"
 
 const Splash=()=> {
     return (
+        <>
         <div className="splash__container">
+         <SplashNav />
             <div className="splash__header__container">
                 <span className="splash__header1">Accomplish more with</span><span className="splash__header1">better notes</span> 
                 <span className="splash__header2">WhatEverNote helps you capture your ideas and find them fast.</span>
@@ -61,6 +64,7 @@ const Splash=()=> {
             </div>
 
         </div>
+        </>
     )
 }
 export default Splash

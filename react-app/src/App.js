@@ -30,7 +30,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <NavBar setAuthenticated={setAuthenticated} /> */}
+      {(authenticated)?<NavBar setAuthenticated={setAuthenticated} />:null}
       
       <Switch>
         <Route path="/login" exact={true}>
