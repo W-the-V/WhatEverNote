@@ -8,6 +8,7 @@ import "./index.css";
 import SignUpForm from "../auth/SignUpForm";
 import LoginForm from "../auth/LoginForm";
 
+
 const Splash = () => {
   const [authenticated, setAuthenticated] = useState(false);
   const [signup, setSignup] = useState(false);
@@ -33,6 +34,7 @@ const Splash = () => {
     setAuthenticated(true);
   };
   if (authenticated) {
+    
     return (
       <Redirect
         to="/home"
