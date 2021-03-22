@@ -9,6 +9,8 @@ const SignUpForm = ({
   setSignup,
   setLogin,
 }) => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +19,7 @@ const SignUpForm = ({
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const user = await signUp(username, email, password);
+      const user = await signUp(username, firstName, lastName, email, password);
       if (!user.errors) {
         setAuthenticated(true);
       }
@@ -30,6 +32,13 @@ const SignUpForm = ({
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
+  };
+
+  const updateFirstName = (e) => {
+    setFirstName(e.target.value);
+  };
+  const updateLastName = (e) => {
+    setLastName(e.target.value);
   };
 
   const updateEmail = (e) => {
@@ -45,7 +54,13 @@ const SignUpForm = ({
   };
 
   if (authenticated) {
-    return <Redirect to="/" />;
+    return (
+      <Redirect
+        to="/home"
+        authenticated={authenticated}
+        setAuthenticated={setAuthenticated}
+      />
+    );
   }
 
   return (
@@ -63,8 +78,8 @@ const SignUpForm = ({
             type="text"
             name="firstname"
             placeholder="First Name"
-            onChange={updateUsername}
-            value={username}
+            onChange={updateFirstName}
+            value={firstName}
           ></input>
         </div>
         <div>
@@ -72,8 +87,8 @@ const SignUpForm = ({
             type="text"
             name="lastname"
             placeholder="Last Name"
-            onChange={updateUsername}
-            value={username}
+            onChange={updateLastName}
+            value={lastName}
           ></input>
         </div>
         <div>

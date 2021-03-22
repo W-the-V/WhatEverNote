@@ -37,7 +37,13 @@ const LoginForm = ({
   };
 
   if (authenticated) {
-    return <Redirect to="/" />;
+    return (
+      <Redirect
+        to="/home"
+        authenticated={authenticated}
+        setAuthenticated={setAuthenticated}
+      />
+    );
   }
 
   return (

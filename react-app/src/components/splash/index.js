@@ -1,5 +1,6 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import { login as Login } from "../../services/auth";
 import Modal from "react-modal";
 import mousePic from "../../images/mouse.png";
 import laptopPic from "../../images/laptopEvernote.png";
@@ -27,6 +28,19 @@ const Splash = () => {
     if (signup) setSignup(false);
     setLogin(true);
   };
+  const demoLogin = async () => {
+    const user = await Login("demo@demo.com", "password");
+    setAuthenticated(true);
+  };
+  if (authenticated) {
+    return (
+      <Redirect
+        to="/home"
+        authenticated={authenticated}
+        setAuthenticated={setAuthenticated}
+      />
+    );
+  }
   return (
     <>
       <Modal
@@ -84,6 +98,9 @@ const Splash = () => {
           </button>
           <button className="Login__button" onClick={openLogin}>
             Already have an account? Log in
+          </button>
+          <button className="Login__button" onClick={demoLogin}>
+            Login as Demo User
           </button>
         </div>
         <div className="splash__section2__container">
