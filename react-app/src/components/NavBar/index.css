@@ -6,7 +6,7 @@ nav{
     /* align-items: flex-start; */
     align-content: center;
     justify-content: flex-start;
-    background-color: #171717;
+    background-color:#1A1A1A;
     position: fixed;
     left: 0px;
     height: 100%;
@@ -20,7 +20,7 @@ nav{
     margin-bottom: 15px;
 }
 .nav_top__circles i, .middle_nav__container i, .middle2_nav__container i, .middle3_nav__container i{
-    color: #bcbcbd;
+    color: #cccccc;
     font-size: 16px;
     margin: auto 0 ;
 }
@@ -40,8 +40,8 @@ nav{
 .letter-circle{
     font-family: 'Ewert', cursive;
     font-size: 23px;
-    background-color: rgb(245, 0, 143);
-    color: #42a103; 
+    background-color: #E35b8b;
+    color: #64AA2D; 
      
     /* -webkit-text-fill-color: #0f9b02; */
      text-shadow:1px 1px 0px #000000; 
