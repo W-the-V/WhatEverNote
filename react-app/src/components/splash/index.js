@@ -4,6 +4,8 @@ import mousePic from "../../images/mouse.png"
 import laptopPic from "../../images/laptopEvernote.png"
 import "./index.css"
 
+
+
 const Splash=()=> {
     return (
         <div className="splash__container">
