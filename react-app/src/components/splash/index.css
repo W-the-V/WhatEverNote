@@ -1,0 +1,130 @@
+.splash__container{
+    position: relative;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    background-color: ;
+    width: 100%;
+}
+.splash__header__container{
+    margin-top: 60px;
+    margin-bottom: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    font-family: "Open Sans", sans-serif;
+}
+.splash__header1{
+    font-size: 45px;
+    font-weight: bold;
+    line-height: 1.5;
+    letter-spacing: 1.8px;
+}
+.splash__header2{
+    font-size: 20px;
+
+}
+.Sign-up__button{
+    display: flex;
+    flex-direction: row;
+    background-color: #64AA2D;
+    border-radius: 2px;
+    width: 275px;
+    height: 45px;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+.Sign-up__button a{
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+.splash__header__container>a{
+    color: black;
+    font-family: "Open Sans", sans-serif;
+}
+.splash__section2__container{
+    display: flex;
+    flex-direction: row;
+
+}
+.splash_Image__holder{
+    height: 200px;
+    width: 87%;
+}
+.splash_Image__holder img{
+    width: 100%;
+}
+.splash_bullet__container{
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+    width: 275px;
+}
+.splash__bullet__header{
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    line-height: 1.8;
+    font-weight: bold;
+}
+.splash__bullet__text{
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.splash__bullet{
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.splash__section3__container{
+    padding-top: 30px;
+    background-color: #F2F2F2 ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.splash__green__quote{
+    /* font-family: 'Frank Ruhl Libre', serif; */
+    color: #64AA2D;
+    font-size: 55px;
+}
+.splash__quote{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 25px;
+    font-family: sans-serif;
+    line-height: 3;
+}
+.splash_mag__container ul{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    
+}
+.splash_mag__container li{
+    padding: 25px;
+    font-size: 35px;
+    color: lightgray;
+}
+.splash__footer__header__container{
+    display: flex;
+    flex-direction: row;
+    border-bottom: 3px solid black;
+    padding-bottom: 45px;
+    padding-top: 45px;
+}
+.splash__footer__header__container img{
+    width: 75px;
+    margin-left: 15px;
+}
+.splash__footer__header__container span{
+    font-size: 35px;
+    font-family: 'Frank Ruhl Libre', serif;
+
+}

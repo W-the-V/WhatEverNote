@@ -8,6 +8,7 @@ import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./services/auth";
 import Home from "./components/Home";
+import Splash from "./components/splash";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -29,14 +30,17 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar setAuthenticated={setAuthenticated} />
+      {/* <NavBar setAuthenticated={setAuthenticated} /> */}
+      
       <Switch>
         <Route path="/login" exact={true}>
-          <Home />
-          {/* <LoginForm
+          <LoginForm
             authenticated={authenticated}
             setAuthenticated={setAuthenticated}
-          /> */}
+          />
+        </Route>
+        <Route path="/splash">
+          <Splash />
         </Route>
         <Route path="/sign-up" exact={true}>
           <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
