@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,400&display=swap');
+
 .splash__container {
   position: relative;
   background-color: white;
@@ -105,7 +107,34 @@
   align-items: center;
   font-size: 25px;
   font-family: sans-serif;
-  line-height: 3;
+  /* margin:30px; */
+}
+
+.splash__quote__container{
+  margin: 30px;
+  justify-content: center;
+}
+.splash__quote__text {
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    line-height: 30px;
+    /* margin:30px; */
+}
+
+.splash__quote__expert {
+    font-family: 'Lato', sans-serif;    text-align: center;
+    font-weight: 400;
+}
+
+.splash__quote__img {
+    opacity: 50%;
+    width: 100px;
+    transition: .25s;
+}
+.splash__quote__img:hover {
+    opacity: 100%;
+    transition: .25s;
+
 }
 .splash_mag__container ul {
   display: flex;
@@ -210,8 +239,8 @@
     font-family: sans-serif;
     line-height: 3;
 }
-splash__quote__text:hover{
-    color:black;
+splash__quote:hover {
+    background-color:black;
 }
 
 .splash_mag__container ul{

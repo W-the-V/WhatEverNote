@@ -173,24 +173,33 @@ const Splash = () => {
           </div>
         </div>
         <div className="splash__section3__container">
-          <div className="splash__green__quote">"</div>
-          <div className="splash__quote">
-                    {quote === "forbes" ? <span className="splash__quote__text.fade-in">"Such a great App... Whatever"</span> : null}
-                    {quote === "inc" ? <span className="splash__quote__text.fade-in">"Another hot review"</span> : null}
-                    {quote === "verge" ? <span className="splash__quote__text fade-in">"Verge loves this company"</span> : null}
-                    {quote === "business" ? <span>"Business thinks we're  bomb"</span> : null}
-                    {quote === "well-good" ? <span>"Another hot review"</span> : null}
 
-            <span>-An Expert</span>
+          <div className="splash__green__quote"><img src="https://evernote.com/c/assets/homepage/homepage-quote.svg?3ec5da84998f74bf"/></div>
+        <div className="splash__quote__container">
+          <div className="splash__quote">
+                    {quote === "forbes" ? <span className="splash__quote__text fade-in">"It feels like there are endless ways to use Evernote… Use it for school, work, life, and beyond."</span> : null}
+                    {quote === "inc" ? <span className="splash__quote__text fade-in">"Evernote is a powerful tool that can help executives, entrepreneurs and creative people capture and arrange their ideas. All you have to do is use it."</span> : null}
+                    {quote === "verge" ? <span className="splash__quote__text fade-in">"A few years ago, after my computer broke down and I lost all of the notes I had saved to my desktop, I finally decided to embrace the cloud and download Evernote. Since then, I haven’t looked back."</span> : null}
+                    {quote === "business" ? <span className="splash__quote__text fade-in">"You can even send emails to Evernote and gather all of the things you need in a single place."</span> : null}
+                    {quote === "well-good" ? <span className="splash__quote__text fade-in">"Another hot review"</span> : null}
+
+            <span className="splash__quote__expert">
+                {quote === "verge" ? <span className="splash__quote__expert fade-in">- Verge</span> : null}
+                {quote === "forbes" ? <span className="splash__quote__expert fade-in">- Forbes</span> : null}
+                {quote === "inc" ? <span className="splash__quote__expert fade-in">- Inc.</span> : null}
+                {quote === "business" ? <span className="splash__quote__expert fade-in">- Entreprenuer</span> : null}
+                {quote === "well-good" ? <span className="splash__quote__expert fade-in">- well + good</span> : null}           
+            </span>
           </div>
           <div className="splash_mag__container">
-            <ul>
-            <li onClick={() => setQuote("forbes")}>FakeMag2</li>
-                        <li onClick={() => setQuote("inc")}>FakeMag3</li>
-                        <li onClick={() => setQuote("verge")}>FakeMag4</li>
-                        <li onClick={() => setQuote("business")}>FakeMag5</li>
-                        <li onClick={() => setQuote("well-good")}>FakeMag6</li>
+            <ul className="splash__quote__container">
+                        <li className="splash__quote__text" onClick={() => setQuote("forbes")}><img className="splash__quote__img" src="https://evernote.com/c/assets/homepage/forbes-active.png?3bffacb93d68b1fe"/></li>
+                        <li className="splash__quote__text" onClick={() => setQuote("verge")}><img className="splash__quote__img" src="https://evernote.com/c/assets/homepage/the-verge_active.png?5312a2b3e103696e"/></li>
+                        <li className="splash__quote__text" onClick={() => setQuote("inc")}><img className="splash__quote__img" src="https://evernote.com/c/assets/homepage/logo-inc-active.png?e993cb33e525ac88"/></li>
+                        <li className="splash__quote__text" onClick={() => setQuote("business")}><img className="splash__quote__img" src="https://evernote.com/c/assets/homepage/entrepreneur-magazine_active.png?b72e18e9aff09af"/></li>
+                        <li className="splash__quote__text" onClick={() => setQuote("well-good")}><img className="https://evernote.com/c/assets/homepage/well-good_active.png?a7ef647d41985ecb"/></li>
             </ul>
+          </div>
           </div>
         </div>
         <div className="splash__section4__container">
