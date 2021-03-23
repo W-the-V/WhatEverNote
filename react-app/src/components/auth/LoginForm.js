@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { NavLink, Redirect } from "react-router-dom";
-import { login } from "../../services/auth";
+import {useDispatch, useSelector} from 'react-redux'
+import * as sessionActions from '../../store/session'
+// import { login } from "../../services/auth";
 import "./index.css";
 import mousepic from "../../images/mouse.png";
 
@@ -10,18 +12,34 @@ const LoginForm = ({
   setSignup,
   setLogin,
 }) => {
+  const dispatch = useDispatch();
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const user = useSelector(state => state.session.user);
 
-  const onLogin = async (e) => {
-    e.preventDefault();
-    const user = await login(email, password);
-    if (!user.errors) {
-      setAuthenticated(true);
-    } else {
-      setErrors(user.errors);
-    }
+  if (user) {
+    console.log("THERE S A USE")
+      // dispatch(getNotebooks)
+      // dispatch our get-all-things from the store
+      // all user information and update the store
+      //get all of the notebooks associated w user
+      //get all notes associated with user 
+      // setAuthenticated true? 
+    
+    return (
+    <Redirect to="/home"/>
+  )}
+
+  const onLogin = (e) => {
+    e.preventDefault()
+    return dispatch(sessionActions.login(email, password))
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors)
+      })
+    
+    
   };
   const signupButton = () => {
     setLogin(false);
@@ -37,6 +55,11 @@ const LoginForm = ({
   };
 
   if (authenticated) {
+    // dispatch our get-all-things from the store
+      // all user information and update the store
+      //get all of the notebooks associated w user
+      //get all notes associated with user 
+      //
     return (
       <Redirect
         to="/home"
@@ -45,6 +68,7 @@ const LoginForm = ({
       />
     );
   }
+
 
   return (
     <div className="form_container">

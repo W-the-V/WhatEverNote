@@ -2,7 +2,10 @@ import React from "react";
 import { render } from "react-dom";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
+// import { createNotes, updateNotes, deleteNote }  from "../../store/notes"
 import "./index.css";
+
+
 
 const CustomHeart = () => <span>♥</span>;
 

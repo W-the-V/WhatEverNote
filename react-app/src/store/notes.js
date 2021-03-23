@@ -4,7 +4,7 @@ const UPDATE_NOTE = "notes/UPDATE_NOTE";
 const ADD_NOTE = "notes/ADD_NOTE";
 
 const get = (userId, noteId) => ({
-  type: LOAD_NOTES,
+  type: GET_NOTES,
   userId,
   notes,
 });
