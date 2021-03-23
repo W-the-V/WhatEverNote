@@ -78,7 +78,7 @@ const LoginForm = ({
         <span>Remember whatever's important.</span>
       </div>
 
-      <form classname="login_form" onSubmit={onLogin}>
+      <form className="login_form" onSubmit={onLogin}>
         <div>
           {errors.map((error) => (
             <div>{error}</div>
