@@ -1,0 +1,40 @@
+.dropdown-wrapper {
+  width: 28px;
+  height: 28px;
+}
+.dropdown-header {
+  padding: 2px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background-color: transparent;
+  color: #333;
+  cursor: pointer;
+  outline: none;
+  font-size: 20px;
+}
+
+.dropdown-wrapper:hover {
+  color: #FFEC81;
+  /* transition: opacity .2s linear; */
+}
+
+.ellipsis {
+  height: 24px;
+  width: 24px;
+}
+
+.list-item:hover {
+  background-color: rgba(0, 0, 0, 0.14);
+  cursor: pointer;
+}
+
+.list-item {
+  border: none;
+  background-color: transparent;
+  padding: 8px 12px;
+}
+
+.dropdown-list {
+  background-color: white;
+}

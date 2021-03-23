@@ -1,0 +1,87 @@
+
+
+.scratch-container {
+  height: 358px;
+  width: 281px;
+  border: 1px solid #FFEB81;
+  background-color: #FFF4B9;
+  border-radius: 8px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0 5px 5px 0;
+  box-sizing: border-box;
+  box-shadow: 1px 2px 6px;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+}
+
+.scratch-top-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 40px;
+  width: 264px;
+  padding: 16px 0px 10px;
+  flex: none;
+  box-sizing: border-box;
+}
+
+.scratch-title-label {
+  width: 110px;
+  height: 50px;
+  padding: 0px 10px 0px 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+}
+
+.scratch-title {
+  width: 110px;
+  height: 50px;
+  padding: 0px 10px 0px 4px;
+  color: #333333;
+  font-size: 14px;
+  line-height: 16px;
+  text-transform: uppercase;
+  font-family: inherit;
+  font-weight: 500;
+}
+.text-box-container {
+  width: 358px;
+  height: 100%;
+  transition: opacity .2s linear;
+  position: relative;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+  flex: 1 1 auto;
+  display: block;
+  box-sizing: inherit;
+}
+
+.scratch-text-box {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  height: 290px;
+  width: 262px;
+  resize: none;
+}
+
+.scratch-menu-button {
+  /* background: transparent;
+  border: none; */
+  border: none;
+  font-size: 16px;
+  color: #6f6f6f;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+  cursor: pointer;
+}
+
+.menu-container .dropdown-content{
+  padding-left: 10px;
+}
