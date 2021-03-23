@@ -9,7 +9,7 @@
 }
 .splash__header__container {
   margin-top: 60px;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -95,6 +95,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 400px;
 }
 .splash__green__quote {
   /* font-family: 'Frank Ruhl Libre', serif; */
@@ -127,7 +128,7 @@
 }
 
 .splash__quote__img {
-    opacity: 50%;
+    opacity: 30%;
     width: 100px;
     transition: .25s;
 }
@@ -146,13 +147,37 @@
   font-size: 35px;
   color: lightgray;
 }
-.splash__footer__header__container {
+
+.splash__feature__container {
+  padding-top: 30px;
+  background-color: white;
   display: flex;
   flex-direction: row;
-  border-bottom: 3px solid black;
-  padding-bottom: 45px;
-  padding-top: 45px;
+  align-items: center;
+  height: 400px;
 }
+
+.splash__feature__text {
+  align-self: baseline;
+  display: block;
+  float: left;
+  width: 50%;
+  margin: 40px;
+}
+
+.splash__feature__desc {
+  color: #24292f;
+  font-size: 24px;
+  line-height: 150%;
+}
+
+.splash__feature__img {
+  display: inline-block;
+  max-height: 360px;
+  margin: 20px;
+  max-width: 100%
+}
+
 .splash__footer__header__container img {
   width: 75px;
   margin-left: 15px;
@@ -219,13 +244,7 @@
     flex-direction: column;
     align-items: stretch;
 }
-.splash__section3__container{
-    padding-top: 30px;
-    background-color: #F2F2F2 ;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
 .splash__green__quote{
     /* font-family: 'Frank Ruhl Libre', serif; */
     color: #64AA2D;
@@ -257,9 +276,13 @@ splash__quote:hover {
 .splash__footer__header__container{
     display: flex;
     flex-direction: row;
-    border-bottom: 3px solid black;
-    padding-bottom: 45px;
+    padding-bottom: 20px;
     padding-top: 45px;
+}
+
+.splash__footer_linklist {
+  display: flex;
+  flex-direction: row;
 }
 .splash__footer__header__container img{
     width: 75px;
