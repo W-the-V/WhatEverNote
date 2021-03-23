@@ -1,57 +1,199 @@
-.splash__container{
-    position: relative;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    background-color: white ;
-    width: 100%;
-    z-index: -1;
-}
-.splash__header__container{
-    margin-top: 160px;
-    margin-bottom: 40px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    font-family: "Open Sans", sans-serif;
-}
-.splash__header1{
-    font-size: 45px;
-    font-weight: bold;
-    line-height: 1.5;
-    letter-spacing: 1.8px;
-}
-.splash__header2{
-    font-size: 20px;
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,400&display=swap');
 
+.splash__container {
+  position: relative;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
-.Sign-up__button{
-    display: flex;
-    flex-direction: row;
-    background-color: #64AA2D;
-    border-radius: 2px;
-    width: 275px;
-    height: 45px;
-    align-items: center;
-    justify-content: center;
-    margin: 20px;
+.splash__header__container {
+  margin-top: 60px;
+  margin-bottom: 40px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  font-family: "Open Sans", sans-serif;
 }
-.Sign-up__button a{
-    font-weight: bold;
-    color: white;
-    text-decoration: none;
+.splash__header1 {
+  font-size: 45px;
+  font-weight: bold;
+  line-height: 1.5;
+  letter-spacing: 1.8px;
 }
-.splash__header__container>a{
-    color: black;
-    font-family: "Open Sans", sans-serif;
+.splash__header2 {
+  font-size: 20px;
+}
+.Sign-up__button {
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(0, 168, 43);
+  border-radius: 2px;
+  width: 275px;
+  height: 45px;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  text-decoration: none;
+  cursor: pointer;
+  outline: 0;
+  border: none;
+}
+.Sign-up__button {
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  letter-spacing: 1.5px;
+  transition: background-color 0.4s ease;
+}
+.Sign-up__button:hover {
+  background-color: rgba(34, 217, 0);
+}
+.splash__header__container > a {
+  color: black;
+  font-family: "Open Sans", sans-serif;
+}
+.splash__section2__container {
+  display: flex;
+  flex-direction: row;
+}
+.splash_Image__holder {
+  height: 200px;
+  width: 87%;
+}
+.splash_Image__holder img {
+  width: 100%;
+}
+.splash_bullet__container {
+  margin-top: 35px;
+  display: flex;
+  flex-direction: column;
+  width: 275px;
+}
+.splash__bullet__header {
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+  font-weight: bold;
+}
+.splash__bullet__text {
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.splash__bullet {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.splash__section3__container {
+  padding-top: 30px;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.splash__green__quote {
+  /* font-family: 'Frank Ruhl Libre', serif; */
+  color: #64aa2d;
+  font-size: 55px;
+}
+.splash__quote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 25px;
+  font-family: sans-serif;
+  /* margin:30px; */
+}
+
+.splash__quote__container{
+  margin: 30px;
+  justify-content: center;
+}
+.splash__quote__text {
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    line-height: 30px;
+    /* margin:30px; */
+}
+
+.splash__quote__expert {
+    font-family: 'Lato', sans-serif;    text-align: center;
+    font-weight: 400;
+}
+
+.splash__quote__img {
+    opacity: 50%;
+    width: 100px;
+    transition: .25s;
 }
 .splash__section2__container{
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+.splash__quote__img:hover {
+    opacity: 100%;
+    transition: .25s;
 
 }
+.splash_mag__container ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+.splash_mag__container li {
+  padding: 25px;
+  font-size: 35px;
+  color: lightgray;
+}
+.splash__footer__header__container {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 3px solid black;
+  padding-bottom: 45px;
+  padding-top: 45px;
+}
+.splash__footer__header__container img {
+  width: 75px;
+  margin-left: 15px;
+}
+.splash__footer__header__container span {
+  font-size: 35px;
+  font-family: "Frank Ruhl Libre", serif;
+}
+.defaultInner {
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.defaultOuter {
+  top: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100vw;
+  position: fixed;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  outline: none;
+}
+
 .splash_Image__holder{
     max-height: 60%;
     width: 60%;
@@ -103,6 +245,10 @@
     font-family: sans-serif;
     line-height: 3;
 }
+splash__quote:hover {
+    background-color:black;
+}
+
 .splash_mag__container ul{
     display: flex;
     flex-direction: row;
@@ -128,5 +274,65 @@
 .splash__footer__header__container span{
     font-size: 35px;
     font-family: 'Frank Ruhl Libre', serif;
+}
 
+.closeIcoOuterShell {
+  width: 100%;
+  max-width: 512px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  text-decoration: none;
+  border: none;
+  outline: 0;
+  margin-bottom: -55px;
+  z-index: 55;
+}
+.closeIcoShell {
+  background-color: white;
+  text-decoration: none;
+  border: none;
+  outline: 0;
+  margin-right: 15px;
+}
+.closeIco {
+  font-size: 30px;
+  background-color: none;
+  outline: 0;
+  width: 40px;
+  color: gray;
+}
+.closeIco:hover {
+  cursor: pointer;
+  color: green;
+  outline: 0;
+}
+.Login__button {
+  text-decoration: underline;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  transition: color 0.25s ease;
+  outline: 0;
+  margin-top: 10px;
+}
+.Login__button:hover {
+  color: rgba(0, 168, 43);
+}
+
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: .5s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
