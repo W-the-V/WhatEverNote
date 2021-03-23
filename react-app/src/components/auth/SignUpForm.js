@@ -1,9 +1,16 @@
 import React, { useState } from "react";
-import { Redirect, NavLink } from 'react-router-dom';
-import { signUp } from '../../services/auth';
-import mousepic from "../../images/mouse.png"
+import { Redirect, NavLink } from "react-router-dom";
+import { signUp } from "../../services/auth";
+import mousepic from "../../images/mouse.png";
 
-const SignUpForm = ({authenticated, setAuthenticated}) => {
+const SignUpForm = ({
+  authenticated,
+  setAuthenticated,
+  setSignup,
+  setLogin,
+}) => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,16 +19,26 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const user = await signUp(username, email, password);
+      const user = await signUp(username, firstName, lastName, email, password);
       if (!user.errors) {
         setAuthenticated(true);
       }
     }
   };
-
+  const loginButton = () => {
+    setSignup(false);
+    setLogin(true);
+  };
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
+  };
+
+  const updateFirstName = (e) => {
+    setFirstName(e.target.value);
+  };
+  const updateLastName = (e) => {
+    setLastName(e.target.value);
   };
 
   const updateEmail = (e) => {
@@ -37,7 +54,13 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
   };
 
   if (authenticated) {
-    return <Redirect to="/" />;
+    return (
+      <Redirect
+        to="/home"
+        authenticated={authenticated}
+        setAuthenticated={setAuthenticated}
+      />
+    );
   }
 
   return (
@@ -48,79 +71,82 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
         <span>Remember whatever's important.</span>
       </div>
 
-    <form onSubmit={onSignUp} className="signup_form">
-      <div>
-        {/* <label>User Name</label> */}
-        <input
-          type="text"
-          name="firstname"
-          placeholder="first name"
-          onChange={updateUsername}
-          value={username}
-        ></input>
-          </div>
+      <form onSubmit={onSignUp} className="signup_form">
+        <div>
+          {/* <label>User Name</label> */}
+          <input
+            type="text"
+            name="firstname"
+            placeholder="First Name"
+            onChange={updateFirstName}
+            value={firstName}
+          ></input>
+        </div>
         <div>
           <input
             type="text"
             name="lastname"
-            placeholder="last name"
+            placeholder="Last Name"
+            onChange={updateLastName}
+            value={lastName}
+          ></input>
+        </div>
+        <div>
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
             onChange={updateUsername}
             value={username}
           ></input>
-
         </div>
         <div>
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          onChange={updateUsername}
-          value={username}
-        ></input>
-
+          {/* <label>Email</label> */}
+          <input
+            placeholder="Email"
+            type="text"
+            name="email"
+            onChange={updateEmail}
+            value={email}
+          ></input>
         </div>
-      <div>
-        {/* <label>Email</label> */}
-        <input
-          placeholder="Email"
-          type="text"
-          name="email"
-          onChange={updateEmail}
-          value={email}
-        ></input>
-      </div>
-      <div>
-        {/* <label>Password</label> */}
-        <input
-          placeholder="password"
-          type="password"
-          name="password"
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        {/* <label>Repeat Password</label> */}
-        <input
-          placeholder="Confirm Password"
-          type="password"
-          name="repeat_password"
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-      <button type="submit">Continue</button>
-    </form>
-    <div className="login_footer__container">
+        <div>
+          {/* <label>Password</label> */}
+          <input
+            placeholder="Password"
+            type="password"
+            name="password"
+            onChange={updatePassword}
+            value={password}
+          ></input>
+        </div>
+        <div>
+          {/* <label>Repeat Password</label> */}
+          <input
+            placeholder="Confirm Password"
+            type="password"
+            name="repeat_password"
+            onChange={updateRepeatPassword}
+            value={repeatPassword}
+            required={true}
+          ></input>
+        </div>
+        <button className="form__button" type="submit">
+          Continue
+        </button>
+      </form>
+      <div className="login_footer__container">
         <div className="terms_of_service">
           <p>
-            By creating an account, you are agreeing to our <span>Terms of Service</span> and <span>Privacy Policy</span>
+            By creating an account, you are agreeing to our{" "}
+            <span>Terms of Service</span> and <span>Privacy Policy</span>
           </p>
         </div>
         <div className="donthaveaccount__holder">
           <span>Already have an account?</span>
-          <NavLink to="/login">Sign In</NavLink>
+          <button className="Login__button" onClick={loginButton}>
+            Login
+          </button>
         </div>
       </div>
     </div>

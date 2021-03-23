@@ -17,7 +17,7 @@ function App() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       const user = await authenticate();
       if (!user.errors) {
         setAuthenticated(true);
@@ -33,27 +33,38 @@ function App() {
   return (
     <BrowserRouter>
       {/* <NavBar setAuthenticated={setAuthenticated} /> */}
-      
+
       <Switch>
+        <Route path="/" exact={true}>
+          <Splash />
+        </Route>
         <Route path="/login" exact={true}>
           <LoginForm
             authenticated={authenticated}
             setAuthenticated={setAuthenticated}
           />
         </Route>
-        <Route path="/splash">
-          <Splash />
-        </Route>
         <Route path="/sign-up" exact={true}>
-          <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
+          <SignUpForm
+            authenticated={authenticated}
+            setAuthenticated={setAuthenticated}
+          />
         </Route>
-        <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
-          <UsersList/>
+        <ProtectedRoute
+          path="/users"
+          exact={true}
+          authenticated={authenticated}
+        >
+          <UsersList />
         </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
+        <ProtectedRoute
+          path="/users/:userId"
+          exact={true}
+          authenticated={authenticated}
+        >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
+        <ProtectedRoute path="/home" exact={true} authenticated={authenticated}>
           <Home />
         </ProtectedRoute>
       </Switch>
