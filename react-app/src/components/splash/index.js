@@ -8,6 +8,8 @@ import "./index.css";
 import SignUpForm from "../auth/SignUpForm";
 import LoginForm from "../auth/LoginForm";
 import {useSplash} from "../../context/SplashContext"
+import SplashNav from "../SplashNav";
+import SplashSidebar from "../SplashSidebar";
 
 
 
@@ -16,6 +18,8 @@ const Splash = () => {
   const [authenticated, setAuthenticated] = useState(false);
   const [signup, setSignup] = useState(false);
   const [login, setLogin] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false)
+
   Modal.setAppElement("#root");
   const closeSignup = () => {
     setSignup(false);
@@ -94,6 +98,8 @@ const Splash = () => {
         />
       </Modal>
       <div className="splash__container">
+          <SplashNav setShowSidebar={setShowSidebar} />
+          {(showSidebar)?<SplashSidebar setShowSidebar={setShowSidebar}/>:null}
         <div className="splash__header__container">
           <span className="splash__header1">Accomplish more with</span>
           <span className="splash__header1">better notes</span>
@@ -112,7 +118,7 @@ const Splash = () => {
         </div>
         <div className="splash__section2__container">
           <div className="splash_Image__holder">
-            <img src={laptopPic} />
+            <img src={laptopPic} alt="laptop"/>
           </div>
           <div className="splash_bullet__container">
             <div className="splash__bullet">

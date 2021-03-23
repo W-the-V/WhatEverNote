@@ -37,31 +37,6 @@ body {
   font-family: "Frank Ruhl Libre", serif;
   font-size: 35px;
 
-<<<<<<< HEAD
-}
-.login-page_header__container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    font-family: 'Open Sans', sans-serif;
-    margin-bottom: 30px;
-
-}
-#root{
-    height: 0;
-}
-.login_whatever{
-    font-family: 'Frank Ruhl Libre', serif;
-    font-size: 35px;
-
-    margin-bottom: 8px;
-}
-.login-page_header__container img{
-    width: 75px;
-    padding: 10px;
-=======
   margin-bottom: 8px;
 }
 .login-page_header__container img {
@@ -115,7 +90,6 @@ body {
   border-width: 1px;
   border-style: solid;
   border-color: #00a82d;
->>>>>>> 6ee055e4f2f1ed7a13f326fbd74621b03994624e
 
   border-radius: 9px;
   float: none;

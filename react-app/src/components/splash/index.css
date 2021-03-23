@@ -8,14 +8,16 @@
   width: 100%;
 }
 .splash__header__container {
-  margin-top: 60px;
+  margin-top: 100px;
   margin-bottom: 40px;
-  position: relative;
   display: flex;
   flex-direction: column;
   text-align: center;
   align-items: center;
   font-family: "Open Sans", sans-serif;
+}
+#root{
+  height: 0;
 }
 .splash__header1 {
   font-size: 45px;
@@ -195,8 +197,8 @@
 }
 
 .splash_Image__holder{
-    max-height: 60%;
-    width: 60%;
+    height: 60%;
+    max-width: 60%;
 }
 .splash_Image__holder img{
     max-height: 100%;

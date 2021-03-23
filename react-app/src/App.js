@@ -43,6 +43,9 @@ function App() {
             setAuthenticated={setAuthenticated}
           />
         </Route>
+        <Route path="/whywhatevernote" >
+          <Whywhatevernote />
+        </Route>
         <Route path="/sign-up" exact={true}>
           <SignUpForm
             authenticated={authenticated}
