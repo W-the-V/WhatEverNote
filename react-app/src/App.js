@@ -9,6 +9,8 @@ import User from "./components/User";
 import { authenticate } from "./services/auth";
 import Home from "./components/Home";
 import Splash from "./components/splash";
+import ScratchPad from "./components/ScratchPad";
+
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -66,6 +68,9 @@ function App() {
           <Home />
         </ProtectedRoute>
       </Switch>
+      <Route exact path="/test">
+        <ScratchPad />
+      </Route>
     </BrowserRouter>
   );
 }
