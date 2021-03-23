@@ -9,7 +9,7 @@
 }
 .splash__header__container {
   margin-top: 60px;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -178,13 +178,6 @@
   max-width: 100%
 }
 
-.splash__footer__header__container {
-  display: flex;
-  flex-direction: row;
-  border-bottom: 3px solid black;
-  padding-bottom: 45px;
-  padding-top: 45px;
-}
 .splash__footer__header__container img {
   width: 75px;
   margin-left: 15px;
@@ -283,9 +276,13 @@ splash__quote:hover {
 .splash__footer__header__container{
     display: flex;
     flex-direction: row;
-    border-bottom: 3px solid black;
-    padding-bottom: 45px;
+    padding-bottom: 20px;
     padding-top: 45px;
+}
+
+.splash__footer_linklist {
+  display: flex;
+  flex-direction: row;
 }
 .splash__footer__header__container img{
     width: 75px;

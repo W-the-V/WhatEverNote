@@ -231,12 +231,22 @@ const Splash = () => {
                 </div>
             </div>
         </div>
+
         <div className="splash__section4__container">
+
+          <div style={{width: "90%", marginLeft:"auto", marginRight:"auto"}}>
           <div className="splash__footer__header__container">
-            <img src={mousePic} />
-            <span>WhatEverNote</span>
+          <img style={{maxWidth:"75px"}}src={mousePic} />
+            <div>
+              <span>WhatEvernote</span>
+              </div>
+        </div>
+        <hr style={{height:"3px",border:"none",color:"#333",backgroundColor:"#333"}}></hr>
+        <div className="splash__footer_linklist">
+          <div><h4 style={{fontWeight:"bolder"}}>GITHUB LINKS:  </h4></div>
+          <h4> &nbsp;&nbsp; <a href="https://github.com/W-the-V">Walter</a> | <a href="https://github.com/alpvyas">Alpesh</a> | <a href="https://github.com/OByrnes">Olivia</a> | <a href="https://github.com/rheannone">Rheannone</a></h4>
           </div>
-          <div>I don't know What to put in this chunk</div>
+        </div>
         </div>
       </div>
     </>
