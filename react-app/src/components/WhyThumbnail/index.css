@@ -1,0 +1,31 @@
+.whyThumbnailContainer{
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 3px 8px 4px rgba(167, 166, 166, 0.336);
+    margin: 3px;
+    padding: 10px;
+    max-width: 200px;
+    min-height: 300px;
+    border-radius: 10px;
+    align-items: center;
+}
+.whyThumbnailContainer img{
+    width: 35px;
+    margin: 15px;
+}
+.WhyThumbnailTitle{
+    font-size: 22px;
+    font-family: "Open Sans", sans-serif;
+    text-align: center;
+    font-weight: bold;
+    line-height: 1.8;
+    flex-wrap: nowrap;
+ 
+}
+.WhyThumbnailText{
+    margin-top: 5px;
+    font-size: 20px;
+    font-family: "Open Sans", sans-serif;
+    text-align: center;
+    line-height: 1.1;
+}

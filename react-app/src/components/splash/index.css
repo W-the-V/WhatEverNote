@@ -8,14 +8,16 @@
   width: 100%;
 }
 .splash__header__container {
-  margin-top: 60px;
-  margin-bottom: 10px;
-  position: relative;
+  margin-top: 100px;
+  margin-bottom: 40px;
   display: flex;
   flex-direction: column;
   text-align: center;
   align-items: center;
   font-family: "Open Sans", sans-serif;
+}
+#root{
+  height: 0;
 }
 .splash__header1 {
   font-size: 45px;
@@ -133,6 +135,11 @@
     width: 100px;
     transition: .25s;
 }
+.splash__section2__container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 .splash__quote__img:hover {
     opacity: 100%;
     transition: .25s;
@@ -218,6 +225,14 @@
   margin-left: -50vw;
   margin-right: -50vw;
   outline: none;
+}
+.splash_Image__holder{
+    height: 60%;
+    max-width: 60%;
+}
+.splash_Image__holder img{
+    max-height: 100%;
+    max-width: 100%;
 }
 
 .splash_bullet__container{

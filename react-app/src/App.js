@@ -9,6 +9,7 @@ import User from "./components/User";
 import { authenticate } from "./services/auth";
 import Home from "./components/Home";
 import Splash from "./components/splash";
+import Whywhatevernote from "./components/Whywhatevernote";
 import ScratchPad from "./components/ScratchPad";
 
 
@@ -32,8 +33,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <NavBar setAuthenticated={setAuthenticated} /> */}
-
+      {(authenticated)?<NavBar setAuthenticated={setAuthenticated} />:null}
+      
       <Switch>
         <Route path="/" exact={true}>
           <Splash />
@@ -43,6 +44,9 @@ function App() {
             authenticated={authenticated}
             setAuthenticated={setAuthenticated}
           />
+        </Route>
+        <Route path="/whywhatevernote" >
+          <Whywhatevernote />
         </Route>
         <Route path="/sign-up" exact={true}>
           <SignUpForm
