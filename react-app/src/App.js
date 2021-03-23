@@ -9,6 +9,7 @@ import User from "./components/User";
 import { authenticate } from "./services/auth";
 import Home from "./components/Home";
 import Splash from "./components/splash";
+import Whywhatevernote from "./components/Whywhatevernote";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -42,6 +43,10 @@ function App() {
         <Route path="/splash">
           <Splash />
         </Route>
+        <Route path="/whywhatevernote">
+            <Whywhatevernote />
+        </Route>
+
         <Route path="/sign-up" exact={true}>
           <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
         </Route>

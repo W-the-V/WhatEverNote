@@ -49,14 +49,16 @@
 .splash__section2__container{
     display: flex;
     flex-direction: row;
+    justify-content: center;
 
 }
 .splash_Image__holder{
-    height: 200px;
-    width: 87%;
+    max-height: 60%;
+    width: 60%;
 }
 .splash_Image__holder img{
-    width: 100%;
+    max-height: 100%;
+    max-width: 100%;
 }
 .splash_bullet__container{
     margin-top: 35px;

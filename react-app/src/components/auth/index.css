@@ -37,6 +37,9 @@ body{
     margin-bottom: 30px;
 
 }
+#root{
+    height: 0;
+}
 .login_whatever{
     font-family: 'Frank Ruhl Libre', serif;
     font-size: 35px;

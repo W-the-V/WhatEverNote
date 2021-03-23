@@ -21,6 +21,9 @@
     flex-direction: row;
     align-items: center;
 }
+.hamburgerBtn{
+    z-index: 5;
+}
 #splash-nav div h1{
     font-family: 'Frank Ruhl Libre', serif;
     font-size: 30px;
@@ -28,5 +31,5 @@
 }
 .fa-bars{
     font-size: 20px;
-    margin: 10px;
+    margin: 40px;
 }
