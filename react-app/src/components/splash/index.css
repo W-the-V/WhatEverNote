@@ -64,7 +64,8 @@
   width: 87%;
 }
 .splash_Image__holder img {
-  width: 100%;
+  max-height: 400px;
+  width: auto;
 }
 .splash_bullet__container {
   margin-top: 35px;
@@ -149,6 +150,8 @@
 }
 
 .splash__feature__container {
+  margin-right: auto;
+  margin-left: auto;
   padding-top: 30px;
   background-color: white;
   display: flex;
@@ -163,6 +166,9 @@
   float: left;
   width: 50%;
   margin: 40px;
+  padding-left: 40px;
+  padding-right: 40px;
+
 }
 
 .splash__feature__desc {
@@ -214,13 +220,6 @@
   outline: none;
 }
 
-.splash_Image__holder{
-    height: 200px;
-    width: 87%;
-}
-.splash_Image__holder img{
-    width: 100%;
-}
 .splash_bullet__container{
     margin-top: 35px;
     display: flex;
