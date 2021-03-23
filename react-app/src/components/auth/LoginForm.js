@@ -16,7 +16,7 @@ const LoginForm = ({
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const user = useSelector(state => state.session.user);
+  const user = useSelector(state => state.session);
 
   if (user) {
     console.log("THERE S A USE")
@@ -54,20 +54,20 @@ const LoginForm = ({
     setPassword(e.target.value);
   };
 
-  if (authenticated) {
-    // dispatch our get-all-things from the store
-      // all user information and update the store
-      //get all of the notebooks associated w user
-      //get all notes associated with user 
-      //
-    return (
-      <Redirect
-        to="/home"
-        authenticated={authenticated}
-        setAuthenticated={setAuthenticated}
-      />
-    );
-  }
+  // if (authenticated) {
+  //   // dispatch our get-all-things from the store
+  //     // all user information and update the store
+  //     //get all of the notebooks associated w user
+  //     //get all notes associated with user 
+  //     //
+  //   return (
+  //     <Redirect
+  //       to="/home"
+  //       authenticated={authenticated}
+  //       setAuthenticated={setAuthenticated}
+  //     />
+  //   );
+  // }
 
 
   return (

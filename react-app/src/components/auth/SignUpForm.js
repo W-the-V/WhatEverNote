@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Redirect, NavLink } from "react-router-dom";
-import { signUp } from "../../services/auth";
+import {useDispatch, useSelector} from 'react-redux'
+// import { signUp } from "../../services/auth";
+import * as sessionActions from '../../store/session'
 import mousepic from "../../images/mouse.png";
 
 const SignUpForm = ({
@@ -9,20 +11,31 @@ const SignUpForm = ({
   setSignup,
   setLogin,
 }) => {
+  const dispatch = useDispatch()
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [errors, setErrors] = useState([]);
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const user = useSelector(state => state.session.user);
 
-  const onSignUp = async (e) => {
+  if (user){
+    console.log("THIS IS THE USER FROM SIGN UP", user)
+    return (
+      <Redirect to="/home"/>
+    )
+  }
+
+  const onSignUp = (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const user = await signUp(username, firstName, lastName, email, password);
-      if (!user.errors) {
-        setAuthenticated(true);
-      }
+      return dispatch(sessionActions.signUp(username, firstName, lastName, email, password))
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors)
+        })
     }
   };
   const loginButton = () => {

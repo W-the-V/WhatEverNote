@@ -1,5 +1,6 @@
 import React from "react";
-import { logout } from "../../services/auth";
+import {logout} from "../../store/session"
+// import { logout } from "../../services/auth";
 
 const LogoutButton = ({setAuthenticated}) => {
   const onLogout = async (e) => {

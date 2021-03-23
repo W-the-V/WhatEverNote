@@ -52,6 +52,7 @@ const removeUser = () => {
         "Content-Type": "application/json",
       },
     });
+    console.log("LOGOUT FROM STORE")
     dispatch(removeUser())
     return response;
   };
@@ -72,7 +73,7 @@ const removeUser = () => {
       }),
     });
     const data = await response.json()
-    dispatch(setUser(data.user))
+    dispatch(setUser(data))
     return response;
   };
   let newState; 
