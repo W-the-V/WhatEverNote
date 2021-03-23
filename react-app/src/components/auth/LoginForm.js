@@ -10,7 +10,7 @@ const LoginForm = ({
   setSignup,
   setLogin,
 }) => {
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,7 +20,7 @@ const LoginForm = ({
     if (!user.errors) {
       setAuthenticated(true);
     } else {
-      setErrors(user.errors);
+      setErrors(true);
     }
   };
   const signupButton = () => {
@@ -29,10 +29,12 @@ const LoginForm = ({
   };
 
   const updateEmail = (e) => {
+    setErrors(false);
     setEmail(e.target.value);
   };
 
   const updatePassword = (e) => {
+    setErrors(false);
     setPassword(e.target.value);
   };
 
@@ -55,11 +57,7 @@ const LoginForm = ({
       </div>
 
       <form classname="login_form" onSubmit={onLogin}>
-        <div>
-          {errors.map((error) => (
-            <div>{error}</div>
-          ))}
-        </div>
+        {errors && <div>{`Invalid login credentials`}</div>}
         <div>
           {/* <label htmlFor="email">Email</label> */}
           <input

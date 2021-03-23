@@ -15,6 +15,7 @@ const SignUpForm = ({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [errors, setErrors] = useState([]);
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -22,7 +23,11 @@ const SignUpForm = ({
       const user = await signUp(username, firstName, lastName, email, password);
       if (!user.errors) {
         setAuthenticated(true);
+      } else {
+        setErrors(user.errors);
       }
+    } else {
+      setErrors(["Passwords do not match"]);
     }
   };
   const loginButton = () => {
@@ -70,7 +75,9 @@ const SignUpForm = ({
         <span className="login_whatever">WhatEverNote</span>
         <span>Remember whatever's important.</span>
       </div>
-
+      {errors.map((error) => (
+        <div>{error}</div>
+      ))}
       <form onSubmit={onSignUp} className="signup_form">
         <div>
           {/* <label>User Name</label> */}
@@ -80,6 +87,7 @@ const SignUpForm = ({
             placeholder="First Name"
             onChange={updateFirstName}
             value={firstName}
+            required={true}
           ></input>
         </div>
         <div>
@@ -89,6 +97,7 @@ const SignUpForm = ({
             placeholder="Last Name"
             onChange={updateLastName}
             value={lastName}
+            required={true}
           ></input>
         </div>
         <div>
@@ -98,6 +107,7 @@ const SignUpForm = ({
             placeholder="Username"
             onChange={updateUsername}
             value={username}
+            required={true}
           ></input>
         </div>
         <div>
@@ -108,6 +118,7 @@ const SignUpForm = ({
             name="email"
             onChange={updateEmail}
             value={email}
+            required={true}
           ></input>
         </div>
         <div>
@@ -118,6 +129,7 @@ const SignUpForm = ({
             name="password"
             onChange={updatePassword}
             value={password}
+            required={true}
           ></input>
         </div>
         <div>
