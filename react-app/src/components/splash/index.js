@@ -147,29 +147,6 @@ const Splash = () => {
                 you type.
               </span>
             </div>
-
-            {/* <div className="splash__section3__container">
-                <div className="splash__green__quote">"</div>
-                <div className="splash__quote">
-                    {quote === "forbes" ? <span className="splash__quote__text.fade-in">"Such a great App... Whatever"</span> : null}
-                    {quote === "inc" ? <span className="splash__quote__text.fade-in">"Another hot review"</span> : null}
-                    {quote === "verge" ? <span className="splash__quote__text fade-in">"Verge loves this company"</span> : null}
-                    {quote === "business" ? <span>"Business thinks we're  bomb"</span> : null}
-                    {quote === "well-good" ? <span>"Another hot review"</span> : null}
-
-                    <span>-An Expert</span>
-                </div>
-                <div className="splash_mag__container">
-                    <ul>
-                        <li>FakeMag</li>
-                        <li onClick={() => setQuote("forbes")}>FakeMag2</li>
-                        <li onClick={() => setQuote("inc")}>FakeMag3</li>
-                        <li onClick={() => setQuote("verge")}>FakeMag4</li>
-                        <li onClick={() => setQuote("business")}>FakeMag5</li>
-                        <li onClick={() => setQuote("well-good")}>FakeMag6</li>
-                    </ul>
-                </div>
-            </div> */}
           </div>
         </div>
         <div className="splash__section3__container">
@@ -201,6 +178,58 @@ const Splash = () => {
             </ul>
           </div>
           </div>
+        </div>
+        <div className="splash__feature__container">
+            <div className="splash__feature__text">
+                <img src="https://evernote.com/c/assets/homepage/integrations.svg?32b746ff5f7b7812"/>
+                <h3>App Integrations</h3>
+                <p className="splash__feature__desc">Share content across apps. Evernote connects with the productivity tools you already use, so you can work your way.</p>
+                <div>
+                    <p>LEARN MORE →</p>
+                </div>
+            </div>
+            <div className="splash__feature__img">
+                <img className="splash__feature__img" src="https://evernote.com/c/assets/homepage/feature_integration@2x.png?be711b55a9463ad8"/>
+            </div>
+        </div>
+        <div className="splash__feature__container">
+            <div className="splash__feature__img">
+                <img className="splash__feature__img" src="https://evernote.com/c/assets/homepage/feature_document_scanning_@2x__en.png?296e238420ad2fe3"/>
+            </div>
+            <div className="splash__feature__text">
+                <img src="https://evernote.com/c/assets/homepage/doc-scanning.svg?54e07b63a6988c1e"/>
+                <h3>Document Scanning</h3>
+                <p className="splash__feature__desc">Go paperless. Back up important documents to all your devices, and keep the information—not the clutter.</p>
+                <div>
+                    <p>LEARN MORE →</p>
+                </div>
+            </div>
+        </div>
+        <div className="splash__feature__container">
+            <div className="splash__feature__text">
+                <img src="https://evernote.com/c/assets/homepage/web-clipping.svg?7b31cc4e08aca215"/>
+                <h3>Web Clipper</h3>
+                <p className="splash__feature__desc">Save web pages (without the ads) and mark them up with arrows, highlights, and text to make them more useful.</p>
+                <div>
+                    <p>LEARN MORE →</p>
+                </div>
+            </div>
+            <div className="splash__feature__img">
+                <img className="splash__feature__img" src="https://evernote.com/c/assets/homepage/feature_web_clipper_@2x__en.png?3c3112a70c9a24e2"/>
+            </div>
+        </div>
+        <div className="splash__feature__container">
+            <div className="splash__feature__img">
+                <img className="splash__feature__img" src="https://evernote.com/c/assets/homepage/feature_mobile_@2x__en.png?9f3c59ae5a97b50"/>
+            </div>
+            <div className="splash__feature__text">
+                <img src="https://evernote.com/c/assets/homepage/rich_notes.svg?4be8ba71638c18bb"/>
+                <h3>Rich Notes</h3>
+                <p className="splash__feature__desc">Express ideas, capture images, and record audio in meetings or lectures, all from your phone or tablet—even if you’re offline.</p>
+                <div>
+                    <p>LEARN MORE →</p>
+                </div>
+            </div>
         </div>
         <div className="splash__section4__container">
           <div className="splash__footer__header__container">
