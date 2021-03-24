@@ -21,12 +21,12 @@ def get_notes(user_data):
     notes_list = []
     notebooks = session
                 .query(Notebook)
-                .filter_by(user_id == user_data.userId)
+                .filter_by(Notebook.user_id == user_data.userId)
                 .all()
     for notebook in notebooks:
         notes = session
                 .query(Note)
-                .filter_by(notebook_id == notebook.id)
+                .filter_by(Note.notebook_id == notebook.id)
                 .order_by(updated_at)
                 .all()
         notes_list = notes_list + notes
@@ -35,7 +35,7 @@ def get_notes(user_data):
 def edit_note(note_data):
     note = session
             .query(Note)
-            .filter_by(note_id == note_data.noteId)
+            .filter_by(Note.note_id == note_data.noteId)
     if note.title is not note_data.title:
         note.title = note_data.title
     elif note.text is not note_data.text:
@@ -46,24 +46,19 @@ def edit_note(note_data):
 def delete_note(note_data):
     note = session
             .query(Note)
-            .filter_by(note_id == note_data.noteId)
+            .filter_by(Note.note_id == note_data.noteId)
     session.delete(note)
     session.commit()
 
     return "something" #check
 
-@bp.route("/notes", methods=['GET'])
-def get_notes(id):
-    notes = session
-           .query(Note)
-           .filter_by(userId == id)
-           .order_by(updated_at)
-           .all()
+# @bp.route("/notes", methods=['GET'])
+# def get_notes(user_data):
 
-    return jsonify(notes)
+#     return get_notes(user_data)
 
-@bp.route("/notes" , methods=['POST'])
-def note_requests():
+@bp.route("/notes" , methods=['GET', 'POST', 'PUT', 'DELETE'])
+def note_requests(request):
     note_data = request.get_json()
 
     if 'method' not in note_data:
@@ -72,8 +67,8 @@ def note_requests():
     else:
         if note_data["method"] == "post":
             result = add_note(note_data)
-        elif len(note_data["method"]) == "get":
-            result = get_note(note_data)
+        elif note_data["method"] == "get":
+            result = get_notes(note_data)
         elif note_data["method"] == "put":
             result = edit_note(note_data)
         elif note_data["method"] == "delete":
