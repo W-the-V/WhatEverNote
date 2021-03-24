@@ -1,16 +1,16 @@
 const GET_NOTES = "notes/GET_NOTES";
 const REMOVE_NOTE = "notes/REMOVE_NOTE";
-const UPDATE_NOTE = "notes/UPDATE_NOTE";
+const EDIT_NOTE = "notes/EDIT_NOTE";
 const ADD_NOTE = "notes/ADD_NOTE";
 
-const get = (userId, noteId) => ({
-  type: LOAD_NOTES,
-  userId,
+const get = (notes, userId) => ({
+  type: GET_NOTES,
   notes,
+  userId,
 });
 
-const update = (note) => ({
-  type: UPDATE_NOTES,
+const edit = (note) => ({
+  type: EDIT_NOTES,
   note,
 });
 
@@ -25,12 +25,12 @@ const remove = (userId, noteId) => ({
   userId,
 });
 
-export const getNotes = (id) => async (dispatch) => {
-  const response = await fetch(`/api/user/${id}/notes`);
+export const getNotes = (userId) => async (dispatch) => {
+  const response = await fetch(`/api/user/${userId}/notes`);
 
   if (response.ok) {
     const notes = await response.json();
-    dispatch(load(notes, id));
+    dispatch(get(notes, userId));
   }
 };
 
@@ -50,7 +50,7 @@ export const createNotes = (data, userId) => async (dispatch) => {
   }
 };
 
-export const updateNotes = (data) => async (dispatch) => {
+export const editNotes = (data) => async (dispatch) => {
   const response = await fetch(`/api/notes/${data.id}`, {
     method: "put",
     headers: {
@@ -96,7 +96,9 @@ const notesReducer = (state = initialState, action) => {
       delete newState[action.noteId];
       return newState;
     }
-    case ADD_note:
+    case ADD_note: {
+      return {}; //todo
+    }
     case UPDATE_note: {
       return {
         ...state,
