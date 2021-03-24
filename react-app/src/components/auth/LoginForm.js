@@ -25,6 +25,19 @@ const LoginForm = ({
       .catch(async (res) => {
       const data = await res.json();
       if (data && data.errors) setErrors(data.errors)
+      if (user) {
+        setAuthenticated(true)
+          // dispatch(getNotebooks)
+          // dispatch our get-all-things from the store
+          // all user information and update the store
+          //get all of the notebooks associated w user
+          //get all notes associated with user 
+          // setAuthenticated true? 
+        
+        return (
+        <Redirect to="/home"/>
+      )}
+
     })
     
     setErrors(userAuthen)
@@ -32,18 +45,7 @@ const LoginForm = ({
     
     
   };
-  if (user) {
-    setAuthenticated(true)
-      // dispatch(getNotebooks)
-      // dispatch our get-all-things from the store
-      // all user information and update the store
-      //get all of the notebooks associated w user
-      //get all notes associated with user 
-      // setAuthenticated true? 
-    
-    return (
-    <Redirect to="/home"/>
-  )}
+  
   const signupButton = () => {
     setLogin(false);
     setSignup(true);
@@ -58,12 +60,14 @@ const LoginForm = ({
   };
   
   const errorCheck = {} 
-  
+  if (errors){
     errors.forEach(error => { 
     error = error.split(':') 
     errorCheck[error[0].trim()] = error[1]
-
   })
+
+  }
+
 
   return (
     <div className="form_container">

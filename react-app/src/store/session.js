@@ -81,6 +81,15 @@ const removeUser = () => {
     return data.errors;
   };
 
+  export const restoreUser = () => async dispatch => {
+    const response = await fetch("/api/auth/")
+    const data = await response.json()
+    if(response.ok && !data.errors){
+      dispatch(setUser(data))
+    }
+    return response
+  }
+
 
   let newState; 
 export const sessionReducer = (state = {}, action) => {
