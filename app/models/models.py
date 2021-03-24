@@ -46,15 +46,16 @@ class Notebook(db.Model):
     __tablename__ = 'notebooks'
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = db.Column(db.String(50), nullable=False)
     notes = db.relationship("Note", backref='notebook', lazy=False)
 
     def to_dict(self):
         return {
             "id": self.id,
-            "user_id": self.user_id,
+            "user_id": self.userId,
             "name": self.name,
+            "notes": [note.to_dict() for note in self.notes]
         }
 
 class Note(db.Model):
@@ -72,12 +73,23 @@ class Note(db.Model):
             "text": self.text,
             "notebook_id": self.notebook_id,
         }
+    
+    def other_to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "text": self.text,
+            "notebook_id": self.notebook_id,
+            "tags": [tag.to_dict() for tag in self.tags]
+        }
+
     # tags = db.relationship("Tag", back_populates='name',
     #                        secondary="Notes_To_Tags")
 
 
-# Notes_To_Tags = db.Table('notes_to_tags', db.Model.metadata, db.Column("tags_id", db.Integer, db.ForeignKey("tags.id"), primary_key=True),
-#                          db.Column("notes_id", db.Integer, db.ForeignKey("notes.id"), primary_key=True))
+Notes_To_Tags = db.Table('notes_to_tags', db.Model.metadata, db.Column  ("tags_id", db.Integer, db.ForeignKey("tags.id"), primary_key=True),
+                         db.Column("notes_id", db.Integer, db.ForeignKey("notes.id"), primary_key=True))
+
 class Notes_To_Tags(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     tags_id = db.Column(db.Integer, db.ForeignKey('tags.id'))
@@ -98,4 +110,12 @@ class Tag(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "name": self.name,
+        }
+
+    def other_to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "name": self.name,
+            "notes": [note.to_dict() for note in self.notes]
         }

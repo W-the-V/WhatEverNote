@@ -26,13 +26,7 @@ const remove = (userId, noteId) => ({
 });
 
 export const getNotes = (userId) => async (dispatch) => {
-  const response = await fetch(`/api/user/${userId}/notes`, {
-    method: "get",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userId)
-  });
+  const response = await fetch(`/api/user/${userId}/notes`);
 
   if (response.ok) {
     const notes = await response.json();

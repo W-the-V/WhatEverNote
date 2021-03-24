@@ -17,7 +17,7 @@ def seed_notebooks():
     if not just_demo:
         while x >= 0:
             n = Notebook(
-                user_id=users[random.randint(0, len(users) - 1)].id,
+                userId=users[random.randint(0, len(users) - 1)].id,
                 name=notebook_names[random.randint
                                     (0, len(notebook_names) - 1)])
             db.session.add(n)
@@ -26,7 +26,7 @@ def seed_notebooks():
     else:
         while x >= 0:
             n = Notebook(
-                user_id=User.query.filter_by(firstName="Demo").first().id,
+                userId=User.query.filter_by(firstName="Demo").first().id,
                 name=notebook_names[random.randint
                                     (0, len(notebook_names) - 1)])
             db.session.add(n)

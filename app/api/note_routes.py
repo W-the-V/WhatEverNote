@@ -1,7 +1,7 @@
 from app.config import Config
 from flask import Flask, session, request
 from flask_sqlalchemy import SQLAlchemy
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from app.models import User, Note, Notebook, db
 
 
@@ -18,19 +18,14 @@ note_routes = Blueprint('note_routes', __name__)
 #     session.add(note)
 #     session.commit()
 
-#     return jsonify(note) #good--worked in potman
+#     return jsonify(note)
 
-def get_all_notes(data=6):
-    # if data.is_json():
-    #     user_data = data.get_json()
-    # else: user_data = data
-    notes_dict = {}
-    notes_list = []
-    notebooks = Notebook.query.filter_by(userId = 6).all()
-    for notebook in notebooks:
-        notes = Note.query.filter_by(notebook_id = notebook.id).all()
-        notes_dict[notebook.name] = notes
-    return notes_dict
+def get_all_notes(user_id):
+    
+    notebooks = Notebook.query.filter_by(userId = user_id).all()
+   
+    return jsonify({"notebooks": [notebook.to_dict() for notebook in notebooks]})
+    
 
 # def edit_note(data):
 #     if data.is_json():
@@ -55,11 +50,12 @@ def get_all_notes(data=6):
 #     return "something" #check
 
 
-@note_routes.route("/api/users/6/notes", methods=['GET'])
-def get_notes():
-    # data = jsonify({"userId": 6})
-
-    return get_all_notes()
+@note_routes.route("/api/user/<int:id>/notes", methods=['GET'])
+def get_notes(id):
+    # print(request.base_url)
+    # request_url = request.base_url.split("/")
+    # print(request_url[5])
+    return get_all_notes(id)
 
 # @bp.route("/notes" , methods=['POST', 'PUT', 'DELETE'])
 # def note_requests(request):
