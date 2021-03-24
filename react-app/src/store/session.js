@@ -44,7 +44,6 @@ const removeUser = () => {
       dispatch(setUser(data))
       
     }
-    // console.log("THIS IS DATA ERRORS",data.errors)
     
     return data.errors;
   };
@@ -76,9 +75,14 @@ const removeUser = () => {
       }),
     });
     const data = await response.json()
-    dispatch(setUser(data))
-    return response;
+    if(response.ok && data.errors.length === 0){
+      console.log(data.errors.length)
+      dispatch(setUser(data))
+    }
+    return data.errors;
   };
+
+
   let newState; 
 export const sessionReducer = (state = {}, action) => {
     switch (action.type) {

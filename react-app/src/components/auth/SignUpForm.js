@@ -21,23 +21,24 @@ const SignUpForm = ({
   const [repeatPassword, setRepeatPassword] = useState("");
   const user = useSelector(state => state.session.user);
 
-  if (user){
-    console.log("THIS IS THE USER FROM SIGN UP", user)
-    return (
-      <Redirect to="/home"/>
-    )
-  }
 
-  const onSignUp = (e) => {
+  const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      return dispatch(sessionActions.signUp(username, firstName, lastName, email, password))
+      const successfulSignUp = await dispatch(sessionActions.signUp(username, firstName, lastName, email, password))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors)
         })
+        setErrors(successfulSignUp)
     }
   };
+  if (user) {
+    setAuthenticated(true)
+    return (
+    <Redirect to="/home"/>
+  )}
+
   const loginButton = () => {
     setSignup(false);
     setLogin(true);
@@ -66,15 +67,15 @@ const SignUpForm = ({
     setRepeatPassword(e.target.value);
   };
 
-  if (authenticated) {
-    return (
-      <Redirect
-        to="/home"
-        authenticated={authenticated}
-        setAuthenticated={setAuthenticated}
-      />
-    );
-  }
+  // if (authenticated) {
+  //   return (
+  //     <Redirect
+  //       to="/home"
+  //       authenticated={authenticated}
+  //       setAuthenticated={setAuthenticated}
+  //     />
+  //   );
+  // }
 
   return (
     <div className="form_container">
@@ -85,6 +86,11 @@ const SignUpForm = ({
       </div>
 
       <form onSubmit={onSignUp} className="signup_form">
+      <div>
+          {errors.map((error) => (
+            <div>{error}</div>
+          ))}
+        </div>
         <div>
           {/* <label>User Name</label> */}
           <input

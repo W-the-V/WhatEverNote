@@ -24,18 +24,15 @@ const LoginForm = ({
     let userAuthen = await dispatch(sessionActions.login(email, password))
       .catch(async (res) => {
       const data = await res.json();
-      console.log("this is data",data)
       if (data && data.errors) setErrors(data.errors)
     })
     
-    console.log(userAuthen)
     setErrors(userAuthen)
 
     
     
   };
   if (user) {
-    console.log("THERE S A USE")
     setAuthenticated(true)
       // dispatch(getNotebooks)
       // dispatch our get-all-things from the store
