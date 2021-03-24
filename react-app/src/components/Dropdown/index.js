@@ -5,17 +5,14 @@ import onClickOutside from 'react-onclickoutside';
 
 function Dropdown({ items = ['A', 'B', 'C'] }) {
   const [open, setOpen] = useState(false);
-  const [selection, setSelection] = useState([]);
-
-  Dropdown.handleClickOutside = () => setOpen(false);
-
   const toggle = () => setOpen(!open);
-  
+
   const handleOnClick = (item) => {
     //do some stuff here
   };
-
-
+  
+  Dropdown.handleClickOutside = () => setOpen(false);
+  
   return (
     <div className="dropdown-wrapper">
       <div
@@ -25,7 +22,11 @@ function Dropdown({ items = ['A', 'B', 'C'] }) {
         onKeyPress={() => toggle(!open)}
         onClick={() => toggle(!open)}
       >
-        <div className="ellipsis">...</div>
+        <div className="ellipsis">
+          <div className="dots">
+            <span>...</span>
+          </div>
+        </div>
       </div>
 
       {open && (
@@ -48,3 +49,5 @@ const clickOutsideConfig = {
 };
 
 export default onClickOutside(Dropdown, clickOutsideConfig);
+
+

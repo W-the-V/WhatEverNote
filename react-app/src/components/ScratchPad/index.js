@@ -19,8 +19,14 @@ function ScratchPad() {
         <div className="scratch-container container">
           <section className="scratch-top container">
             <div className="scratch-title-label">
-              <div className="scratch-title">SCRATCH PAD</div>
-              <DropDown items = {["Convert to note", "Clear scratch pad", "Remove widget"]} />
+              <div className="scratch-title">
+                <p className="scratch-text">scratch pad</p>
+              </div>
+              <div className="dropdown-container">
+                <DropDown
+                  items={["Convert to note", "Clear scratch pad", "Remove widget"]}
+                />
+              </div>
             </div>
           </section>
 
