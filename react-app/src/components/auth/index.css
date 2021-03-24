@@ -180,3 +180,18 @@ input[type="submit" i] {
 .form__button:hover {
   background-color: rgba(34, 217, 0);
 }
+#Logout-Button{
+  position: absolute;
+  height: 300px;
+  width: 300px;
+}
+.form__error__container{
+  height: 15px;
+  display: flex;
+  justify-content: center;
+  padding-left: 5px;
+}
+.form__error__text{
+  color: red;
+  font-size: 13px;
+}

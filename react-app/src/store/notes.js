@@ -3,6 +3,7 @@ const REMOVE_NOTE = "notes/REMOVE_NOTE";
 const EDIT_NOTE = "notes/EDIT_NOTE";
 const ADD_NOTE = "notes/ADD_NOTE";
 
+
 const get = (notes, userId) => ({
   type: GET_NOTES,
   notes,

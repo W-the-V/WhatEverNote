@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { NavLink, Redirect } from "react-router-dom";
-import { login } from "../../services/auth";
+import {useDispatch, useSelector} from 'react-redux'
+import * as sessionActions from '../../store/session'
+// import { login } from "../../services/auth";
 import "./index.css";
 import mousepic from "../../images/mouse.png";
 
@@ -10,19 +12,40 @@ const LoginForm = ({
   setSignup,
   setLogin,
 }) => {
+  const dispatch = useDispatch();
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const user = useSelector(state => state.session.user);
 
+  
   const onLogin = async (e) => {
-    e.preventDefault();
-    const user = await login(email, password);
-    if (!user.errors) {
-      setAuthenticated(true);
-    } else {
-      setErrors(user.errors);
-    }
+    e.preventDefault()
+    let userAuthen = await dispatch(sessionActions.login(email, password))
+      .catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors)
+      if (user) {
+        setAuthenticated(true)
+          // dispatch(getNotebooks)
+          // dispatch our get-all-things from the store
+          // all user information and update the store
+          //get all of the notebooks associated w user
+          //get all notes associated with user 
+          // setAuthenticated true? 
+        
+        return (
+        <Redirect to="/home"/>
+      )}
+
+    })
+    
+    setErrors(userAuthen)
+
+    
+    
   };
+  
   const signupButton = () => {
     setLogin(false);
     setSignup(true);
@@ -35,16 +58,16 @@ const LoginForm = ({
   const updatePassword = (e) => {
     setPassword(e.target.value);
   };
+  
+  const errorCheck = {} 
+  if (errors){
+    errors.forEach(error => { 
+    error = error.split(':') 
+    errorCheck[error[0].trim()] = error[1]
+  })
 
-  if (authenticated) {
-    return (
-      <Redirect
-        to="/home"
-        authenticated={authenticated}
-        setAuthenticated={setAuthenticated}
-      />
-    );
   }
+
 
   return (
     <div className="form_container">
@@ -54,12 +77,8 @@ const LoginForm = ({
         <span>Remember whatever's important.</span>
       </div>
 
-      <form classname="login_form" onSubmit={onLogin}>
-        <div>
-          {errors.map((error) => (
-            <div>{error}</div>
-          ))}
-        </div>
+      <form className="login_form" onSubmit={onLogin}>
+
         <div>
           {/* <label htmlFor="email">Email</label> */}
           <input
@@ -69,6 +88,7 @@ const LoginForm = ({
             value={email}
             onChange={updateEmail}
           />
+        {"email" in errorCheck ? <div className="form__error__container"><p className="form__error__text">{errorCheck.email}</p></div> : null}
         </div>
         <div>
           {/* <label htmlFor="password">Password</label> */}
@@ -79,7 +99,9 @@ const LoginForm = ({
             value={password}
             onChange={updatePassword}
           />
+          {"password" in errorCheck ? <div className="form__error__container"><p className="form__error__text">{errorCheck.password}</p></div> : null}
         </div>
+
         <button className="form__button" type="submit">
           Continue
         </button>

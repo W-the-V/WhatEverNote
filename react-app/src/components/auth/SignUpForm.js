@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Redirect, NavLink } from "react-router-dom";
-import { signUp } from "../../services/auth";
+import {useDispatch, useSelector} from 'react-redux'
+// import { signUp } from "../../services/auth";
+import * as sessionActions from '../../store/session'
 import mousepic from "../../images/mouse.png";
 
 const SignUpForm = ({
@@ -9,22 +11,35 @@ const SignUpForm = ({
   setSignup,
   setLogin,
 }) => {
+  const dispatch = useDispatch()
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [errors, setErrors] = useState([]);
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const user = useSelector(state => state.session.user);
+
 
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const user = await signUp(username, firstName, lastName, email, password);
-      if (!user.errors) {
-        setAuthenticated(true);
+    let successfulSignUp = await dispatch(sessionActions.signUp(username, firstName, lastName, email, password))
+        .catch(async (res) => {
+          console.log("THIS IS RES", res)
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors)
+        })
+        setErrors(successfulSignUp)
       }
-    }
   };
+  if (user) {
+    setAuthenticated(true)
+    return (
+    <Redirect to="/home"/>
+  )}
+
   const loginButton = () => {
     setSignup(false);
     setLogin(true);
@@ -53,15 +68,26 @@ const SignUpForm = ({
     setRepeatPassword(e.target.value);
   };
 
-  if (authenticated) {
-    return (
-      <Redirect
-        to="/home"
-        authenticated={authenticated}
-        setAuthenticated={setAuthenticated}
-      />
-    );
-  }
+  const errorCheck = {} 
+  
+    errors.forEach(error => { 
+    error = error.split(':') 
+    errorCheck[error[0].trim()] = error[1]
+
+  })
+
+ console.log(errorCheck)
+
+
+  // if (authenticated) {
+  //   return (
+  //     <Redirect
+  //       to="/home"
+  //       authenticated={authenticated}
+  //       setAuthenticated={setAuthenticated}
+  //     />
+  //   );
+  // }
 
   return (
     <div className="form_container">
@@ -81,6 +107,8 @@ const SignUpForm = ({
             onChange={updateFirstName}
             value={firstName}
           ></input>
+          {"firstName" in errorCheck ? <div className="form__error__container"><p className="form__error__text">{errorCheck.firstName}</p></div> : null}
+  
         </div>
         <div>
           <input
@@ -90,6 +118,8 @@ const SignUpForm = ({
             onChange={updateLastName}
             value={lastName}
           ></input>
+          {"lastName" in errorCheck ? <div className="form__error__container"><p className="form__error__text">{errorCheck.lastName}</p></div> : null}
+
         </div>
         <div>
           <input
@@ -99,6 +129,8 @@ const SignUpForm = ({
             onChange={updateUsername}
             value={username}
           ></input>
+          {"username" in errorCheck ? <div className="form__error__container"><p className="form__error__text">{errorCheck.username}</p></div> : null}
+
         </div>
         <div>
           {/* <label>Email</label> */}
@@ -109,6 +141,8 @@ const SignUpForm = ({
             onChange={updateEmail}
             value={email}
           ></input>
+          {"email" in errorCheck ? <div className="form__error__container"><p className="form__error__text">{errorCheck.email}</p></div> : null}
+
         </div>
         <div>
           {/* <label>Password</label> */}

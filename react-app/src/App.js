@@ -4,28 +4,37 @@ import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import {useDispatch, useSelector} from 'react-redux'
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./services/auth";
+import * as sessionActions from "./store/session"
 import Home from "./components/Home";
 import Splash from "./components/splash";
 import Whywhatevernote from "./components/Whywhatevernote";
 import ScratchPad from "./components/ScratchPad";
+import Note from "./components/Note";
+import LogoutButton from "./components/auth/LogoutButton";
 
 
 function App() {
+  const dispatch = useDispatch()
   const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    (async () => {
-      const user = await authenticate();
-      if (!user.errors) {
-        setAuthenticated(true);
-      }
-      setLoaded(true);
-    })();
-  }, []);
+  const user = useSelector(state => state.session.user);
+  // useEffect(() => {
+  //   (async () => {
+  //     if (user && !user.errors) {
+  //       console.log(user)
+  //       setAuthenticated(true);
+  //       console.log("this is authenticated", authenticated)
+  //     }
+  //     setLoaded(true);
+  //   })();
+  // }, []);
+  useEffect(()=>{
+    dispatch(sessionActions.restoreUser()).then(()=> setLoaded(true))
+  },[dispatch])
 
   if (!loaded) {
     return null;
@@ -33,27 +42,31 @@ function App() {
 
   return (
     <BrowserRouter>
-      {(authenticated)?<NavBar setAuthenticated={setAuthenticated} />:null}
+      {/* {(authenticated)?<NavBar setAuthenticated={setAuthenticated} />:null} */}
+      {(user)?<NavBar />:null}
       
       <Switch>
         <Route path="/" exact={true}>
           <Splash />
         </Route>
-        <Route path="/login" exact={true}>
+        {/* <Route path="/login" exact={true}>
           <LoginForm
             authenticated={authenticated}
             setAuthenticated={setAuthenticated}
           />
+        </Route> */}
+        <Route path="/logout">
+          <LogoutButton />
         </Route>
         <Route path="/whywhatevernote" >
           <Whywhatevernote />
         </Route>
-        <Route path="/sign-up" exact={true}>
+        {/* <Route path="/sign-up" exact={true}>
           <SignUpForm
             authenticated={authenticated}
             setAuthenticated={setAuthenticated}
           />
-        </Route>
+        </Route> */}
         <ProtectedRoute
           path="/users"
           exact={true}
@@ -68,8 +81,11 @@ function App() {
         >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path="/home" exact={true} authenticated={authenticated}>
+        <ProtectedRoute path="/home" exact={true}  authenticated={authenticated}>
           <Home />
+        </ProtectedRoute>
+        <ProtectedRoute path="/note" exact={true} authenticated={authenticated}>
+          <Note placeholder={"Write something or insert a heart ♥"}/>
         </ProtectedRoute>
       </Switch>
       <Route exact path="/test">

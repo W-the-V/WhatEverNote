@@ -3,7 +3,7 @@ const REMOVE_NOTEBOOK = "notes/REMOVE_NOTEBOOK";
 const UPDATE_NOTEBOOK = "notes/UPDATE_NOTEBOOK";
 const ADD_NOTEBOOK = "notes/ADD_NOTEBOOK";
 
-const get = (userId, notebookId) => ({
+const get = (userId) => ({
   type: LOAD_NOTEBOOKS,
   userId,
   notebooks,
@@ -25,12 +25,13 @@ const remove = (userId, notebookId) => ({
   userId,
 });
 
-export const getNotebooks = (id) => async (dispatch) => {
-  const response = await fetch(`/api/user/${id}/notebooks`);
+export const getNotebooks = (userId) => async (dispatch) => {
+  const response = await fetch(`/api/user/${userId}/notebooks`);
 
   if (response.ok) {
-    const notebooks = await response.json();
-    dispatch(load(notebooks, id));
+    const data = await response.json();
+    dispatch(get(data.notebooks));
+    return response;
   }
 };
 
