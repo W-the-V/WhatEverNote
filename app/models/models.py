@@ -17,6 +17,7 @@ class User(db.Model, UserMixin):
     theme = db.Column(db.Boolean(), nullable=True)
     bgroundimg = db.Column(db.Integer(), nullable=True)
     notebooks = db.relationship("Notebook", backref='User', lazy=False)
+    tags = db.relationship("Tag", backref='User', lazy=False)
 
     @property
     def password(self):
@@ -75,4 +76,5 @@ class Tag(db.Model):
     __tablename__ = 'tags'
 
     id = db.Column(db.Integer, primary_key=True)
+    userId = db.Column(db.Integer, db.ForeignKey('users.id'))
     name = db.Column(db.String(30), nullable=True)
