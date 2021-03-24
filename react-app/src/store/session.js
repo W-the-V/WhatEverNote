@@ -39,11 +39,14 @@ const removeUser = () => {
         password,
       }),
     });
-
     const data = await response.json()
-    console.log("DATA:.......", data )
-    dispatch(setUser(data))
-    return response;
+    if (response.ok){
+      dispatch(setUser(data))
+      
+    }
+    // console.log("THIS IS DATA ERRORS",data.errors)
+    
+    return data.errors;
   };
   
   export const logout = () => async (dispatch) => {

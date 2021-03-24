@@ -16,10 +16,27 @@ const LoginForm = ({
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const user = useSelector(state => state.session);
+  const user = useSelector(state => state.session.user);
 
+  
+  const onLogin = async (e) => {
+    e.preventDefault()
+    let userAuthen = await dispatch(sessionActions.login(email, password))
+      .catch(async (res) => {
+      const data = await res.json();
+      console.log("this is data",data)
+      if (data && data.errors) setErrors(data.errors)
+    })
+    
+    console.log(userAuthen)
+    setErrors(userAuthen)
+
+    
+    
+  };
   if (user) {
     console.log("THERE S A USE")
+    setAuthenticated(true)
       // dispatch(getNotebooks)
       // dispatch our get-all-things from the store
       // all user information and update the store
@@ -30,17 +47,6 @@ const LoginForm = ({
     return (
     <Redirect to="/home"/>
   )}
-
-  const onLogin = (e) => {
-    e.preventDefault()
-    return dispatch(sessionActions.login(email, password))
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors)
-      })
-    
-    
-  };
   const signupButton = () => {
     setLogin(false);
     setSignup(true);

@@ -180,3 +180,8 @@ input[type="submit" i] {
 .form__button:hover {
   background-color: rgba(34, 217, 0);
 }
+#Logout-Button{
+  position: absolute;
+  height: 300px;
+  width: 300px;
+}
