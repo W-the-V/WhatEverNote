@@ -1,13 +1,27 @@
-from config import Config
+from .config import Config
 from flask import Flask, session
 from flask_sqlalchemy import SQLAlchemy
 from flask import Blueprint, jsonify
 from app.models import User, Notebook, db
+from flask_login import current_user
 
+bp = Blueprint('notebook', __name__)
 
-bp = Blueprint('notebooks', __name__)
+def get_default_notebook(data):
+    data = get_notebooks(data)
+
+    if data.is_json():
+        notebook_data = data.get_json()
+    else:
+        notebook_data = data
+
+    if notebook_data.
+    
 
 def get_notebooks(notebook_data):
+    if data.is_json():
+        notebook_data = data.get_json()
+
     notebooks = session
                 .query(Notebook)
                 .filter_by(notebook_data.userId == Notebook.id)

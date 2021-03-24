@@ -23,7 +23,7 @@ def seed_notes():
             x -= 1
     else:
         demo = User.query.filter_by(firstName="Demo").first().id
-        notebooks = Notebook.query.filter_by(userId=demo).all()
+        notebooks = Notebook.query.filter_by(user_id=demo).all()
         while x >= 0:
             n = Note(title=note_names[random.randint(0, len(note_names) - 1)],
                      text=fake.text(),

@@ -46,10 +46,16 @@ class Notebook(db.Model):
     __tablename__ = 'notebooks'
 
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = db.Column(db.String(50), nullable=False)
     notes = db.relationship("Note", backref='notebook', lazy=False)
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "name": self.name,
+        }
 
 class Note(db.Model):
     __tablename__ = 'notes'
@@ -58,6 +64,14 @@ class Note(db.Model):
     title = db.Column(db.String(75), default="Untitled")
     text = db.Column(db.Text, nullable=True)
     notebook_id = db.Column(db.Integer, db.ForeignKey('notebooks.id'))
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "text": self.text,
+            "notebook_id": self.notebook_id,
+        }
     # tags = db.relationship("Tag", back_populates='name',
     #                        secondary="Notes_To_Tags")
 
@@ -76,5 +90,12 @@ class Tag(db.Model):
     __tablename__ = 'tags'
 
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     name = db.Column(db.String(30), nullable=True)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "name": self.name,
+        }
