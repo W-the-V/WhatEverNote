@@ -1,7 +1,7 @@
 from config import Config
 from flask import Flask, session, request
 from flask_sqlalchemy import SQLAlchemy
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, get_json, is_json
 from app.models import User, Note, Notebook db
 
 
