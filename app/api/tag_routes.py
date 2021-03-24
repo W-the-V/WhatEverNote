@@ -9,16 +9,16 @@ bp = Blueprint("tags", __name__)
 
 def get_tags(tag_data):
     tags = session
-                .query(Tag)
-                .filter_by(tag_data.userId == Tag.id)
-                .order_by(updated_at)
-                .all()
+          .query(Tag)
+          .filter_by(tag_data.userId == Tag.id)
+          .order_by(updated_at)
+          .all()
 
     return jsonify(tags)
 
 def add_tag(tag_data):
     tag = Tag(name=tag_data.name,
-                        user_id=tag_data.userId
+              user_id=tag_data.userId
                         )
     
     session.add(tag)
@@ -28,12 +28,12 @@ def add_tag(tag_data):
 
 def edit_tag(tag_data):
     tag = session
-            .query(Tag)
-            .filter_by(Tag.id == tag_data.tagId)
+          .query(Tag)
+          .filter_by(Tag.id == tag_data.tagId)
     if tag.name is not tag_data.name:
         tag.name = tag_data.name
     else:
-        pass #am i sending the tag back or just updating it?
+        pass
 
 def delete_tag(tag_data):
     tag = session

@@ -33,7 +33,7 @@ def edit_notebook(notebook_data):
     if notebook.name is not notebook_data.name:
         notebook.name = notebook_data.name
     else:
-        pass #am i sending the notebook back or just updating it?
+        pass 
 
 def delete_notebook(notebook_data):
     notebook = session
@@ -42,7 +42,7 @@ def delete_notebook(notebook_data):
     session.delete(notebook)
     session.commit()
 
-    return "something" #check
+    return "something"
 
 
 @bp.route("/notebooks", methods=['GET', 'POST', 'PUT', 'DELETE'])

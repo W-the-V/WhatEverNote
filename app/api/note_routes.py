@@ -7,7 +7,10 @@ from app.models import User, Note, Notebook db
 
 bp = Blueprint('notes', __name__)
 
-def add_note(note_data):
+def add_note(data):
+    if data.is_json():
+        note_data = data.get_json()
+
     note = Note(title=note_data.title,
                 text=note_data.text,
                 notebook_id=note_data.notebookId)
@@ -15,9 +18,12 @@ def add_note(note_data):
     session.add(note)
     session.commit()
 
-    return jsonify(note)
+    return jsonify(note) #good--worked in potman
 
-def get_notes(user_data):
+def get_notes(data):
+    if data.is_json():
+        user_data = data.get_json()
+
     notes_list = []
     notebooks = session
                 .query(Notebook)
@@ -30,9 +36,11 @@ def get_notes(user_data):
                 .order_by(updated_at)
                 .all()
         notes_list = notes_list + notes
-    return jsonify(notes_list)
+    return jsonify(notes_list) #ok --at least on my end it worked in postman
 
-def edit_note(note_data):
+def edit_note(data):
+    if data.is_json():
+        note_data = data.get_json
     note = session
             .query(Note)
             .filter_by(Note.note_id == note_data.noteId)
@@ -41,7 +49,7 @@ def edit_note(note_data):
     elif note.text is not note_data.text:
         note.text = note_data.text
     else:
-        pass #am i sending the note back or just updating it?
+        return note 
 
 def delete_note(note_data):
     note = session
