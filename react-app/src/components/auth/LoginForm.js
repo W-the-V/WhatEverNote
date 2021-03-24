@@ -56,22 +56,14 @@ const LoginForm = ({
   const updatePassword = (e) => {
     setPassword(e.target.value);
   };
+  
+  const errorCheck = {} 
+  
+    errors.forEach(error => { 
+    error = error.split(':') 
+    errorCheck[error[0].trim()] = error[1]
 
-  // if (authenticated) {
-  //   // dispatch our get-all-things from the store
-  //     // all user information and update the store
-  //     //get all of the notebooks associated w user
-  //     //get all notes associated with user 
-  //     //
-  //   return (
-  //     <Redirect
-  //       to="/home"
-  //       authenticated={authenticated}
-  //       setAuthenticated={setAuthenticated}
-  //     />
-  //   );
-  // }
-
+  })
 
   return (
     <div className="form_container">
@@ -82,11 +74,7 @@ const LoginForm = ({
       </div>
 
       <form className="login_form" onSubmit={onLogin}>
-        <div>
-          {errors.map((error) => (
-            <div>{error}</div>
-          ))}
-        </div>
+
         <div>
           {/* <label htmlFor="email">Email</label> */}
           <input
@@ -96,6 +84,7 @@ const LoginForm = ({
             value={email}
             onChange={updateEmail}
           />
+        {"email" in errorCheck ? <div className="form__error__container"><p className="form__error__text">{errorCheck.email}</p></div> : null}
         </div>
         <div>
           {/* <label htmlFor="password">Password</label> */}
@@ -106,7 +95,9 @@ const LoginForm = ({
             value={password}
             onChange={updatePassword}
           />
+          {"password" in errorCheck ? <div className="form__error__container"><p className="form__error__text">{errorCheck.password}</p></div> : null}
         </div>
+
         <button className="form__button" type="submit">
           Continue
         </button>

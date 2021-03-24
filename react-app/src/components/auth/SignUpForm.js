@@ -25,13 +25,14 @@ const SignUpForm = ({
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const successfulSignUp = await dispatch(sessionActions.signUp(username, firstName, lastName, email, password))
+    let successfulSignUp = await dispatch(sessionActions.signUp(username, firstName, lastName, email, password))
         .catch(async (res) => {
+          console.log("THIS IS RES", res)
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors)
         })
         setErrors(successfulSignUp)
-    }
+      }
   };
   if (user) {
     setAuthenticated(true)
@@ -67,6 +68,17 @@ const SignUpForm = ({
     setRepeatPassword(e.target.value);
   };
 
+  const errorCheck = {} 
+  
+    errors.forEach(error => { 
+    error = error.split(':') 
+    errorCheck[error[0].trim()] = error[1]
+
+  })
+
+ console.log(errorCheck)
+
+
   // if (authenticated) {
   //   return (
   //     <Redirect
@@ -86,11 +98,6 @@ const SignUpForm = ({
       </div>
 
       <form onSubmit={onSignUp} className="signup_form">
-      <div>
-          {errors.map((error) => (
-            <div>{error}</div>
-          ))}
-        </div>
         <div>
           {/* <label>User Name</label> */}
           <input
@@ -100,6 +107,8 @@ const SignUpForm = ({
             onChange={updateFirstName}
             value={firstName}
           ></input>
+          {"firstName" in errorCheck ? <div className="form__error__container"><p className="form__error__text">{errorCheck.firstName}</p></div> : null}
+  
         </div>
         <div>
           <input
@@ -109,6 +118,8 @@ const SignUpForm = ({
             onChange={updateLastName}
             value={lastName}
           ></input>
+          {"lastName" in errorCheck ? <div className="form__error__container"><p className="form__error__text">{errorCheck.lastName}</p></div> : null}
+
         </div>
         <div>
           <input
@@ -118,6 +129,8 @@ const SignUpForm = ({
             onChange={updateUsername}
             value={username}
           ></input>
+          {"username" in errorCheck ? <div className="form__error__container"><p className="form__error__text">{errorCheck.username}</p></div> : null}
+
         </div>
         <div>
           {/* <label>Email</label> */}
@@ -128,6 +141,8 @@ const SignUpForm = ({
             onChange={updateEmail}
             value={email}
           ></input>
+          {"email" in errorCheck ? <div className="form__error__container"><p className="form__error__text">{errorCheck.email}</p></div> : null}
+
         </div>
         <div>
           {/* <label>Password</label> */}

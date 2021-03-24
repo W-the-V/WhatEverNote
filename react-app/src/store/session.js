@@ -54,7 +54,7 @@ const removeUser = () => {
         "Content-Type": "application/json",
       },
     });
-    console.log("LOGOUT FROM STORE")
+  
     dispatch(removeUser())
     return response;
   };
@@ -75,8 +75,7 @@ const removeUser = () => {
       }),
     });
     const data = await response.json()
-    if(response.ok && data.errors.length === 0){
-      console.log(data.errors.length)
+    if(response.ok && !data.errors){
       dispatch(setUser(data))
     }
     return data.errors;
