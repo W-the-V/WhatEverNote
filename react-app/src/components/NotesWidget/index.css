@@ -5,7 +5,7 @@
     border-radius: 8px;
     background-color: white;
     padding-left: 5px;
-    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.61);
+    box-shadow: 0px 2px 6px darkgrey;
     overflow-x: scroll;
 }
 .N_Widget__header{
@@ -55,6 +55,7 @@
     margin: 5px;
 }
 .customizeHome{
+    height: 20px;
     position:absolute;
     right: 30px;
     top: 30px;
@@ -63,7 +64,18 @@
     border-radius: 4px;
     background-color: white;
 }
-.customizeHome button{
+.customize__button {
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    height: 20px;
     border:none;
     background-color: transparent;
+}
+
+.ScratchPad_Widget__container{
+    border-radius: 8px;
+    background-color: white;
+    padding-left: 5px;
+    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.61);
+    overflow-x: scroll;
 }

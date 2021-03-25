@@ -24,3 +24,12 @@ body{
 .hello h3{
     font-size: 12px;
 }
+
+.ScratchPad_Widget__container{
+    /* position:relative; */
+    border-radius: 8px;
+    background-color: white;
+    padding-left: 5px;
+    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.61);
+    overflow-x: scroll;
+}
