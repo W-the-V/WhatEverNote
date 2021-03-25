@@ -48,8 +48,9 @@ class Notebook(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    name = db.Column(db.String(50), nullable=False)
+    name = db.Column(db.String(50), nullable=False, default="Notebook")
     notes = db.relationship("Note", backref='notebook', lazy=False)
+    default_notebook = db.Column(db.Boolean, nullable=False, default=False)
     createdAt = db.Column(db.DateTime, nullable=False,
                           default=datetime.datetime.now())
     updatedAt = db.Column(db.DateTime, nullable=False,
@@ -63,6 +64,7 @@ class Notebook(db.Model):
             "notes": [note.to_dict() for note in self.notes]
         }
 
+
 class Note(db.Model):
     __tablename__ = 'notes'
 
@@ -75,7 +77,6 @@ class Note(db.Model):
     updatedAt = db.Column(db.DateTime, nullable=False,
                           default=datetime.datetime.now())
 
-   
     def to_dict(self):
         return {
             "id": self.id,
@@ -83,7 +84,7 @@ class Note(db.Model):
             "text": self.text,
             "notebook_id": self.notebook_id,
         }
-    
+
     def other_to_dict(self):
         return {
             "id": self.id,
@@ -93,12 +94,16 @@ class Note(db.Model):
             "tags": [tag.to_dict() for tag in self.tags]
         }
 
-
     # tags = db.relationship("Tag", back_populates='name',
     #                        secondary="Notes_To_Tags")
 
 
-Notes_To_Tags = db.Table('notes_to_tags', db.Model.metadata, db.Column  ("tags_id", db.Integer, db.ForeignKey("tags.id"), primary_key=True),db.Column("notes_id", db.Integer, db.ForeignKey("notes.id"), primary_key=True))
+class Notes_To_Tags(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    tags_id = db.Column(db.Integer, db.ForeignKey('tags.id'))
+    notes_id = db.Column(db.Integer, db.ForeignKey('notes.id'))
+    notes = db.relationship("Note", backref='tag', lazy=False)
+    tags = db.relationship("Tag", backref='note', lazy=False)
 
 
 class Tag(db.Model):
