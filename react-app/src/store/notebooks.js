@@ -1,28 +1,27 @@
+import * as deepcopy from "deepcopy"
 const GET_NOTEBOOKS = "notes/GET_NOTEBOOKS";
 const REMOVE_NOTEBOOK = "notes/REMOVE_NOTEBOOK";
 const UPDATE_NOTEBOOK = "notes/UPDATE_NOTEBOOK";
 const ADD_NOTEBOOK = "notes/ADD_NOTEBOOK";
 
-const get = (userId) => ({
-  type: LOAD_NOTEBOOKS,
-  userId,
+const get = (notebooks) => ({
+  type: GET_NOTEBOOKS,
   notebooks,
 });
 
 const update = (notebook) => ({
-  type: UPDATE_NOTEBOOKS,
+  type: UPDATE_NOTEBOOK,
   notebook,
 });
 
 const add = (notebook) => ({
-  type: ADD_NOTEBOOKS,
+  type: ADD_NOTEBOOK,
   notebook,
 });
 
-const remove = (userId, notebookId) => ({
-  type: REMOVE_NOTEBOOKS,
+const remove = ( notebookId) => ({
+  type: REMOVE_NOTEBOOK,
   notebookId,
-  userId,
 });
 
 export const getNotebooks = (userId) => async (dispatch) => {
@@ -35,7 +34,7 @@ export const getNotebooks = (userId) => async (dispatch) => {
   }
 };
 
-export const createNotebooks = (data, userId) => async (dispatch) => {
+export const createNotebook = (data, userId) => async (dispatch) => {
   const response = await fetch(`/api/user/${userId}/notebooks`, {
     method: "post",
     headers: {
@@ -79,20 +78,15 @@ export const deleteNotebooks = (notebookId) => async (dispatch) => {
 };
 
 const initialState = {};
-
+let newState;
 const notebooksReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_NOTEBOOKS: {
-      const newNotebooks = {};
-      action.Notebooks.forEach((notebook) => {
-        newNotebooks[notebook.id] = notebook;
-      });
-      return {
-        ...state,
-        ...newNotebooks,
-      };
+      newState = deepcopy(state)
+      newState.notebooks = action.notebooks
+      return newState
     }
-    case REMOVE_NOTE: {
+    case REMOVE_NOTEBOOK: {
       const newState = { ...state };
       delete newState[action.noteId];
       return newState;
