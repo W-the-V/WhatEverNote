@@ -1,79 +1,78 @@
-from .config import Config
-from flask import Flask, session
+from app.config import Config
+from flask import Flask, Blueprint, jsonify, json, request, session
 from flask_sqlalchemy import SQLAlchemy
-from flask import Blueprint, jsonify
-from app.models import User, Notebook, db
-from flask_login import current_user
+from app.models import Note, Notebook, db
 
-bp = Blueprint('notebook', __name__)
+notebook_routes = Blueprint("notebook_routes",
+                            __name__,
+                            url_prefix="/api/user/<int:user_id>")
 
-def get_default_notebook(data):
-    data = get_notebooks(data)
+#------------------------------------------------------------------------------
+#                         Notebook Operation Functions
+#------------------------------------------------------------------------------
 
-    if data.is_json():
-        notebook_data = data.get_json()
-    else:
-        notebook_data = data
+def get_one_notebook(notebook_id):
+    notebook = Notebook.query.filter_by(id = notebook_id).first()
+    return notebook
 
-    if notebook_data.
+def get_all_notebooks(user_id):
+    notebooks = Notebook.query.filter_by(user_id = user_id).all()
+    return jsonify({"notebooks": [notebook.to_dict() for notebook in notebooks]})
+
+def add_notebook(user_id):
+    notebook_data = json.loads(request.data.decode("utf-8"))
+
+    notebook = Notebook(name = notebook_data["name"],
+                        user_id = notebook_data["user_id"])
     
+    db.session.add(notebook)
+    db.session.commit()
+    return jsonify(notebook.to_dict())
 
-def get_notebooks(notebook_data):
-    if data.is_json():
-        notebook_data = data.get_json()
+def delete_notebook(notebook_id):
+    # notes = Note.query.filter_by(notebook_id = notebook_id).all()
+    # for note in notes:
+    #     db.delete(note)
+    #     db.session.commit()
 
-    notebooks = session
-                .query(Notebook)
-                .filter_by(notebook_data.userId == Notebook.id)
-                .order_by(updated_at)
-                .all()
+    notebook = Notebook.query.filter_by(id = notebook_id)
 
-    return jsonify(notebooks)
+    db.session.delete(notebook)
+    db.session.commit()
+    return jsonify({"message": "Notebook successfully deleted"})
 
-def add_notebook(notebook_data):
-    notebook = Notebook(name=notebook_data.name,
-                        user_id=notebook_data.userId
-                        )
+def edit_notebook(notebook_id):
+    edit_notebook_data = json.loads(request.data.decode("utf-8"))
+    notebook = get_one_notebook(notebook_id)
+
+    if notebook.name is not edit_notebook_data["name"]:
+        notebook.name = edit_notebook_data["name"]
+    if notebook.user_id is not edit_notebook_data["user_id"]:
+        notebook.user_id = edit_notebook_data["user_id"]
     
-    session.add(notebook)
-    session.commit()
+    db.session.commit()
+    return jsonify(notebook.to_dict())
 
-    return jsonify(notebook)
+#------------------------------------------------------------------------------
+#                    RESTful Routes -- Notebooks
+#------------------------------------------------------------------------------
 
-def edit_notebook(notebook_data):
-    notebook = session
-            .query(Notebook)
-            .filter_by(Notebook.notebook_id == notebook_data.notebookId)
-    if notebook.name is not notebook_data.name:
-        notebook.name = notebook_data.name
-    else:
-        pass 
+#get_all
+#add_notebook
+@notebook_routes.route("/notebooks", methods=['GET', 'POST'])
+def get_or_add_notebooks(user_id):
+    if request.method == 'GET':
+        return get_all_notebooks(user_id)
+    elif request.method == 'POST':
+        return add_notebook(user_id)
 
-def delete_notebook(notebook_data):
-    notebook = session
-            .query(Notebook)
-            .filter_by(Notebook.notebook_id == notebook_data.notebookId)
-    session.delete(notebook)
-    session.commit()
+#delete
+@notebook_routes.route("/notebooks/<int:notebook_id>", methods = ['DELETE'])
+def delete_user_note(user_id, notebook_id):
+    return delete_notebook(notebook_id)
 
-    return "something"
-
-
-@bp.route("/notebooks", methods=['GET', 'POST', 'PUT', 'DELETE'])
-def notebook_requests(request):
-    notebook_data = request.get_json()
-
-    if "method" not in notebook_data:
-       return "some error message"
-    else:
-        if notebook_data["method"] == "post":
-            result = add_notebook(notebook_data)
-        elif notebook_data["method"] == "get":
-            result = get_notebooks(notebook_data)
-        elif notebook_data["method"] == "put":
-            result = edit_notebook(notebook_data)
-        elif notebook_data["method"] == "delete":
-            result = delete_notebook(notebook_data)
-        else:
-            return None
+#edit
+@notebook_routes.route("/notebooks/<int:notebook_id>", methods=['PUT'])
+def edit_user_notebook(user_id, notebook_id):
+    return edit_notebook(notebook_id)
 
