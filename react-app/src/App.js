@@ -7,8 +7,10 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import {useDispatch, useSelector} from 'react-redux'
 import UsersList from "./components/UsersList";
 import User from "./components/User";
-import { authenticate } from "./services/auth";
 import * as sessionActions from "./store/session"
+import {getNotebooks} from "./store/notebooks"
+import {getNotes} from "./store/notes"
+import {getTags} from "./store/tags"
 import Home from "./components/Home";
 import Splash from "./components/splash";
 import Whywhatevernote from "./components/Whywhatevernote";
@@ -23,19 +25,14 @@ function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const user = useSelector(state => state.session.user);
-  // useEffect(() => {
-  //   (async () => {
-  //     if (user && !user.errors) {
-  //       console.log(user)
-  //       setAuthenticated(true);
-  //       console.log("this is authenticated", authenticated)
-  //     }
-  //     setLoaded(true);
-  //   })();
-  // }, []);
+  
+  
   useEffect(()=>{
-    dispatch(sessionActions.restoreUser()).then(()=> setLoaded(true))
+    dispatch(sessionActions.restoreUser())
+    .then(()=> setLoaded(true))
+    
   },[dispatch])
+  
 
   if (!loaded) {
     return null;
@@ -86,7 +83,7 @@ function App() {
           <Home />
         </ProtectedRoute>
         <ProtectedRoute path="/note" exact={true} authenticated={authenticated}>
-          <Note placeholder={"Write something or insert a heart ♥"}/>
+          <Note placeholder={"Write something or insert a heart ♥"} title={"Title"}/>
         </ProtectedRoute>
         <ProtectedRoute path="/notebooks" exact={true}>
           <NoteBooks />
