@@ -1,16 +1,18 @@
 import * as deepcopy from "deepcopy"
 const GET_NOTES = "notes/GET_NOTES";
 const REMOVE_NOTE = "notes/REMOVE_NOTE";
-const UPDATE_NOTE = "notes/UPDATE_NOTE";
+const EDIT_NOTE = "notes/EDIT_NOTE";
 const ADD_NOTE = "notes/ADD_NOTE";
+
 
 const get = (notes) => ({
   type: GET_NOTES,
   notes,
 });
 
-const update = (note) => ({
-  type: UPDATE_NOTE,
+
+const edit = (note) => ({
+  type: EDIT_NOTE,
   note,
 });
 
@@ -25,8 +27,8 @@ const remove = (userId, noteId) => ({
   userId,
 });
 
-export const getNotes = (id) => async (dispatch) => {
-  const response = await fetch(`/api/user/${id}/notes`);
+export const getNotes = (userId) => async (dispatch) => {
+  const response = await fetch(`/api/user/${userId}/notes`);
 
   if (response.ok) {
     const notes = await response.json();
@@ -50,7 +52,7 @@ export const createNotes = (data, userId) => async (dispatch) => {
   }
 };
 
-export const updateNotes = (data) => async (dispatch) => {
+export const editNotes = (data) => async (dispatch) => {
   const response = await fetch(`/api/notes/${data.id}`, {
     method: "put",
     headers: {
@@ -92,7 +94,7 @@ const notesReducer = (state = initialState, action) => {
       return newState;
     }
     case ADD_NOTE:
-    case UPDATE_NOTE: {
+    case EDIT_NOTE: {
       return {
         ...state,
         [action.note.id]: action.note,
