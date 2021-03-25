@@ -1,7 +1,9 @@
 
 
 .scratch-container {
-  height: 358px;
+  top: 540px;
+  left: 85px;
+  height: 250px;
   width: 281px;
   border: 1px solid #FFEB81;
   background-color: #FFF4B9;
@@ -12,7 +14,7 @@
   overflow: hidden;
   padding: 0 5px 5px 0;
   box-sizing: border-box;
-  box-shadow: 1px 2px 6px;
+  box-shadow: 0px 2px 6px darkgrey;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
 }
 
@@ -23,7 +25,7 @@
   height: 40px;
   width: 264px;
   padding: 16px 0px 10px;
-  flex: none;
+  /* flex: none; */
   box-sizing: border-box;
 }
 
@@ -46,11 +48,11 @@
   line-height: 16px;
   text-transform: uppercase;
   font-family: inherit;
-  font-weight: 500;
+  font-weight: 700;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0;
+  margin-left: 8px;
 }
 
 .scratch-text {
@@ -62,7 +64,7 @@
   width: 358px;
   height: 100%;
   transition: opacity .2s linear;
-  position: relative;
+  /* position: relative; */
   border-radius: 0 0 8px 8px;
   overflow: hidden;
   flex: 1 1 auto;
@@ -71,6 +73,8 @@
 }
 
 .scratch-text-box {
+  margin-left: 12px;
+  font-size: 14px;
   border: none;
   outline: none;
   background-color: transparent;
@@ -92,7 +96,11 @@
   cursor: pointer;
 }
 
-/* .dropdown-container:hover {
+.dropdown-container {
+  margin-right: 10px;
+}
+
+.dropdown-container:hover {
   color: #CF8C29;
   transition: opacity .2s linear;
-} */
+}

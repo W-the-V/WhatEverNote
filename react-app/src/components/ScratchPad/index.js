@@ -14,9 +14,9 @@ function ScratchPad() {
   }
 
   return (
-    <form>
-      <div className="container" id="scratch-holder">
+      <>
         <div className="scratch-container container">
+    <form>
           <section className="scratch-top container">
             <div className="scratch-title-label">
               <div className="scratch-title">
@@ -38,9 +38,9 @@ function ScratchPad() {
               onChange={handleChange}
             ></textarea>
           </div>
-        </div>
-      </div>
     </form>
+        </div>
+      </>
   );
 };
 

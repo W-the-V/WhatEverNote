@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@700&family=Open+Sans:wght@300;400&family=Roboto:wght@100;400&display=swap');
+
+
+.Tags_Widget__container{
+    box-sizing: border-box;
+    padding: 10px;
+    position: relative;
+    left: 390px;
+    top: 540px;
+    width: 620px;
+    height: 250px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0px 2px 6px darkgrey;
+}
+
+.tagcloud {
+    padding: 10px;
+    font-family: 'Lato', sans-serif;
+}
