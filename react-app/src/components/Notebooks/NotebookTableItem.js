@@ -30,9 +30,9 @@ const NotebookTableItem = ({NoteBook}) => {
             {/* {showActions? <Dropdown items={notebookActions} />:null} */}
         </tr>
             {caretDown && notesforNotebook.map(note => (<tr className="NoteOnNotebooksTable">
-                <td><i className="fas fa-file-alt"></i>{note.title}</td>
-                <td></td>
-                <td>{note.updatedAt}</td>
+                <td class="SubTable-item"><i className="fas fa-file-alt"></i>{note.title}</td>
+                <td >{user.username}</td>
+                <td >{note.updatedAt}</td>
                 {/* <td><span onClick={()=>setShowNoteActions(true)}>...</span></td> */}
                 <td onClick={()=>setShowNoteActions(true)} >{showNoteActions? <Dropdown items={noteActions} />:<span>...</span>}</td>
             </tr>))}
