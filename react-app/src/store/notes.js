@@ -26,7 +26,7 @@ const remove = (userId, noteId) => ({
   noteId,
   userId,
 });
-
+// /api/user/<int:id>/notes
 export const getNotes = (userId) => async (dispatch) => {
   const response = await fetch(`/api/user/${userId}/notes`);
 
@@ -63,7 +63,7 @@ export const editNotes = (data) => async (dispatch) => {
 
   if (response.ok) {
     const notes = await response.json();
-    dispatch(update(notes));
+    dispatch(edit(notes));
     return notes;
   }
 };

@@ -22,29 +22,35 @@ const LoginForm = ({
   const user = useSelector(state => state.session.user);
 
   
+  
   const onLogin = async (e) => {
     e.preventDefault()
     let userAuthen = await dispatch(sessionActions.login(email, password))
-      .catch(async (res) => {
+    .catch(async (res) => {
       const data = await res.json();
       if (data && data.errors) setErrors(data.errors)
-      if (user) {
-        setAuthenticated(true)
-          dispatch(getNotebooks(user.id))
-          // dispatch our get-all-things from the store
-          dispatch(getNotes(user.id))
-
-          // all user information and update the store
-          dispatch(getTags(user.id))
-          //get all of the notebooks associated w user
-          //get all notes associated with user 
-          // setAuthenticated true? 
-        
-        return (
-        <Redirect to="/home"/>
-      )}
-
     })
+    // if (user) {
+    //     console.log(user, "========================================")
+    //     dispatch(getNotes(user.id))
+    //     setAuthenticated(true)
+    //     dispatch(getNotebooks(user.id))
+    //     // dispatch our get-all-things from the store
+        
+        
+    //     // all user information and update the store
+    //     dispatch(getTags(user.id))
+    //     //get all of the notebooks associated w user
+    //     //get all notes associated with user 
+    //     // setAuthenticated true? 
+        
+    //     return (
+    //       <Redirect to="/home"/>
+    //       )
+    //     }
+        
+      
+    console.log("+++++++++++++++++++++++++",user)
     
     setErrors(userAuthen)
 
