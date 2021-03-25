@@ -1,0 +1,119 @@
+.NoteBook_Page__Container{
+    padding-left: 100px;
+    box-sizing: border-box;
+    max-width: 2500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+}
+.NoteBook_Page__Header{
+    display: flex;
+    
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.NoteBook_Page__Header h4{
+    font-weight: 400;
+    font-size: 20px;
+    letter-spacing: 1.6px;
+}
+.search_input__container{
+    border: 1px rgb(190, 189, 189) solid;
+    border-radius: 2px;
+    padding: 5px;
+    margin-right: 10px;
+    width: 235px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.search_input__container input{
+    background-color: transparent;
+    border: none;
+    font-family: 'Lato', sans-serif;
+}
+.search_input__container .fa-search{
+    color:rgb(190, 189, 189);
+}
+.Notebook__Table__Container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 25px;
+    box-sizing: border-box;
+}
+.Notebook-Table-Header__Container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.Notebook-Table-Header__Button__container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.fa-sort-amount-up{
+    color: #737373;
+}
+.addNotebook-button{
+    color:#64AA2D;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: .2px;
+    font-weight: 600;
+    padding: 8px;
+}
+#root{
+    height: 0px;
+}
+.table__Container{
+    width: 100%;
+
+}
+thead tr{
+    background-color: #F2F2F2;
+}
+tr:nth-child(even) {background-color: #F2F2F2;}
+table{
+    border: none;
+    border-top: 2px #5B6B70 solid;
+    border-collapse: collapse;
+    width: 100%;
+}
+tr{
+    height: 33px;
+    font-family: 'Lato', sans-serif;
+}
+th{
+    height: 33px;
+    font-size: 12px;
+    color: #B4B4B4;
+    font-weight: 400;
+    font-family: 'Lato', sans-serif;
+    text-align: left; 
+    padding: 2px;
+}
+td span{
+    padding-left: 8px;
+}
+td{
+    height: 35px;
+    color: #777777;
+    font-family: 'Lato', sans-serif;
+    vertical-align: middle;
+    text-align: left;
+
+}
+td .numofNotes{
+    color: #c4c4c4;
+
+}
+tr:hover{
+    background-color: #dfdddd;
+}

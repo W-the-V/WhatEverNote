@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { NavLink, Redirect } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux'
 import * as sessionActions from '../../store/session'
+import {getNotebooks} from "../../store/notebooks"
+import {getNotes} from "../../store/notes"
+import {getTags} from "../../store/tags"
 // import { login } from "../../services/auth";
 import "./index.css";
 import mousepic from "../../images/mouse.png";
@@ -27,9 +30,12 @@ const LoginForm = ({
       if (data && data.errors) setErrors(data.errors)
       if (user) {
         setAuthenticated(true)
-          // dispatch(getNotebooks)
+          dispatch(getNotebooks(user.id))
           // dispatch our get-all-things from the store
+          dispatch(getNotes(user.id))
+
           // all user information and update the store
+          dispatch(getTags(user.id))
           //get all of the notebooks associated w user
           //get all notes associated with user 
           // setAuthenticated true? 

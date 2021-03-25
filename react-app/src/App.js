@@ -15,6 +15,7 @@ import Whywhatevernote from "./components/Whywhatevernote";
 import ScratchPad from "./components/ScratchPad";
 import Note from "./components/Note";
 import LogoutButton from "./components/auth/LogoutButton";
+import NoteBooks from "./components/Notebooks";
 
 
 function App() {
@@ -86,6 +87,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/note" exact={true} authenticated={authenticated}>
           <Note placeholder={"Write something or insert a heart ♥"}/>
+        </ProtectedRoute>
+        <ProtectedRoute path="/notebooks" exact={true}>
+          <NoteBooks />
         </ProtectedRoute>
       </Switch>
       <Route exact path="/test">

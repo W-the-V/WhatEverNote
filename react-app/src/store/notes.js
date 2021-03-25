@@ -1,26 +1,26 @@
+import * as deepcopy from "deepcopy"
 const GET_NOTES = "notes/GET_NOTES";
 const REMOVE_NOTE = "notes/REMOVE_NOTE";
 const UPDATE_NOTE = "notes/UPDATE_NOTE";
 const ADD_NOTE = "notes/ADD_NOTE";
 
-const get = (userId, noteId) => ({
+const get = (notes) => ({
   type: GET_NOTES,
-  userId,
   notes,
 });
 
 const update = (note) => ({
-  type: UPDATE_NOTES,
+  type: UPDATE_NOTE,
   note,
 });
 
 const add = (note) => ({
-  type: ADD_NOTES,
+  type: ADD_NOTE,
   note,
 });
 
 const remove = (userId, noteId) => ({
-  type: REMOVE_NOTES,
+  type: REMOVE_NOTE,
   noteId,
   userId,
 });
@@ -30,7 +30,7 @@ export const getNotes = (id) => async (dispatch) => {
 
   if (response.ok) {
     const notes = await response.json();
-    dispatch(load(notes, id));
+    dispatch(get(notes));
   }
 };
 
@@ -78,26 +78,21 @@ export const deleteNote = (noteId) => async (dispatch) => {
 };
 
 const initialState = {};
-
+let newState;
 const notesReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_NOTES: {
-      const newNotes = {};
-      action.Notes.forEach((note) => {
-        newNotes[note.id] = note;
-      });
-      return {
-        ...state,
-        ...newNotes,
-      };
+      newState= deepcopy(state);
+      newState.notes = action.notes
+      return newState
     }
     case REMOVE_NOTE: {
       const newState = { ...state };
       delete newState[action.noteId];
       return newState;
     }
-    case ADD_note:
-    case UPDATE_note: {
+    case ADD_NOTE:
+    case UPDATE_NOTE: {
       return {
         ...state,
         [action.note.id]: action.note,

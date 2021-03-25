@@ -3,6 +3,7 @@ import { Redirect, NavLink } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux'
 // import { signUp } from "../../services/auth";
 import * as sessionActions from '../../store/session'
+import { createNotebook } from "../../store/notebooks"
 import mousepic from "../../images/mouse.png";
 
 const SignUpForm = ({
@@ -35,7 +36,7 @@ const SignUpForm = ({
       }
   };
   if (user) {
-    setAuthenticated(true)
+    dispatch(createNotebook("first_Notebook",user.id))
     return (
     <Redirect to="/home"/>
   )}
@@ -76,7 +77,7 @@ const SignUpForm = ({
 
   })
 
- console.log(errorCheck)
+
 
 
   // if (authenticated) {
