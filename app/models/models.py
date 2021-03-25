@@ -100,6 +100,14 @@ class Note(db.Model):
     #                        secondary="Notes_To_Tags")
 
 
+# Notes_To_Tags = db.Table('notes_to_tags', db.Model.metadata, db.Column
+#                          ("tags_id", db.Integer, db.ForeignKey(
+#                              "tags.id"), primary_key=True), db.Column
+#                          ("notes_id", db.Integer, db.ForeignKey("notes.id"),
+#                           primary_key=True))
+
+
+
 class Notes_To_Tags(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     tags_id = db.Column(db.Integer, db.ForeignKey('tags.id'))
