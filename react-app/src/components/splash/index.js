@@ -1,6 +1,7 @@
 import { NavLink, Redirect } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { login as Login } from "../../services/auth";
+import {useDispatch, useSelector} from "react-redux"
+import * as sessionActions from '../../store/session'
 import Modal from "react-modal";
 import mousePic from "../../images/mouse.png";
 import laptopPic from "../../images/laptopEvernote.png";
@@ -14,6 +15,8 @@ import SplashSidebar from "../SplashSidebar";
 
 
 const Splash = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.session.user);
   const [quote, setQuote] = useState("forbes")
   const [authenticated, setAuthenticated] = useState(false);
   const [signup, setSignup] = useState(false);
@@ -36,17 +39,17 @@ const Splash = () => {
     if (signup) setSignup(false);
     setLogin(true);
   };
-  const demoLogin = async () => {
-    const user = await Login("demo@demo.com", "password");
+  const demoLogin = () => {
+    const user =  dispatch(sessionActions.login("demo@demo.com", "password"));
     setAuthenticated(true);
   };
-  if (authenticated) {  
+  if (user) {  
 
     return (
       <Redirect
         to="/home"
-        authenticated={authenticated}
-        setAuthenticated={setAuthenticated}
+        // authenticated={authenticated}
+        // setAuthenticated={setAuthenticated}
       />
     );
   }

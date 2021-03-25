@@ -76,3 +76,4 @@ def notebook_requests(request):
             result = delete_notebook(notebook_data)
         else:
             return None
+

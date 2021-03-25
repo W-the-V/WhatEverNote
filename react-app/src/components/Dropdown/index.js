@@ -3,8 +3,12 @@ import './Dropdown.css'
 
 import onClickOutside from 'react-onclickoutside';
 
-function Dropdown({ items = ['A', 'B', 'C'] }) {
-  const [open, setOpen] = useState(false);
+
+function Dropdown({ items }) {
+  const [open, setOpen] = useState(true);
+  const [selection, setSelection] = useState([]);
+
+  Dropdown.handleClickOutside = () => setOpen(false);
   const toggle = () => setOpen(!open);
 
   const handleOnClick = (item) => {
