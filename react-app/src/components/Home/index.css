@@ -5,7 +5,7 @@ body{
 .home_photo{
     position: absolute;
     background-image: url("https://images.pexels.com/photos/606542/pexels-photo-606542.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1000");
-    /* background-repeat: no-repeat; */
+    background-size:cover;
     height: 350px;
     width: 100%;
     z-index: -1;
