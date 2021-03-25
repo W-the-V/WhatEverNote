@@ -1,8 +1,7 @@
 from app.config import Config
-from flask import Flask, session, request
+from flask import Flask, Blueprint, jsonify, json, request, session
 from flask_sqlalchemy import SQLAlchemy
-from flask import Blueprint, jsonify, request, json
-from app.models import User, Note, Notebook, db
+from app.models import Note, Notebook, db
 
 
 note_routes = Blueprint("note_routes",
@@ -10,15 +9,16 @@ note_routes = Blueprint("note_routes",
                          url_prefix="/api/user/<int:user_id>")
 
 #------------------------------------------------------------------------------
-#                         Note Action Functions
+#                         Note Operation Functions
 #------------------------------------------------------------------------------
 def get_one_note(note_id):
     note = Note.query.filter_by(id = note_id).first()
     return note
 
 def get_all_notes(user_id):
-    notebooks = Notebook.query.filter_by(userId = user_id).all()
-    return jsonify({"notebooks": [notebook.to_dict() for notebook in notebooks]})
+    notebooks = Notebook.query.filter_by(user_id = user_id).all()
+    # return jsonify({"notebooks": [notebook.to_dict() for notebook in notebooks]})
+    return jsonify({"notes":[notebook.to_dict()["notes"] for notebook in notebooks]})
 
 def add_note(user_id):
     note_data = json.loads(request.data.decode("utf-8"))

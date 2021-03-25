@@ -1,6 +1,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import backref
 import datetime
 
 db = SQLAlchemy()
@@ -17,8 +18,8 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     theme = db.Column(db.Boolean(), nullable=True)
     bgroundimg = db.Column(db.Integer(), nullable=True)
-    notebooks = db.relationship("Notebook", backref='User')
-    tags = db.relationship("Tag", backref='User', lazy=False)
+    notebooks = db.relationship("Notebook", backref='User', cascade="all, delete-orphan")
+    tags = db.relationship("Tag", backref='User', lazy=False, cascade="all, delete-orphan")
 
     @property
     def password(self):
@@ -47,18 +48,18 @@ class Notebook(db.Model):
     __tablename__ = 'notebooks'
 
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = db.Column(db.String(50), nullable=False)
-    notes = db.relationship("Note", backref='notebook', lazy=False)
-    createdAt = db.Column(db.DateTime, nullable=False,
+    notes = db.relationship("Note", backref='notebook', lazy=False, cascade="all, delete-orphan")
+    created_at = db.Column(db.DateTime, nullable=False,
                           default=datetime.datetime.now())
-    updatedAt = db.Column(db.DateTime, nullable=False,
+    updated_at = db.Column(db.DateTime, nullable=False,
                           default=datetime.datetime.now())
 
     def to_dict(self):
         return {
             "id": self.id,
-            "user_id": self.userId,
+            "user_id": self.user_id,
             "name": self.name,
             "notes": [note.to_dict() for note in self.notes]
         }
@@ -70,11 +71,10 @@ class Note(db.Model):
     title = db.Column(db.String(75), default="Untitled")
     text = db.Column(db.Text, nullable=True)
     notebook_id = db.Column(db.Integer, db.ForeignKey('notebooks.id'))
-    createdAt = db.Column(db.DateTime, nullable=False,
+    created_at = db.Column(db.DateTime, nullable=False,
                           default=datetime.datetime.now())
-    updatedAt = db.Column(db.DateTime, nullable=False,
+    updated_at = db.Column(db.DateTime, nullable=False,
                           default=datetime.datetime.now())
-
    
     def to_dict(self):
         return {

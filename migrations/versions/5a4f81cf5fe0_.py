@@ -1,8 +1,8 @@
-"""initial migration
+"""empty message
 
-Revision ID: 60bac84dc0d2
+Revision ID: 5a4f81cf5fe0
 Revises: 
-Create Date: 2021-03-25 10:50:05.864950
+Create Date: 2021-03-25 13:57:43.942123
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '60bac84dc0d2'
+revision = '5a4f81cf5fe0'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,11 +33,11 @@ def upgrade():
     )
     op.create_table('notebooks',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('userId', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=50), nullable=False),
-    sa.Column('createdAt', sa.DateTime(), nullable=False),
-    sa.Column('updatedAt', sa.DateTime(), nullable=False),
-    sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('tags',
@@ -52,8 +52,8 @@ def upgrade():
     sa.Column('title', sa.String(length=75), nullable=True),
     sa.Column('text', sa.Text(), nullable=True),
     sa.Column('notebook_id', sa.Integer(), nullable=True),
-    sa.Column('createdAt', sa.DateTime(), nullable=False),
-    sa.Column('updatedAt', sa.DateTime(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['notebook_id'], ['notebooks.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
