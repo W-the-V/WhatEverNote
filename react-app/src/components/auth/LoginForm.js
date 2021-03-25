@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { NavLink, Redirect } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux'
 import * as sessionActions from '../../store/session'
-import {getNotebooks} from "../../store/notebooks"
-import {getNotes} from "../../store/notes"
-import {getTags} from "../../store/tags"
+
 // import { login } from "../../services/auth";
 import "./index.css";
 import mousepic from "../../images/mouse.png";
@@ -26,10 +24,10 @@ const LoginForm = ({
   const onLogin = async (e) => {
     e.preventDefault()
     let userAuthen = await dispatch(sessionActions.login(email, password))
-    .catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) setErrors(data.errors)
-    })
+    // .catch(async (res) => {
+    //   const data = await res.json();
+    //   if (data && data.errors) setErrors(data.errors)
+    // })
     // if (user) {
     //     console.log(user, "========================================")
     //     dispatch(getNotes(user.id))

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import NotesWidget from '../NotesWidget'
 import ScratchPad from '../ScratchPad'
@@ -10,15 +10,20 @@ import "./index.css"
 const Home = () => {
     const dispatch = useDispatch()
     let user = useSelector(state => state.session.user)
-    let notes = useSelector(state => state.notes.notes.notebooks)
-    console.log(notes)
+    let mapnotes = useSelector(state => state.notes?.notes)
+    let notes;
+    if (mapnotes){
+        notes = mapnotes.flat()
+    }
     let date = new Date()
     let daysList = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     let dayofWeek = date.getDay()
     let day = `${daysList[dayofWeek].toUpperCase()}, `+ date.toLocaleString('default', { month: 'long' }).toUpperCase()+` ${date.getDate()}, ${date.getFullYear()}`
     let timeofDay=(date.getHours()>12)? "afternoon":"morning"
-    
-    dispatch(getNotes(user.id))
+    useEffect(()=>{
+        dispatch(getNotes(user.id))
+
+    }, [dispatch])
     return (
         <>
         <div className="home_page__container">
@@ -33,7 +38,7 @@ const Home = () => {
                     </button>  
                 </div>
             </div>
-            <NotesWidget />
+            <NotesWidget notes={notes}/>
             <ScratchPad/>
             <TagCloud/>
         </div>

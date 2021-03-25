@@ -85,7 +85,7 @@ const notesReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_NOTES: {
       newState= deepcopy(state);
-      newState.notes = action.notes
+      newState = action.notes
       return newState
     }
     case REMOVE_NOTE: {
