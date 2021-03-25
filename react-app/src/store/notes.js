@@ -63,7 +63,7 @@ export const editNotes = (data) => async (dispatch) => {
 
   if (response.ok) {
     const notes = await response.json();
-    dispatch(update(notes));
+    dispatch(edit(notes));
     return notes;
   }
 };
