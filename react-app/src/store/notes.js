@@ -36,7 +36,7 @@ export const getNotes = (userId) => async (dispatch) => {
   }
 };
 
-export const createNotes = (data, userId) => async (dispatch) => {
+export const createNote = (data, userId) => async (dispatch) => {
   const response = await fetch(`/api/user/${userId}/notes`, {
     method: "post",
     headers: {
@@ -52,7 +52,7 @@ export const createNotes = (data, userId) => async (dispatch) => {
   }
 };
 
-export const editNotes = (data) => async (dispatch) => {
+export const editNote = (data) => async (dispatch) => {
   const response = await fetch(`/api/notes/${data.id}`, {
     method: "put",
     headers: {
