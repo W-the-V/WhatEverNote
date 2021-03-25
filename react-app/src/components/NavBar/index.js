@@ -1,15 +1,16 @@
 import React from 'react';
+import {useDispatch, useSelector} from "react-redux"
 import { NavLink } from 'react-router-dom';
 import "./index.css"
 import LogoutButton from '../auth/LogoutButton';
 
 const NavBar = ({ setAuthenticated }) => {
-  let user = {"id":1,"firstname":"Fake", "lastname": "McDonald", "username":"FakeMcFake", "email":"fake@fake.com"}
+  let user = useSelector(state => state.session.user)
   return (
     <nav>
       <div className="nav_top__circles">
         <div className="nav_circles letter-circle">
-          {user.firstname[0]}
+          {user.firstName[0]}
         </div>
         <div className="nav_circles search-circle">
           <i className="fas fa-search"></i>

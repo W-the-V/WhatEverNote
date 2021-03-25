@@ -16,11 +16,11 @@ const NoteThumbnail = ({note}) => {
 
             <div className="note_footer">
                 <div className="tag_note_thumbnail_container">
-                {note.tags.map(tag=> (
+                {/* {note?.tags.map(tag=> (
                     <div key={tag} className="tag_note_thumbnail">
                         <span>{tag}</span>
                         </div>
-                ))}
+                ))} */}
 
                 </div>
                 <p>{note.updatedAt}</p>

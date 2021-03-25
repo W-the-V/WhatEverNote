@@ -1,67 +1,71 @@
 from app.config import Config
-from flask import Flask, session, request
+from flask import Flask, Blueprint, jsonify, json, request, session
 from flask_sqlalchemy import SQLAlchemy
-from flask import Blueprint, jsonify
-from app.models import User, Note, Notebook db
+from app.models import Tag, db
 
 
-bp = Blueprint("tags", __name__)
+tag_routes = Blueprint("tags", __name__, url_prefix="/api/user/<int:user_id>")
 
-def get_tags(tag_data):
-    tags = session
-          .query(Tag)
-          .filter_by(tag_data.userId == Tag.id)
-          .order_by(updated_at)
-          .all()
+#------------------------------------------------------------------------------
+#                         Tag Operation Functions
+#------------------------------------------------------------------------------
+def get_one_tag(tag_id):
+    tag = Tag.query.filter_by(id = tag_id).first()
+    return tag
 
-    return jsonify(tags)
+def get_all_tags(user_id):
+    tags = Tag.query.filter_by(user_id = user_id).all()
+    return jsonify({"tags": [tag.to_dict() for tag in tags]})
 
-def add_tag(tag_data):
-    tag = Tag(name=tag_data.name,
-              user_id=tag_data.userId
-                        )
+def add_tag(user_id):
+    tag_data = json.loads(request.data.decode("utf-8"))
+
+    tag = Tag(name = tag_data["name"],
+              user_id = tag_data["user_id"])
     
-    session.add(tag)
-    session.commit()
+    db.session.add(tag)
+    db.session.commit()
+    return jsonify(tag.to_dict())
 
-    return jsonify(tag)
+def delete_tag(tag_id):
+    tag = Tag.query.filter_by(id = tag_id)
 
-def edit_tag(tag_data):
-    tag = session
-          .query(Tag)
-          .filter_by(Tag.id == tag_data.tagId)
-    if tag.name is not tag_data.name:
-        tag.name = tag_data.name
-    else:
-        pass
+    db.delete(tag)
+    db.session.commit()
+    return jsonify({"message": "Tag successfully deleted"})
 
-def delete_tag(tag_data):
-    tag = session
-          .query(Tag)
-          .filter_by(Tag.id == tag_data.tagId)
-    relationships = session
-                    .query(Notes_To_Tags)
-                    .filter_by(Notes_To_Tags.tags_id == tag.id)
-    session.delete(relationships)
-    session.delete(tag)
-    session.commit()
+def edit_tag(tag_id):
+    edit_tag_data = json.loads(request.data.decode("utf-8"))
+    tag = get_one_tag(tag_id)
 
-    return "something" #check
+    if tag.name is not edit_tag_data["name"]:
+        tag.name = edit_tag_data["name"]
+    if tag.user_id is not edit_tag_data["user_id"]:
+        tag.user_id = edit_tag_data["user_id"]
+    
+    db.session.commit()
+    return jsonify(tag.to_dict())
 
-@bp.route("/tags", methods=['GET', 'POST', 'PUT', 'DELETE'])
-def tag_requests(request):
-    tag_data = request.get_json()
 
-    if "method" not in tag_data:
-       return "some error message"
-    else:
-        if tag_data["method"] == "post":
-            result = add_tag(tag_data)
-        elif tag_data["method"] == "get":
-            result = get_tags(tag_data)
-        elif tag_data["method"] == "put":
-            result = edit_tag(tag_data)
-        elif tag_data["method"] == "delete":
-            result = delete_tag(tag_data)
-        else:
-            return None
+#------------------------------------------------------------------------------
+#                    RESTful Routes -- Tags
+#------------------------------------------------------------------------------
+
+#get_all
+#add_tag
+@tag_routes.route("/tags", methods=['GET', 'POST'])
+def get_or_add_tags(user_id):
+    if request.method == 'GET':
+        return get_all_tags(user_id)
+    elif request.method == 'POST':
+        return add_tag(user_id)
+
+#delete
+@tag_routes.route("/tags/<int:tag_id>", methods = ['DELETE'])
+def delete_user_note(user_id, tag_id):
+    return delete_tag(tag_id)
+
+#edit
+@tag_routes.route("/tags/<int:tag_id>", methods=['PUT'])
+def edit_user_tag(user_id, tag_id):
+    return edit_tag(tag_id)

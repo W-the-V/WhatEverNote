@@ -117,3 +117,6 @@ td .numofNotes{
 tr:hover{
     background-color: #dfdddd;
 }
+.SubTable-item{
+    padding-left: 35px;
+}

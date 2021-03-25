@@ -26,7 +26,7 @@ const remove = (userId, noteId) => ({
   noteId,
   userId,
 });
-
+// /api/user/<int:id>/notes
 export const getNotes = (userId) => async (dispatch) => {
   const response = await fetch(`/api/user/${userId}/notes`);
 
@@ -36,7 +36,7 @@ export const getNotes = (userId) => async (dispatch) => {
   }
 };
 
-export const createNotes = (data, userId) => async (dispatch) => {
+export const createNote = (data, userId) => async (dispatch) => {
   const response = await fetch(`/api/user/${userId}/notes`, {
     method: "post",
     headers: {
@@ -52,7 +52,7 @@ export const createNotes = (data, userId) => async (dispatch) => {
   }
 };
 
-export const editNotes = (data) => async (dispatch) => {
+export const editNote = (data) => async (dispatch) => {
   const response = await fetch(`/api/notes/${data.id}`, {
     method: "put",
     headers: {
@@ -85,7 +85,7 @@ const notesReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_NOTES: {
       newState= deepcopy(state);
-      newState.notes = action.notes
+      newState = action.notes
       return newState
     }
     case REMOVE_NOTE: {

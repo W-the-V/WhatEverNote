@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import { render } from "react-dom";
+import {useDispatch} from 'react-redux'
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
-// import { createNotes, updateNotes, deleteNote }  from "../../store/notes"
+import { createNote, editNote, deleteNote }  from "../../store/notes"
 import "./index.css";
 
 
@@ -68,14 +69,15 @@ Quill.register(Font, true);
 /*
  * Editor component with custom toolbar and content containers
  */
-class Note extends React.Component {
-  state = { editorHtml: "" };
+function Note(props) {
+  const [editorHtml, setEditorHtml] = useState("")
+  
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(editorHtml, "EDITORHTML")
+  }
 
-  handleChange = html => {
-    this.setState({ editorHtml: html });
-  };
-
-  static modules = {
+  const modules = {
     toolbar: {
       container: "#toolbar",
       handlers: {
@@ -84,7 +86,7 @@ class Note extends React.Component {
     }
   };
 
-  static formats = [
+  const formats = [
     "header",
     "font",
     "size",
@@ -101,39 +103,26 @@ class Note extends React.Component {
     "color"
   ];
 
-  render() {
+
+
+  
     return (
       <div className="text-editor">
         <CustomToolbar />
         <ReactQuill
-          value={this.state.editorHtml}
-          onChange={this.handleChange}
-          placeholder={this.props.placeholder}
-          modules={Note.modules}
-          formats={Note.formats}
+          value={editorHtml}
+          onChange={(e) => setEditorHtml(props.value)}
+          placeholder={props.placeholder}
+          modules={modules}
+          formats={formats}
         />
+        <button type="button" onClick={handleSubmit}>Submit</button>
       </div>
     );
-  }
 }
 
 
 
-// const Note = () => {
-//     const [theme, setTheme] = useState('snow')
-//     const [text, setText] = useState("")
-//     return (
-//         <div className="text-editor">
-//         <CustomToolbar />
-//         <ReactQuill
-//           onChange={()=>setText}
-//           placeholder={""}
-//           modules={Editor.modules}
-//         />
-//       </div>
-//     )
 
-
-// }
 
 export default Note
