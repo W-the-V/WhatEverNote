@@ -1,85 +1,118 @@
-from config import Config
+from app.config import Config
 from flask import Flask, session, request
 from flask_sqlalchemy import SQLAlchemy
-from flask import Blueprint, jsonify, get_json, is_json
-from app.models import User, Note, Notebook db
+from flask import Blueprint, jsonify, request, json
+from app.models import User, Note, Notebook, db
 
 
-bp = Blueprint('notes', __name__)
+note_routes = Blueprint('note_routes', __name__)
 
-def add_note(data):
-    if data.is_json():
-        note_data = data.get_json()
+def get_one_note(note_id):
+    note = Note.query.filter_by(id = note_id).first()
+    return note
 
-    note = Note(title=note_data.title,
-                text=note_data.text,
-                notebook_id=note_data.notebookId)
+def get_all_notes(user_id):
+    notebooks = Notebook.query.filter_by(userId = user_id).all()
+    return jsonify({"notebooks": [notebook.to_dict() for notebook in notebooks]})
+
+def add_one_note(id):
+    note_data = json.loads(request.data.decode("utf-8"))
+
+    note = Note(title = note_data["title"],
+    text = note_data["text"],
+    notebook_id = note_data["notebook_id"])
     
-    session.add(note)
-    session.commit()
+    db.session.add(note)
+    db.session.commit()
+    return jsonify(note.to_dict())
 
-    return jsonify(note) #good--worked in potman
+def delete_note(note_id):
+    Note.query.filter_by(id = note_id).delete()
 
-def get_notes(data):
-    if data.is_json():
-        user_data = data.get_json()
+    db.session.commit()
+    return "success!"
 
-    notes_list = []
-    notebooks = session
-                .query(Notebook)
-                .filter_by(Notebook.user_id == user_data.userId)
-                .all()
-    for notebook in notebooks:
-        notes = session
-                .query(Note)
-                .filter_by(Note.notebook_id == notebook.id)
-                .order_by(updated_at)
-                .all()
-        notes_list = notes_list + notes
-    return jsonify(notes_list) #ok --at least on my end it worked in postman
+def edit_note(note_id):
+    edit_note_data = json.loads(request.data.decode("utf-8"))
+    note = get_one_note(note_id)
 
-def edit_note(data):
-    if data.is_json():
-        note_data = data.get_json
-    note = session
-            .query(Note)
-            .filter_by(Note.note_id == note_data.noteId)
-    if note.title is not note_data.title:
-        note.title = note_data.title
-    elif note.text is not note_data.text:
-        note.text = note_data.text
-    else:
-        return note 
+    if note.title is not edit_note_data["title"]:
+        note.title = edit_note_data["title"]
+    if note.text is not edit_note_data["text"]:
+        note.text = edit_note_data["text"]
+    if note.notebook_id is not edit_note_data["notebook_id"]:
+        note.notebook_id = edit_note_data["notebook_id"]
+    
+    db.session.commit()
+    return jsonify(note.to_dict())
 
-def delete_note(note_data):
-    note = session
-            .query(Note)
-            .filter_by(Note.note_id == note_data.noteId)
-    session.delete(note)
-    session.commit()
 
-    return "something" #check
 
-# @bp.route("/notes", methods=['GET'])
-# def get_notes(user_data):
+#get_all_notes works--tested
+#add_one_note works--tested --need to add validations, etc
+@note_routes.route("/api/user/<int:id>/notes", methods=['GET', 'POST'])
+def get_or_add_notes(id):
+    if request.method == 'GET':
+        return get_all_notes(id)
+    elif request.method == 'POST':
+        return add_one_note(id)
 
-#     return get_notes(user_data)
+#delete note works--tested --need to add validations
+@note_routes.route("/api/user/<int:user_id>/notes/<int:note_id>", methods = ['DELETE'])
+def delete_user_note(user_id, note_id):
+    return delete_note(note_id)
 
-@bp.route("/notes" , methods=['GET', 'POST', 'PUT', 'DELETE'])
-def note_requests(request):
-    note_data = request.get_json()
+#edit_note works--tested --need to add validations
+@note_routes.route("/api/user/<int:id>/notes/<int:note_id>", methods=['PUT'])
+def edit_user_note(id, note_id):
+    return edit_note(note_id)
 
-    if 'method' not in note_data:
-       print('some error message')
-       return None
-    else:
-        if note_data["method"] == "post":
-            result = add_note(note_data)
-        elif note_data["method"] == "get":
-            result = get_notes(note_data)
-        elif note_data["method"] == "put":
-            result = edit_note(note_data)
-        elif note_data["method"] == "delete":
-            result = delete_notes(note_data)
-        else:
-            return None
+
+# def get_notes(id):
+    # print(request.base_url)
+    # request_url = request.base_url.split("/")
+    # print(request_url[5])
+
+# @note_routes.route("/api/user/<int:id>/notes/<data>", methods=['POST'])
+# def add_note(data, id):
+#     return add_one_note(data, id)
+
+# def edit_note(data):
+#     if data.is_json():
+#         note_data = data.get_json
+#     note = session
+#             .query(Note)
+#             .filter_by(Note.note_id == note_data.noteId)
+#     if note.title is not note_data.title:
+#         note.title = note_data.title
+#     elif note.text is not note_data.text:
+#         note.text = note_data.text
+#     else:
+#         return note 
+
+# def delete_note(note_data):
+#     note = session
+#             .query(Note)
+#             .filter_by(Note.note_id == note_data.noteId)
+#     session.delete(note)
+#     session.commit()
+
+#     return "something" #check
+
+
+# @bp.route("/notes" , methods=['POST', 'PUT', 'DELETE'])
+# def note_requests(request):
+#     note_data = request.get_json()
+
+#     if 'method' not in note_data:
+#        print('some error message')
+#        return None
+#     else:
+#         if note_data["method"] == "post":
+#             result = add_note(note_data)
+#         elif note_data["method"] == "put":
+#             result = edit_note(note_data)
+#         elif note_data["method"] == "delete":
+#             result = delete_notes(note_data)
+#         else:
+#             return None

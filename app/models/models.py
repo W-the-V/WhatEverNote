@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     theme = db.Column(db.Boolean(), nullable=True)
     bgroundimg = db.Column(db.Integer(), nullable=True)
-    notebooks = db.relationship("Notebook", backref='User', lazy=False)
+    notebooks = db.relationship("Notebook", backref='User')
     tags = db.relationship("Tag", backref='User', lazy=False)
 
     @property
@@ -55,6 +55,13 @@ class Notebook(db.Model):
     updatedAt = db.Column(db.DateTime, nullable=False,
                           default=datetime.datetime.now())
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.userId,
+            "name": self.name,
+            "notes": [note.to_dict() for note in self.notes]
+        }
 
 class Note(db.Model):
     __tablename__ = 'notes'
@@ -67,23 +74,51 @@ class Note(db.Model):
                           default=datetime.datetime.now())
     updatedAt = db.Column(db.DateTime, nullable=False,
                           default=datetime.datetime.now())
+
+   
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "text": self.text,
+            "notebook_id": self.notebook_id,
+        }
+    
+    def other_to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "text": self.text,
+            "notebook_id": self.notebook_id,
+            "tags": [tag.to_dict() for tag in self.tags]
+        }
+
+
     # tags = db.relationship("Tag", back_populates='name',
     #                        secondary="Notes_To_Tags")
 
 
-# Notes_To_Tags = db.Table('notes_to_tags', db.Model.metadata, db.Column("tags_id", db.Integer, db.ForeignKey("tags.id"), primary_key=True),
-#                          db.Column("notes_id", db.Integer, db.ForeignKey("notes.id"), primary_key=True))
-class Notes_To_Tags(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    tags_id = db.Column(db.Integer, db.ForeignKey('tags.id'))
-    notes_id = db.Column(db.Integer, db.ForeignKey('notes.id'))
-    notes = db.relationship("Note", backref='tag', lazy=False)
-    tags = db.relationship("Tag", backref='note', lazy=False)
+Notes_To_Tags = db.Table('notes_to_tags', db.Model.metadata, db.Column  ("tags_id", db.Integer, db.ForeignKey("tags.id"), primary_key=True),db.Column("notes_id", db.Integer, db.ForeignKey("notes.id"), primary_key=True))
 
 
 class Tag(db.Model):
     __tablename__ = 'tags'
 
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     name = db.Column(db.String(30), nullable=True)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "name": self.name,
+        }
+
+    def other_to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "name": self.name,
+            "notes": [note.to_dict() for note in self.notes]
+        }

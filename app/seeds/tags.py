@@ -14,7 +14,7 @@ def seed_tags():
         users = User.query.all()
         while x >= 0:
             t = Tag(name=names[random.randint(0, len(names) - 1)],
-                    userId=users[random.randint
+                    user_id=users[random.randint
                                  (0, len(users) - 1)].id)
             db.session.add(t)
             db.session.commit()
@@ -23,7 +23,7 @@ def seed_tags():
         demo = User.query.filter_by(firstName="Demo").first().id
         while x >= 0:
             t = Tag(name=names[random.randint(0, len(names) - 1)],
-                    userId=demo)
+                    user_id=demo)
             db.session.add(t)
             db.session.commit()
             x -= 1
