@@ -93,7 +93,7 @@ const SignUpForm = ({
   return (
     <div className="form_container">
       <div className="login-page_header__container">
-        <img src={mousepic} />
+        <img alt="logo" src={mousepic} />
         <span className="login_whatever">WhatEverNote</span>
         <span>Remember whatever's important.</span>
       </div>

@@ -9,7 +9,7 @@ const SplashNav = ({setShowSidebar}) => {
     return (
         <nav id="splash-nav">
             <div>
-                <img src={mousePic} alt="mouse"/>
+                <img alt="logo" src={mousePic} alt="mouse"/>
                 <h1>WhatEverNote</h1>
             </div>
             <div className="hamburgerBtn" onClick={()=>setShowSidebar(true)}>

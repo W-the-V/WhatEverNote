@@ -17,7 +17,7 @@ def seed():
     seed_notebooks()
     seed_notes()
     seed_tags()
-    seed_notes_to_tags()
+    # seed_notes_to_tags()
     # Add other seed functions here
 
 

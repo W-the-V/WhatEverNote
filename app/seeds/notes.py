@@ -19,7 +19,7 @@ def seed_notes():
     notebooks = Notebook.query.all()
 
     x = 10
-    just_demo = True
+    just_demo = False
 
     if not just_demo:
         while x >= 0:

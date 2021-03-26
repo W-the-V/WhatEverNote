@@ -4,10 +4,11 @@
     box-shadow: 1px 3px 8px 4px rgba(167, 166, 166, 0.336);
     margin: 3px;
     padding: 10px;
-    max-width: 200px;
+    min-width: 200px;
     min-height: 300px;
     border-radius: 10px;
     align-items: center;
+    flex-grow: 2;
 }
 .whyThumbnailContainer img{
     width: 35px;

@@ -35,19 +35,23 @@ const NavBar = ({ setAuthenticated }) => {
             <i className="fas fa-star"></i>
           </div>
           <div className="icon__holder note_icon">
-            <i className="fas fa-file-alt"></i>
+            <NavLink to="/notes" exact={true}>
+              <i className="fas fa-file-alt"></i>
+            </NavLink>
           </div>
         </div>
         <div className="middle2_nav__container">
-          <div className="icon__holder notebook_icon">
-            <i className="fas fa-book"></i>
-          </div>
-          <div className="icon__holder tag_icon" onClick={tagClick}>
-            <i className="fas fa-tag"></i>
-          </div>
-          <div className="icon__holder user_icon">
-            <i className="fas fa-user-friends"></i>
-          </div>
+        <div className="icon__holder notebook_icon">
+          <NavLink to="/notebooks">
+          <i className="fas fa-book"></i>
+          </NavLink>
+        </div>
+        <div className="icon__holder tag_icon">
+          <i className="fas fa-tag"></i>
+        </div>
+        <div className="icon__holder user_icon">
+          <i className="fas fa-user-friends"></i>
+        </div>
         </div>
         <div className="middle3_nav__container">
           <div className="icon__holder trash_icon">
@@ -55,31 +59,7 @@ const NavBar = ({ setAuthenticated }) => {
           </div>
         </div>
       </div>
-      {/* <ul>
-        <li>
-          <NavLink to="/" exact={true} activeClassName="active">
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/login" exact={true} activeClassName="active">
-            Login
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/sign-up" exact={true} activeClassName="active">
-            Sign Up
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/users" exact={true} activeClassName="active">
-            Users
-          </NavLink>
-        </li>
-        <li>
-          <LogoutButton setAuthenticated={setAuthenticated} />
-        </li> */}
-      {/* </ul> */}
+    
     </nav>
   );
 };

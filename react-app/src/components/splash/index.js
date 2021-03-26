@@ -121,7 +121,7 @@ const Splash = () => {
         </div>
         <div className="splash__section2__container">
           <div className="splash_Image__holder">
-            <img src={laptopPic} alt="laptop"/>
+            <img alt="logo" src={laptopPic} alt="laptop"/>
           </div>
           <div className="splash_bullet__container">
             <div className="splash__bullet">
@@ -160,7 +160,7 @@ const Splash = () => {
         </div>
         <div className="splash__section3__container">
 
-          <div className="splash__green__quote"><img src="https://evernote.com/c/assets/homepage/homepage-quote.svg?3ec5da84998f74bf"/></div>
+          <div className="splash__green__quote"><img alt="logo" src="https://evernote.com/c/assets/homepage/homepage-quote.svg?3ec5da84998f74bf"/></div>
         <div className="splash__quote__container">
           <div className="splash__quote">
                     {quote === "forbes" ? <span className="splash__quote__text fade-in">"It feels like there are endless ways to use Evernote… Use it for school, work, life, and beyond."</span> : null}
@@ -179,18 +179,18 @@ const Splash = () => {
           </div>
           <div className="splash_mag__container">
             <ul className="splash__quote__container">
-                        <li className="splash__quote__text" onClick={() => setQuote("forbes")}><img className="splash__quote__img" src="https://evernote.com/c/assets/homepage/forbes-active.png?3bffacb93d68b1fe"/></li>
-                        <li className="splash__quote__text" onClick={() => setQuote("verge")}><img className="splash__quote__img" src="https://evernote.com/c/assets/homepage/the-verge_active.png?5312a2b3e103696e"/></li>
-                        <li className="splash__quote__text" onClick={() => setQuote("inc")}><img className="splash__quote__img" src="https://evernote.com/c/assets/homepage/logo-inc-active.png?e993cb33e525ac88"/></li>
-                        <li className="splash__quote__text" onClick={() => setQuote("business")}><img className="splash__quote__img" src="https://evernote.com/c/assets/homepage/entrepreneur-magazine_active.png?b72e18e9aff09af"/></li>
-                        <li className="splash__quote__text" onClick={() => setQuote("well-good")}><img className="https://evernote.com/c/assets/homepage/well-good_active.png?a7ef647d41985ecb"/></li>
+                        <li className="splash__quote__text" onClick={() => setQuote("forbes")}><img alt="logo" className="splash__quote__img" src="https://evernote.com/c/assets/homepage/forbes-active.png?3bffacb93d68b1fe"/></li>
+                        <li className="splash__quote__text" onClick={() => setQuote("verge")}><img alt="logo" className="splash__quote__img" src="https://evernote.com/c/assets/homepage/the-verge_active.png?5312a2b3e103696e"/></li>
+                        <li className="splash__quote__text" onClick={() => setQuote("inc")}><img alt="logo" className="splash__quote__img" src="https://evernote.com/c/assets/homepage/logo-inc-active.png?e993cb33e525ac88"/></li>
+                        <li className="splash__quote__text" onClick={() => setQuote("business")}><img alt="logo" className="splash__quote__img" src="https://evernote.com/c/assets/homepage/entrepreneur-magazine_active.png?b72e18e9aff09af"/></li>
+                        <li className="splash__quote__text" onClick={() => setQuote("well-good")}><img alt="logo" className="https://evernote.com/c/assets/homepage/well-good_active.png?a7ef647d41985ecb"/></li>
             </ul>
           </div>
           </div>
         </div>
         <div className="splash__feature__container">
             <div className="splash__feature__text">
-                <img src="https://evernote.com/c/assets/homepage/integrations.svg?32b746ff5f7b7812"/>
+                <img alt="logo" src="https://evernote.com/c/assets/homepage/integrations.svg?32b746ff5f7b7812"/>
                 <h3>App Integrations</h3>
                 <p className="splash__feature__desc">Share content across apps. Evernote connects with the productivity tools you already use, so you can work your way.</p>
                 <div>
@@ -198,15 +198,15 @@ const Splash = () => {
                 </div>
             </div>
             <div className="splash__feature__img">
-                <img className="splash__feature__img" src="https://evernote.com/c/assets/homepage/feature_integration@2x.png?be711b55a9463ad8"/>
+                <img alt="logo" className="splash__feature__img" src="https://evernote.com/c/assets/homepage/feature_integration@2x.png?be711b55a9463ad8"/>
             </div>
         </div>
         <div className="splash__feature__container">
             <div className="splash__feature__img">
-                <img className="splash__feature__img" src="https://evernote.com/c/assets/homepage/feature_document_scanning_@2x__en.png?296e238420ad2fe3"/>
+                <img alt="logo" className="splash__feature__img" src="https://evernote.com/c/assets/homepage/feature_document_scanning_@2x__en.png?296e238420ad2fe3"/>
             </div>
             <div className="splash__feature__text">
-                <img src="https://evernote.com/c/assets/homepage/doc-scanning.svg?54e07b63a6988c1e"/>
+                <img alt="logo" src="https://evernote.com/c/assets/homepage/doc-scanning.svg?54e07b63a6988c1e"/>
                 <h3>Document Scanning</h3>
                 <p className="splash__feature__desc">Go paperless. Back up important documents to all your devices, and keep the information—not the clutter.</p>
                 <div>
@@ -216,7 +216,7 @@ const Splash = () => {
         </div>
         <div className="splash__feature__container">
             <div className="splash__feature__text">
-                <img src="https://evernote.com/c/assets/homepage/web-clipping.svg?7b31cc4e08aca215"/>
+                <img alt="logo" src="https://evernote.com/c/assets/homepage/web-clipping.svg?7b31cc4e08aca215"/>
                 <h3>Web Clipper</h3>
                 <p className="splash__feature__desc">Save web pages (without the ads) and mark them up with arrows, highlights, and text to make them more useful.</p>
                 <div>
@@ -224,15 +224,15 @@ const Splash = () => {
                 </div>
             </div>
             <div className="splash__feature__img">
-                <img className="splash__feature__img" src="https://evernote.com/c/assets/homepage/feature_web_clipper_@2x__en.png?3c3112a70c9a24e2"/>
+                <img alt="logo" className="splash__feature__img" src="https://evernote.com/c/assets/homepage/feature_web_clipper_@2x__en.png?3c3112a70c9a24e2"/>
             </div>
         </div>
         <div className="splash__feature__container">
             <div className="splash__feature__img">
-                <img className="splash__feature__img" src="https://evernote.com/c/assets/homepage/feature_mobile_@2x__en.png?9f3c59ae5a97b50"/>
+                <img alt="logo" className="splash__feature__img" src="https://evernote.com/c/assets/homepage/feature_mobile_@2x__en.png?9f3c59ae5a97b50"/>
             </div>
             <div className="splash__feature__text">
-                <img src="https://evernote.com/c/assets/homepage/rich_notes.svg?4be8ba71638c18bb"/>
+                <img alt="logo" src="https://evernote.com/c/assets/homepage/rich_notes.svg?4be8ba71638c18bb"/>
                 <h3>Rich Notes</h3>
                 <p className="splash__feature__desc">Express ideas, capture images, and record audio in meetings or lectures, all from your phone or tablet—even if you’re offline.</p>
                 <div>
@@ -245,7 +245,7 @@ const Splash = () => {
 
           <div style={{width: "90%", marginLeft:"auto", marginRight:"auto"}}>
           <div className="splash__footer__header__container">
-          <img style={{maxWidth:"75px"}}src={mousePic} />
+          <img alt="logo" style={{maxWidth:"75px"}}src={mousePic} />
             <div>
               <span>WhatEvernote</span>
               </div>

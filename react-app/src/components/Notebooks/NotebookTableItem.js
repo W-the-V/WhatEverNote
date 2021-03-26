@@ -16,27 +16,30 @@ const NotebookTableItem = ({NoteBook}) => {
     let notesforNotebook = notes.filter(note => note.notebookId === NoteBook.id)
     const notebookActions= ["Add new note", "Rename notebook", "Add to shortcuts", "Move to trash"]
     const noteActions = ["Move...", "Edit tags...", "Add to Shortcuts", "Move to trash"]
+    if(NoteBook){
 
+   
     return (
         <>
         <tr>
             <td>
                 {caretDown?<span onClick={()=>setCaretDown(false)}><i className="fas fa-caret-down"></i></span>:<span onClick={()=>setCaretDown(true)}><i className="fas fa-caret-right"></i></span>}
-                <span className="NotebookTitle__td"><i className="fas fa-book"></i>{NoteBook.title}<span className="numofNotes">{`(${notesforNotebook.length})`}</span></span>
+                <span className="NotebookTitle__td"><i className="fas fa-book"></i>{NoteBook.title}<span className="numofNotes">{NoteBook.notes?`(${NoteBook.notes.length})`:0}</span></span>
             </td>
             <td>{user.username}</td>
-            <td>{NoteBook.updatedAt}</td>
+            <td>{NoteBook.updated_at}</td>
             <td onClick={()=>setShowActions(true)}>{showNoteActions? <Dropdown items={noteActions}/>: <span>...</span>}</td>
             {/* {showActions? <Dropdown items={notebookActions} />:null} */}
         </tr>
-            {caretDown && notesforNotebook.map(note => (<tr className="NoteOnNotebooksTable">
+            {caretDown && NoteBook.notes.map(note => (<tr className="NoteOnNotebooksTable">
                 <td class="SubTable-item"><i className="fas fa-file-alt"></i>{note.title}</td>
                 <td >{user.username}</td>
-                <td >{note.updatedAt}</td>
+                <td >{note.updated_at}</td>
                 {/* <td><span onClick={()=>setShowNoteActions(true)}>...</span></td> */}
                 <td onClick={()=>setShowNoteActions(true)} >{showNoteActions? <Dropdown items={noteActions} />:<span>...</span>}</td>
             </tr>))}
     </>
     )
+}
 }
 export default NotebookTableItem
