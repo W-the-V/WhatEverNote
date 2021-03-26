@@ -83,7 +83,7 @@ function App() {
           <Home />
         </ProtectedRoute>
         <ProtectedRoute path="/note" exact={true} authenticated={authenticated}>
-          <Note placeholder={"Write something or insert a heart ♥"} title={"Title"}/>
+          <Note placeholder={"Start writing or drag files"} title={"Title"}/>
         </ProtectedRoute>
         <ProtectedRoute path="/notebooks" exact={true}>
           <NoteBooks />
