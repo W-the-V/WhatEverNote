@@ -1,75 +1,84 @@
 @import url("https://kit.fontawesome.com/6463feb8bd.js");
-@import url('https://fonts.googleapis.com/css2?family=Ewert&display=swap');
-nav{
-    display: flex;
-    flex-direction: column;
-    /* align-items: flex-start; */
-    align-content: center;
-    justify-content: flex-start;
-    background-color:#1A1A1A;
-    position: fixed;
-    left: 0px;
-    height: 100%;
-    width: 60px;
+@import url("https://fonts.googleapis.com/css2?family=Ewert&display=swap");
+nav {
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
+  align-content: center;
+  justify-content: flex-start;
+  background-color: #1a1a1a;
+  position: fixed;
+  left: 0px;
+  height: 100%;
+  width: 60px;
 }
-.nav_top__circles, .middle_nav__container, .middle2_nav__container, .middle3_nav__container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    margin-bottom: 15px;
+.homeNavBarOuter {
+  z-index: 20;
 }
-.nav_top__circles i, .middle_nav__container i, .middle2_nav__container i, .middle3_nav__container i{
-    color: #cccccc;
-    font-size: 16px;
-    margin: auto 0 ;
+.nav_top__circles,
+.middle_nav__container,
+.middle2_nav__container,
+.middle3_nav__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  margin-bottom: 15px;
 }
-.nav_top__circles{
-    margin-top: 10px;
-    margin-bottom: 7px;
+.nav_top__circles i,
+.middle_nav__container i,
+.middle2_nav__container i,
+.middle3_nav__container i {
+  color: #cccccc;
+  font-size: 16px;
+  margin: auto 0;
 }
-.nav_circles{
-    border-radius: 25px;
-    height: 35px;
-    width: 35px;
-    margin: 7px;
-    display: flex;
-    align-content: center;
-    justify-content: center;
+.nav_top__circles {
+  margin-top: 10px;
+  margin-bottom: 7px;
 }
-.letter-circle{
-    font-family: 'Ewert', cursive;
-    font-size: 23px;
-    background-color: #E35b8b;
-    color: #64AA2D; 
-     
-    /* -webkit-text-fill-color: #0f9b02; */
-     text-shadow:1px 1px 0px #000000; 
-    /* color:black; */
+.nav_circles {
+  border-radius: 25px;
+  height: 35px;
+  width: 35px;
+  margin: 7px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+.letter-circle {
+  font-family: "Ewert", cursive;
+  font-size: 23px;
+  background-color: #e35b8b;
+  color: #64aa2d;
+
+  /* -webkit-text-fill-color: #0f9b02; */
+  text-shadow: 1px 1px 0px #000000;
+  /* color:black; */
   /* text-shadow: 1px 1px 0 #000, 1px 1px 0 #000, 1px 1px 0 #000, 1px 1px 0 #000; */
 
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    height: 30px;
-    width: 30px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  height: 30px;
+  width: 30px;
 }
 
-
-.search-circle{
-    background-color: #2E2F35;
+.search-circle {
+  background-color: #2e2f35;
 }
-.plus-circle{
-    background-color:#05a729 ;
+.plus-circle {
+  background-color: #05a729;
 }
-.icon__holder{
-    width: 55px;
-    height: 31px;
-    display: flex;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
+.icon__holder {
+  width: 55px;
+  height: 31px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
-.icon__holder:hover{
-    background-color:#424546 ;
+.icon__holder:hover {
+  background-color: #424546;
 }
