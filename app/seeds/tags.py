@@ -5,7 +5,12 @@ fake = Faker()
 
 
 def seed_tags():
-    names = ["Tag1", "Tag2", "Tag3", "Tag4", "Tag5"]
+    names = ["Work", "School", "Personal", "Vacation", "Pets",
+             "Homework", "Scheduling", "Family", "Presentation",
+             "Receipts", "Progress", "Journal", "Shopping", "Important",
+             "Wedding", "Meal Planning", "Lunches", "Dinners", "Recipes",
+             "Breakfasts", "Code Snippets", "Chores", "Uncategorized"
+             ]
 
     x = 10
     just_demo = False

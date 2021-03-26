@@ -1,0 +1,100 @@
+.tagInner {
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  margin-left: 140px;
+  outline: 0;
+}
+.tagOuter {
+  top: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100vw;
+  position: fixed;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  outline: none;
+}
+.tagInnerShell {
+  height: 100%;
+  width: 500px;
+  background-color: white;
+  outline: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+}
+.tagHeaderShell {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  outline: 0;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-left: 10%;
+  margin-right: 10%;
+  border-bottom: 2px solid black;
+  margin-bottom: 20px;
+}
+.tagTitle {
+  font-weight: bold;
+}
+.tagTitle,
+.fa-plus {
+  font-size: 18px;
+  margin-bottom: 7px;
+}
+.fa-plus:hover {
+  color: green;
+}
+.fa-plus {
+  cursor: pointer;
+  color: gray;
+}
+.searchBarShell {
+  border: 1px solid lightgray;
+  padding: 2px;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  display: flex;
+  align-items: space-between;
+  flex-direction: row;
+  height: 40px;
+}
+.searchInput,
+.searchIcon {
+  border: none;
+  text-decoration: none;
+  outline: none;
+  background-color: white;
+  height: 100%;
+}
+.tagSearch {
+  width: 100%;
+}
+.searchInput {
+  width: 90%;
+}
+.searchIcon {
+  color: gray;
+  font-size: 18px;
+  height: 100%;
+  width: 10%;
+  margin-top: 1px;
+  cursor: pointer;
+}
+.searchIcon:hover {
+  color: green;
+}
