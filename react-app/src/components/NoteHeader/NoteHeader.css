@@ -1,0 +1,66 @@
+#note-header {
+  display: flex;
+  height: 44px;
+  align-items: center;
+  padding: 8px 12px 4px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+
+}
+
+.left-container {
+  flex: 1;
+  min-width: 220px;
+}
+
+.right-container {
+  height: 32px;
+  margin-left: 8px;
+}
+
+#fullscreen-button {
+  cursor: pointer;
+  flex: 0 0 28px;
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  padding: 2px;
+  outline: none;
+  background-color: transparent;
+  border-radius: 3px;
+  transition: background-color .2s;
+}
+
+.divider {
+  flex: 0 0 1px;
+  display: inline-block;
+  width: 1px;
+  height: 20px;
+  margin: 6px 8px 6px 12px;
+  background: var(--editor-formatting-button-divider);
+}
+
+.notebook-label {
+  max-width: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+#notebook-button {
+  min-width: 46px;
+  display: flex;
+  text-decoration: inherit;
+  align-items: center;
+}
+div, span {
+  outline-style: none;
+}
+
+* {
+  box-sizing: border-box;
+}

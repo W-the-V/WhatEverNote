@@ -18,6 +18,7 @@ import ScratchPad from "./components/ScratchPad";
 import Note from "./components/Note";
 import LogoutButton from "./components/auth/LogoutButton";
 import NoteBooks from "./components/Notebooks";
+import NoteHeader from "./components/NoteHeader";
 
 
 function App() {
@@ -90,7 +91,7 @@ function App() {
         </ProtectedRoute>
       </Switch>
       <Route exact path="/test">
-        <ScratchPad />
+        <NoteHeader />
       </Route>
     </BrowserRouter>
   );
