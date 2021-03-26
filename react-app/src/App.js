@@ -19,6 +19,7 @@ import Note from "./components/NotePage/note";
 import NotePage from "./components/NotePage/NotePage"
 import LogoutButton from "./components/auth/LogoutButton";
 import NoteBooks from "./components/Notebooks";
+import NoteHeader from "./components/NoteHeader";
 
 
 function App() {
@@ -91,7 +92,7 @@ function App() {
         </ProtectedRoute>
       </Switch>
       <Route exact path="/test">
-        <ScratchPad />
+        <NoteHeader />
       </Route>
     </BrowserRouter>
   );

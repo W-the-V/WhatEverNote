@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DropDown from '../Dropdown'
+import Dropdown from '../Dropdown'
 import './ScratchPad.css';
 
 function ScratchPad() {
@@ -23,7 +23,7 @@ function ScratchPad() {
                 <p className="scratch-text">scratch pad</p>
               </div>
               <div className="dropdown-container">
-                <DropDown
+                <Dropdown
                   items={["Convert to note", "Clear scratch pad", "Remove widget"]}
                 />
               </div>

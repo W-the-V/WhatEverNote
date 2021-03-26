@@ -5,7 +5,17 @@ fake = Faker()
 
 
 def seed_notes():
-    note_names = ["URGENT", "For tomorrow", "Finish these later!"]
+    note_names = ["URGENT", "For tomorrow", "To Do", "Vegan Meatloaf",
+                  "Non-vegan meatloaf", "Dresses", "Venues", "Cars",
+                  "Tuesday", "Overdue homework", "Overdue bills",
+                  "Possible DJs", "Hawaii", "Vacations", "Vacation Homes",
+                  "Real estate", "Business", "My Diary",
+                  "Cool NPM packages", "Normal npm packages",
+                  "PB&J", "Recipes", "Algebra", "Calculus",
+                  "Physics", "Boolean Algebra",
+                  "Stressful events", "Cat videos", "Good cat videos",
+                  "Old cat videos", "Meme", "Memes", "App-academy memes",
+                  ]
     notebooks = Notebook.query.all()
 
     x = 10

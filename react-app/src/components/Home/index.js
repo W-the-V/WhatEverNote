@@ -45,8 +45,12 @@ const Home = () => {
             <ScratchPad/>
             <TagCloud/>
         </div>
-        
-            </>
-    )
-}
-export default Home
+        <div>
+        <NotesWidget notes={notes} />
+        <ScratchPad />
+        <TagCloud />
+      </div>
+    </>
+  );
+};
+export default Home;
