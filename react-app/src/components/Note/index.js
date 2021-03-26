@@ -51,19 +51,22 @@ const CustomToolbar = () => (
         <option value="mirza">Mirza</option>
         <option value="arial">Arial</option>
 </select>
-<select class="ql-size"></select>
 </span>
+
+
 <span class="ql-formats">
+<select class="ql-size"></select>
 <button class="ql-bold"></button>
 <button class="ql-italic"></button>
 <button class="ql-underline"></button>
 <select class="ql-color"></select>
+<button class="ql-header" value="1"></button>
+{/* <button class="ql-header" value="2"></button> */}
+<button class="ql-blockquote"></button>
 {/* <button class="ql-strike"></button> */}
 </span>
 
-<button class="ql-header" value="1"></button>
-<button class="ql-header" value="2"></button>
-<button class="ql-blockquote"></button>
+
 
 <span class="ql-formats">
 <button class="ql-list" value="ordered"></button>
@@ -107,15 +110,12 @@ Font.whitelist = [
 ];
 Quill.register(Font, true);
 
-/*
- * Editor component with custom toolbar and content containers
- */
 function Note(props) {
-  const [editorHtml, setEditorHtml] = useState("")
+
+  const [editorHtml, setEditorHtml] = useState("...")
   
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(editorHtml, "EDITORHTML")
   }
 
   const modules = {
@@ -153,27 +153,29 @@ function Note(props) {
   ];
 
 
-
-  
     return (
       <div className="text-editor">
         <CustomToolbar />
         <ReactQuill
           value={editorHtml}
-          onChange={(e) => setEditorHtml(props.value)}
+          onChange={(e) => setEditorHtml(Quill.state?.value)}
           placeholder={props.placeholder}
           modules={modules}
           formats={formats}
         />
+        {console.log({props}, "FROM RETURN")}
         <div className="editor-footer">
-          <p>Add tag</p>
+          <div className="footer__save__text">
+            <p>all changes saved.</p>
+          </div>
           <div className="footer-right">
-            <button className="footer__button" type="button"><p className="Footer_button_text">New Note</p></button>
+            <button className="footer__button" type="button"><p className="Footer_button_text">New Note <i className="fas fa-caret-down"></i></p></button>
           </div>
         </div>
       </div>
     );
 }
+
 
 
 
