@@ -95,10 +95,11 @@
 }
 
 .editor-footer {
-  padding: 10px;
+  padding: 0px;
+  padding-right: 10px;
   display: grid;
   grid-template-areas:
-  "left middle right";
+  "left middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle right";
   font-size: 14px;
   color: grey;
 
@@ -107,6 +108,13 @@
 .footer-right {
   grid-area: right;
   justify-self: end;
+  align-self: center;
+}
+.footer__save__text {
+  grid-area:middle;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .footer__button {
