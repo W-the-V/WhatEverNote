@@ -45,11 +45,7 @@ const Home = () => {
             <ScratchPad/>
             <TagCloud/>
         </div>
-        <div>
-        <NotesWidget notes={notes} />
-        <ScratchPad />
-        <TagCloud />
-      </div>
+        
     </>
   );
 };
