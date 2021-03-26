@@ -3,36 +3,40 @@ import Dropdown from '../Dropdown';
 import './NoteHeader.css';
 
 function NoteHeader() {
-  const [notebookName, setNotebookName ] = useState('Notebook')
+  const [notebookName, setNotebookName ] = useState('Notebook');
+  const [expand, setExpand] = useState(false);
+  const [expandStyle, setExpandStyle] = useState("flex: 1 0 10%")
 
+  const expandOnClick = () => {
+    setExpand(!expand);
+  }
   return (
 		<>
 			<div className='header' id='note-header'>
 				<div className='left-container container'>
-					<button
-						aria-label='Expand note'
-						className='button'
-						id='fullscreen-button'
-						type='button'
-					>
-						<i class='fas fa-expand'></i>
+					<button className='button' id='fullscreen-button' type='button' onClick={expandOnClick}>
+						<div>
+							<i class='fas fa-expand'></i>
+						</div>
 					</button>
-					<div className="divider"></div>
-					<div className="notebook-label">
-						<button type="button" id="notebook-button">
-							<span id="notebook-icon-container">
-								<svg></svg>
+					<div className='divider'>
+						<i class='fas fa-grip-lines-vertical'></i>
+					</div>
+					<div className='notebook-label'>
+						<button type='button' id='notebook-button'>
+							<span id='notebook-icon-container'>
+								<i className='fas fa-book'></i>
 							</span>
-							<span id="notebook-name">"Notebook"</span>
+							<span id='notebook-name'>Notebook</span>
 						</button>
 						<div></div>
 					</div>
 				</div>
 
 				<div className='right-container container'>
-					<div>"Only You"</div>
+					<div className='who-can-see'>Only You</div>
 					<span>
-						<button>Share</button>
+						<button className='share-button'>Share</button>
 					</span>
 					<Dropdown
 						items={[
