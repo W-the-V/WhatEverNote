@@ -18,7 +18,10 @@
     font-size: 15px;
 
 }
-.N_Widget__header span{
+.N_Widget__header a{
+    text-decoration: none;
+}
+.N_Widget__header span a{
     padding: 5px;
     font-weight: bolder;
     

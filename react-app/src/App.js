@@ -15,7 +15,8 @@ import Home from "./components/Home";
 import Splash from "./components/splash";
 import Whywhatevernote from "./components/Whywhatevernote";
 import ScratchPad from "./components/ScratchPad";
-import Note from "./components/Note";
+import Note from "./components/NotePage/note";
+import NotePage from "./components/NotePage/NotePage"
 import LogoutButton from "./components/auth/LogoutButton";
 import NoteBooks from "./components/Notebooks";
 
@@ -82,8 +83,8 @@ function App() {
         <ProtectedRoute path="/home" exact={true}  authenticated={authenticated}>
           <Home />
         </ProtectedRoute>
-        <ProtectedRoute path="/note" exact={true} authenticated={authenticated}>
-          <Note placeholder={"Write something or insert a heart ♥"} title={"Title"}/>
+        <ProtectedRoute path="/notes" exact={true} authenticated={authenticated}>
+          <NotePage />
         </ProtectedRoute>
         <ProtectedRoute path="/notebooks" exact={true}>
           <NoteBooks />

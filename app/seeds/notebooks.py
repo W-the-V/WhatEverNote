@@ -12,7 +12,7 @@ def seed_notebooks():
     users = User.query.all()
 
     x = 10
-    just_demo = True
+    just_demo = False
 
     if not just_demo:
         while x >= 0:

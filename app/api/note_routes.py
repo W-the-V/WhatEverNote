@@ -22,7 +22,7 @@ def get_one_note(note_id):
 def get_all_notes(user_id):
 
     notebooks = Notebook.query.filter_by(user_id = user_id).all()
-    return jsonify({"notes":[notebook.to_dict()["notes"] for notebook in notebooks]})
+    return jsonify({"notes":[ note for notebook in notebooks for note in notebook.to_dict()['notes']]})
 
 def add_note(user_id):
     note_data = json.loads(request.data.decode("utf-8"))

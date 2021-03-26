@@ -7,11 +7,11 @@ const get = (tags) => ({
   });
 
 export  const getTags = (id) => async (dispatch) => {
-    const response = await fetch(`/api/user/${id}/notes`);
+    const response = await fetch(`/api/user/${id}/tags`);
   
     if (response.ok) {
-      const notes = await response.json();
-      dispatch(get(notes));
+      const tags = await response.json();
+      dispatch(get(tags));
     }
   };
 

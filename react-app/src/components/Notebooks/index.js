@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom"
-import {useSelector} from "react-redux"
+import {useSelector, useDispatch} from "react-redux"
 import "./index.css"
 import NotebookTableItem from "./NotebookTableItem"
+import { getNotebooks } from "../../store/notebooks";
 
 const NoteBooks = () => {
-    const Notebooks = [{id: 1, title:"Notebook_1",updatedAt: "May 14"},{id: 2, title:"Notebook_3",updatedAt: "May 14"},{id: 3, title:"Notebook_3",updatedAt: "May 14"} ]
+    let Notebooks = [{id: 1, title:"Notebook_1",updatedAt: "May 14"},{id: 2, title:"Notebook_3",updatedAt: "May 14"},{id: 3, title:"Notebook_3",updatedAt: "May 14"} ]
     const [notebookSearch, setNotebookSeach] = useState("")
     const user = useSelector(state => state.session.user);
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        dispatch(getNotebooks(user.id))
 
+    }, [user])
+    let testNotebooks = useSelector(state => state.notebooks?.notebooks)
+    if (testNotebooks){
+        Notebooks = [...testNotebooks] }
+    
     return(
     <div className="NoteBook_Page__Container">
         <div className="NoteBook_Page__Header">

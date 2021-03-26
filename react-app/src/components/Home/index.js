@@ -5,12 +5,14 @@ import ScratchPad from '../ScratchPad'
 import TagCloud from '../TagCloud'
 import {getNotes} from "../../store/notes"
 import "./index.css"
+import { getTags } from '../../store/tags'
 
 
 const Home = () => {
     const dispatch = useDispatch()
     let user = useSelector(state => state.session.user)
     let mapnotes = useSelector(state => state.notes?.notes)
+    let maptags = useSelector(state => state.tags)
     let notes;
     if (mapnotes){
         notes = mapnotes.flat()
@@ -22,6 +24,7 @@ const Home = () => {
     let timeofDay=(date.getHours()>12)? "afternoon":"morning"
     useEffect(()=>{
         dispatch(getNotes(user.id))
+        dispatch(getTags(user.id))
 
     }, [dispatch])
     return (
