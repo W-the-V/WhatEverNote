@@ -13,11 +13,11 @@ seed_commands = AppGroup('seed')
 # Creates the `flask seed all` command
 @seed_commands.command('all')
 def seed():
-    # seed_users()
-    # seed_notebooks()
-    # seed_notes()
+    seed_users()
+    seed_notebooks()
+    seed_notes()
     seed_tags()
-    seed_notes_to_tags()
+    # seed_notes_to_tags()
     # Add other seed functions here
 
 
