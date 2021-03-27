@@ -61,7 +61,7 @@ const NavBar = ({ setAuthenticated }) => {
           <i className="fas fa-book"></i>
           </NavLink>
         </div>
-        <div className="icon__holder tag_icon">
+        <div className="icon__holder tag_icon" onClick={tagClick}>
           <i className="fas fa-tag"></i>
         </div>
         <div className="icon__holder user_icon">
@@ -76,6 +76,7 @@ const NavBar = ({ setAuthenticated }) => {
       </div>
     
     </nav>
+    
   );
 };
 

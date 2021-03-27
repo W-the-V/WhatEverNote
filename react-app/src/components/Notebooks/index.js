@@ -4,6 +4,7 @@ import {useSelector, useDispatch} from "react-redux"
 import "./index.css"
 import NotebookTableItem from "./NotebookTableItem"
 import { getNotebooks } from "../../store/notebooks";
+import TagModal from "../TagModal/index.js"
 
 const NoteBooks = () => {
     let Notebooks = [{id: 1, title:"Notebook_1",updatedAt: "May 14"},{id: 2, title:"Notebook_3",updatedAt: "May 14"},{id: 3, title:"Notebook_3",updatedAt: "May 14"} ]
@@ -20,6 +21,7 @@ const NoteBooks = () => {
     
     return(
     <div className="NoteBook_Page__Container">
+        <TagModal />
         <div className="NoteBook_Page__Header">
             <h4>Notebooks</h4>
             <div className="search_input__container">

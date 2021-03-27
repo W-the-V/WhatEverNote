@@ -7,6 +7,7 @@ import {getNotes} from "../../store/notes"
 import "./index.css"
 import "../NotesWidget/index.css"
 import { getTags } from '../../store/tags'
+import TagModal from "../TagModal/index.js"
 
 
 const Home = () => {
@@ -30,6 +31,7 @@ const Home = () => {
     }, [dispatch])
     return (
         <>
+        <TagModal />
         <div className="home_page__container">
             <div className="home_photo">
                 <div className="hello">

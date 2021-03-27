@@ -6,6 +6,7 @@ import "./index.css"
 import Note from "./note"
 import NoteInList from "./NoteInList"
 import NoteHeader from "../NoteHeader/index"
+import TagModal from "../TagModal/index"
 import { useParams } from 'react-router'
 import { getNotebooks } from '../../store/notebooks'
 
@@ -56,6 +57,7 @@ const [selectedNote, setSelectedNote] = useState("")
     
     return(
     <div className="Note-Page__container">
+        <TagModal />
         <div className="notesidebar__container">
         <div className="notesidebar__header">
             <div className="notesidebar__innerheader">
