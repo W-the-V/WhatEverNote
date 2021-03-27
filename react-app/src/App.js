@@ -85,11 +85,15 @@ function App() {
           <Home />
         </ProtectedRoute>
         <ProtectedRoute path="/notes" exact={true} authenticated={authenticated}>
-          <NotePage notebook={'all'}/>
+          <NotePage />
         </ProtectedRoute>
         <ProtectedRoute path="/notebooks/:id"
         exact={true}>
-          <NotePage notebook={'G'}/>
+          <NotePage />
+        </ProtectedRoute>
+        <ProtectedRoute path="/notes/:id"
+        exact={true}>
+          <NotePage />
         </ProtectedRoute>
         <ProtectedRoute path="/notebooks" exact={true}>
           <NoteBooks />
