@@ -6,17 +6,16 @@ import "react-quill/dist/quill.snow.css";
 import { createNote, editNote, deleteNote }  from "../../store/notes"
 import "../Note/index.css"
 import "./index.css";
+let editorId = "editor__container"
 
-
+// 3000 millisec is maybe too long but too make sure that the problem is from creating 
+// Quill before DOM
+// let quill = new Quill()
 
 
 const CustomHeart = () => <span>♥</span>;
 
-function insertHeart() {
-  const cursorPosition = this.quill.getSelection().index;
-  this.quill.insertText(cursorPosition, "♥");
-  this.quill.setSelection(cursorPosition + 1);
-}
+
 
 
 const CustomUndo = () => (
@@ -108,47 +107,59 @@ Quill.register(Font, true);
 // Quill.register(FontStyle, true);
 
 function Note(props) {
+  
   // React.useEffect(() => {
   //   return () => {
 
   //    };
   // }, [parentProp]);
-
+  // console.log("THIS IS CURSOR POSITION", cursorPosition)
   const [editorHtml, setEditorHtml] = useState('')
-  
+  // let quill;
   useEffect(()=>{
-  
+    // let container = document.getElementById(editorId);
+    // quill = new Quill( container );
     if(props.note && props.note.text){
       setEditorHtml(props.note.text)
     }
     if (editorHtml){
-        return 
+      return 
     }
-},[props.note])
-
+  },[props.note])
   
+  // console.log(quill, "this is quill")
+  function insertText() {
+    const currentSelection = quill.getSelection()
+    if(currentSelection !== null){
+      const cursorPosition = quill.getSelection().index;
+      if(quill){
+        quill.setContents(cursorPosition, Quill.state?.value);  
+        quill.setSelection(cursorPosition + 1);
+      }
+
+    }
+  }
   const handleSubmit = (e) => {
     e.preventDefault()
   }
-
-  const modules = {
-    toolbar: {
-      container: "#toolbar",
-      handlers: {
-        insertHeart: insertHeart,
-        undo: undoChange
-
-      }
-    },
-    history: {
-      delay: 500,
-      maxStack: 100,
-      userOnly: true
+  let quill = new Quill('#editor__container', {
+    modules: {
+      toolbar: {
+        container: "#toolbar",
+        handlers: {
+          undo: undoChange,
+          insertText: insertText
+        }
+      },
+      history: {
+        delay: 500,
+        maxStack: 100,
+        userOnly: true
+      },
+      
     }
-    
-  };
-
-  const formats = [
+  });
+  let formats=[
     "header",
     "font",
     "size",
@@ -163,7 +174,42 @@ function Note(props) {
     "link",
     "image",
     "color"
-  ];
+  ]
+  Quill.import()
+  // const modules = {
+  //   toolbar: {
+  //     container: "#toolbar",
+  //     handlers: {
+        
+  //       undo: undoChange,
+  //       insertText: insertText
+
+  //     }
+  //   },
+  //   history: {
+  //     delay: 500,
+  //     maxStack: 100,
+  //     userOnly: true
+  //   }
+    
+  // };
+
+  // const formats = [
+  //   "header",
+  //   "font",
+  //   "size",
+  //   "bold",
+  //   "italic",
+  //   "underline",
+  //   "strike",
+  //   "blockquote",
+  //   "list",
+  //   "bullet",
+  //   "indent",
+  //   "link",
+  //   "image",
+  //   "color"
+  // ];
 // // ON THE COMPONENT
 // <ReactQuill
 // value={this.state.content}
@@ -180,17 +226,17 @@ function Note(props) {
 //       emailTemplate['content'] = this.state.content;
 //       this.setState({ emailTemplate });
 //       return;
-    
+// ()=>setEditorHtml(ReactQuill?.state?.value)
     return (
       <div className="text-editor">
-        {console.log(editorHtml)}
+        
         <CustomToolbar />
-        <div className="editor__container">
+        <div className="editor__container" id="editor__container">
         {editorHtml?<ReactQuill
           defaultValue={editorHtml}
-          onChange={()=>setEditorHtml(Quill?.state?.value)}
+          onChange={()=>insertText()}
           placeholder={props.placeholder}
-          modules={modules}
+          modules={quill.modules}
           formats={formats}
         />:null}
         </div>
