@@ -39,15 +39,13 @@
 .ql-size span[data-value="large"]::before {
   font-size: 20px !important;
 }
-.text-editor{
-    margin-left: 100px;
-}
+
 .Note-Page__container{
-  margin-left: 70px;
+  padding-left: 60px;
   width: 100%;
   display: flex;
+  align-content: flex-start;
   background-color: white;
-  /* justify-content: space-betw; */
 }
 .notesidebar__container{
   max-width: 300px;
@@ -70,10 +68,11 @@
   flex-direction: row;
   justify-content: left;
   align-items: center;
+  color: #737373;
   font-size: 20px;
 }
 .notesidebar__container span,i{
-  padding:9px;
+  padding:3px;
   box-sizing: border-box;
 }
 .notesidebar__innerheader2 span,i{
@@ -85,37 +84,202 @@
   margin-top: 10px;
   flex-direction: row;
   justify-content: space-between;
-  color: #6A6A8F;
+  color: #8f8d8d;
+}
+.notesidebar__header,.NoteinList__container{
+  padding-left: 12px;
 }
 .NoteinList__container{
-  max-height: 175px;
+  max-height: 135px;
   width: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   padding-top: 10px;
   padding-bottom: 25px;
-  border-top: 1px gray solid;
+  border-top: 1px #CCCCCC solid;
+  border-bottom: 1px #CCCCCC solid;
 
 }
 .note-title{
+  font-size: 15px;
   font-weight: 600;
   padding-bottom: 2px;
 }
 .note-text{
-  max-height: 100px;
-
+  max-height: 40px;
+  overflow: hidden;
+  color: #8b8b8b;
   padding-bottom: 2px;
 }
 .note-list-updated-tags__container{
+  color: #8b8b8b;
   display: flex;
   flex-direction: row;
 }
 .notelist-tag{
   display: flex;
   align-items: center;
-  background-color: gray;
+  background-color: #8b8b8b;
+  color: #383838;
   height:25px;
   border-radius: 15px;
   margin-right: 3px;
+}
+.ql-font span[data-label="Roboto"]::before {
+  font-family: "Roboto";
+}
+.ql-font-roboto {
+  font-family: "Roboto";
+}
+
+.ql-font-arial,
+.ql-font span[data-value="arial"]::before {
+  font-family: Arial, sans-serif;
+}
+.ql-font-comic-sans,
+.ql-font span[data-value="comic-sans"]::before {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+.ql-font-courier-new,
+.ql-font span[data-value="courier-new"]::before {
+  font-family: "Courier New";
+}
+.ql-font-georgia,
+.ql-font span[data-value="georgia"]::before {
+  font-family: Georgia, serif;
+}
+.ql-font-helvetica,
+.ql-font span[data-value="helvetica"]::before {
+  font-family: Helvetica, sans-serif;
+}
+.ql-font-lucida,
+.ql-font span[data-value="lucida"]::before {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+/* Set content for sizes */
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="14px"]::before {
+  content: 'Normal';
+  font-size: 14px !important;
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="16px"]::before {
+  content: 'Large';
+  font-size: 16px !important;
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="18px"]::before {
+  content: 'Huge';
+  font-size: 18px !important;
+}
+
+
+.ql-showHtml {
+  margin-right: 8px;
+}
+
+.ql-showHtml:after {
+  content: "<html>";
+}
+
+.ql-picker.ql-emailVars {
+  width: 160px;
+}
+.text-editor{
+  /* margin-left: 100px; */
+  width: 100%;
+  background-color: white;
+  border: 0px;
+  
+}
+
+.ql-toolbar.ql-snow { 
+  border: 0px;
+}
+
+
+
+.ql-container.ql-snow {
+  border: 0px;
+  height: 500px;
+  border-top: .1em solid gainsboro;
+  border-bottom: .1em solid gainsboro;
+
+}
+
+.quill > .ql-container > .ql-editor.ql-blank::before{
+  font-size: 15px;
+  color: lightgrey;
+  font-style: none;
+}
+.ql-editor.ql-blank::before {
+  color: rgba(0,0,0,0.6);
+  content: attr(data-placeholder);
+  font-style: normal;
+  left: 15px;
+  pointer-events: none;
+  position: absolute;
+  right: 15px;
+}
+
+.editor-footer {
+  padding: 0px;
+  padding-right: 10px;
+  display: grid;
+  grid-template-areas:
+  "left middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle right";
+  font-size: 14px;
+  color: grey;
+
+}
+
+.footer-right {
+  grid-area: right;
+  justify-self: end;
+  align-self: center;
+}
+.footer__save__text {
+  grid-area:middle;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.footer__button {
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    background:#383838;
+    color: white;
+    height: 22px;
+    padding-left: 13px;
+    padding-bottom: 13px;
+    margin: 3px 0;
+    font-size: 10px;
+    letter-spacing: .25px;
+    font-family: -apple-system,sans-serif;
+    font-weight: 600;
+    user-select: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    line-height: 22px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.Footer_button_text {
+  padding-top: 10px;
+  padding-right: 5px;
+  color: white;
+  font-size: 10px;
+  letter-spacing: .25px;
+  font-family: -apple-system,sans-serif;
+  font-weight: 600;
+
+}
+.note-page__editor__container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
