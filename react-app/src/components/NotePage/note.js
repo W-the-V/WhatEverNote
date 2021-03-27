@@ -85,11 +85,6 @@ const CustomToolbar = () => (
 <button class="ql-video"></button>
 
 </span>
-
-{/* <select className="ql-insertCustomTags">
-      <option value="1">One</option>
-      <option value="2">Two</option>
-    </select> */}
   </div>
 );
 
