@@ -4,15 +4,30 @@ import { NavLink } from "react-router-dom";
 import "./index.css";
 import LogoutButton from "../auth/LogoutButton";
 import { deactivateTagModal, activateTagModal } from "../../store/tagmodal";
+import { createNote } from "../../store/notes"
+import { createNotebook } from "../../store/notebooks"
 
 const NavBar = ({ setAuthenticated }) => {
   let user = useSelector((state) => state.session.user);
   let TagModal = useSelector((state) => state.tagModal.status);
+  let notebooks = useSelector((state) => state.notebooks.notebooks)
   const dispatch = useDispatch();
   const tagClick = (e) => {
     if (TagModal) dispatch(deactivateTagModal());
     else dispatch(activateTagModal());
   };
+
+
+  const addNewNote = () => {
+    let defaultNotebook;
+    if (notebooks){
+      defaultNotebook = notebooks.filter(notebook => notebook.default_notebook)[0]
+      const defaultNote = {Title: "Default Note", Text: "<p>Start writing your note</p>", notebook_id: defaultNotebook.id}
+      dispatch(createNote(defaultNote, user.id))
+      
+    }
+  }
+  // addNewNote()
   return (
     <nav className="homeNavBarOuter">
       <div className="nav_top__circles">

@@ -33,13 +33,13 @@ const NotePage = () => {
     const [sortCriteria, setSortCriteria] = useState(sortCriteriaList[0])
     const [ascending, setAscending] = useState(false)
     const [selectedNote, setSelectedNote] = useState(notes[0])
-    useEffect(()=>{
-        switch (ascending && sortCriteria === "updatedAt"){
-            notes.sort((a, b) => {
+    // useEffect(()=>{
+    //     switch (ascending && sortCriteria === "updatedAt"){
+    //         notes.sort((a, b) => {
                 
-            })
-        }
-    }, [ascending, sortCriteria])
+    //         })
+    //     }
+    // }, [ascending, sortCriteria])
     return(
     <div className="Note-Page__container">
         <div className="notesidebar__container">
