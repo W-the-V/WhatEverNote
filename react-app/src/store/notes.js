@@ -81,7 +81,7 @@ export const deleteNote = (noteId) => async (dispatch) => {
 
 const initialState = {};
 let newState;
-const notesReducer = (state = initialState, action) => {
+const notesReducer = (state = {}, action) => {
   switch (action.type) {
     case GET_NOTES: {
       newState= deepcopy(state);
