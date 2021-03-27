@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 /* .ql-font span[data-label="Roboto"]::before {
   font-family: "Roboto";
 }
@@ -5,6 +7,7 @@
   font-family: "Roboto";
 }
 
+>>>>>>> origin/SaturdayRhea
 .ql-font-arial,
 .ql-font span[data-value="arial"]::before {
   font-family: Arial, sans-serif;
@@ -30,34 +33,26 @@
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 } */
 /* Set content for sizes */
-.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="14px"]::before {
-  content: 'Normal';
+.ql-size-extra-small,
+.ql-size span[data-value="extra-small"]::before {
+  font-size: 13px !important;
+}
+.ql-size-small,
+.ql-size span[data-value="small"]::before {
   font-size: 14px !important;
 }
-
-.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="16px"]::before {
-  content: 'Large';
-  font-size: 16px !important;
-}
-
-.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="18px"]::before {
-  content: 'Huge';
+.ql-size-medium,
+.ql-size span[data-value="medium"]::before {
   font-size: 18px !important;
 }
-
-
-.ql-showHtml {
-  margin-right: 8px;
-}
-
-.ql-showHtml:after {
-  content: "<html>";
-}
-
-.ql-picker.ql-emailVars {
-  width: 160px;
+.ql-size-large,
+.ql-size span[data-value="large"]::before {
+  font-size: 20px !important;
 }
 .text-editor{
+<<<<<<< HEAD
+    margin-left: 100px;
+=======
   /* margin-left: 100px; */
   width: 80%;
   background-color: white;
@@ -149,4 +144,5 @@
   font-family: -apple-system,sans-serif;
   font-weight: 600;
 
+>>>>>>> origin/SaturdayRhea
 }

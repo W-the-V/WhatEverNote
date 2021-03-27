@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+import React from 'react';
+import {useDispatch, useSelector} from "react-redux"
+import { NavLink } from 'react-router-dom';
+import "./index.css"
+import LogoutButton from '../auth/LogoutButton';
+
+const NavBar = ({ setAuthenticated }) => {
+  let user = useSelector(state => state.session.user)
+=======
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
@@ -28,16 +38,20 @@ const NavBar = ({ setAuthenticated }) => {
     }
   }
   // addNewNote()
+>>>>>>> origin/SaturdayRhea
   return (
-    <nav className="homeNavBarOuter">
+    <nav>
       <div className="nav_top__circles">
-        <div className="nav_circles letter-circle">{user.firstName[0]}</div>
+        <div className="nav_circles letter-circle">
+          {user.firstName[0]}
+        </div>
         <div className="nav_circles search-circle">
           <i className="fas fa-search"></i>
         </div>
         <div className="nav_circles plus-circle">
           <i className="fas fa-plus"></i>
         </div>
+
       </div>
       <div>
         <div className="middle_nav__container">
@@ -48,6 +62,7 @@ const NavBar = ({ setAuthenticated }) => {
           </div>
           <div className="icon__holder star_icon">
             <i className="fas fa-star"></i>
+
           </div>
           <div className="icon__holder note_icon">
             <NavLink to="/notes" exact={true}>
@@ -57,9 +72,13 @@ const NavBar = ({ setAuthenticated }) => {
         </div>
         <div className="middle2_nav__container">
         <div className="icon__holder notebook_icon">
+<<<<<<< HEAD
+          <i className="fas fa-book"></i>
+=======
           <NavLink to="/notebooks">
           <i className="fas fa-book"></i>
           </NavLink>
+>>>>>>> origin/SaturdayRhea
         </div>
         <div className="icon__holder tag_icon" onClick={tagClick}>
           <i className="fas fa-tag"></i>
@@ -69,15 +88,15 @@ const NavBar = ({ setAuthenticated }) => {
         </div>
         </div>
         <div className="middle3_nav__container">
-          <div className="icon__holder trash_icon">
-            <i className="fas fa-trash"></i>
-          </div>
+        <div className="icon__holder trash_icon">
+          <i className="fas fa-trash"></i> 
+        </div>
         </div>
       </div>
     
     </nav>
     
   );
-};
+}
 
 export default NavBar;

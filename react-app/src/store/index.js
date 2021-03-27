@@ -1,17 +1,17 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-import sessionReducer from "./session";
-import notesReducer from "./notes";
-import notebooksReducer from "./notebooks";
-import tagsReducer from "./tags";
-import tagModalReducer from "./tagmodal";
+import sessionReducer from './session'
+import notesReducer from "./notes"
+import notebooksReducer from "./notebooks"
+import tagsReducer from "./tags"
 import thunk from "redux-thunk";
+
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   notes: notesReducer,
   notebooks: notebooksReducer,
   tags: tagsReducer,
-  tagModal: tagModalReducer,
+
 });
 
 let enhancer;
@@ -31,7 +31,8 @@ const configureStore = (preloadedState) => {
 
 const store = configureStore();
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== 'production') {
+
   window.store = store;
 }
 

@@ -19,7 +19,6 @@ import Note from "./components/NotePage/note";
 import NotePage from "./components/NotePage/NotePage"
 import LogoutButton from "./components/auth/LogoutButton";
 import NoteBooks from "./components/Notebooks";
-import NoteHeader from "./components/NoteHeader";
 
 
 function App() {
@@ -84,6 +83,10 @@ function App() {
         <ProtectedRoute path="/home" exact={true}  authenticated={authenticated}>
           <Home />
         </ProtectedRoute>
+<<<<<<< HEAD
+        <ProtectedRoute path="/note" exact={true} authenticated={authenticated}>
+          <Note placeholder={"Write something or insert a heart ♥"} title={"Title"}/>
+=======
         <ProtectedRoute path="/notes" exact={true} authenticated={authenticated}>
           <NotePage />
         </ProtectedRoute>
@@ -94,13 +97,14 @@ function App() {
         <ProtectedRoute path="/notes/:id"
         exact={true}>
           <NotePage />
+>>>>>>> origin/SaturdayRhea
         </ProtectedRoute>
         <ProtectedRoute path="/notebooks" exact={true}>
           <NoteBooks />
         </ProtectedRoute>
       </Switch>
       <Route exact path="/test">
-        <NoteHeader />
+        <ScratchPad />
       </Route>
     </BrowserRouter>
   );
