@@ -1,10 +1,3 @@
-.ql-font span[data-label="Roboto"]::before {
-  font-family: "Roboto";
-}
-.ql-font-roboto {
-  font-family: "Roboto";
-}
-
 .ql-font-arial,
 .ql-font span[data-value="arial"]::before {
   font-family: Arial, sans-serif;
@@ -30,114 +23,22 @@
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 /* Set content for sizes */
-.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="14px"]::before {
-  content: 'Normal';
+.ql-size-extra-small,
+.ql-size span[data-value="extra-small"]::before {
+  font-size: 13px !important;
+}
+.ql-size-small,
+.ql-size span[data-value="small"]::before {
   font-size: 14px !important;
 }
-
-.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="16px"]::before {
-  content: 'Large';
-  font-size: 16px !important;
-}
-
-.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="18px"]::before {
-  content: 'Huge';
+.ql-size-medium,
+.ql-size span[data-value="medium"]::before {
   font-size: 18px !important;
 }
-
-
-.ql-showHtml {
-  margin-right: 8px;
-}
-
-.ql-showHtml:after {
-  content: "<html>";
-}
-
-.ql-picker.ql-emailVars {
-  width: 160px;
+.ql-size-large,
+.ql-size span[data-value="large"]::before {
+  font-size: 20px !important;
 }
 .text-editor{
-  margin-left: 100px;
-  width: 80%;
-  background-color: white;
-  border: 0px;
-  
-}
-
-.ql-toolbar.ql-snow { 
-  border: 0px;
-}
-
-
-
-.ql-container.ql-snow {
-  border: 0px;
-  height: 500px;
-  border-top: .1em solid gainsboro;
-  border-bottom: .1em solid gainsboro;
-
-}
-
-.quill > .ql-container > .ql-editor.ql-blank::before{
-  font-size: 15px;
-  color: lightgrey;
-  font-style: none;
-}
-.ql-editor.ql-blank::before {
-  color: rgba(0,0,0,0.6);
-  content: attr(data-placeholder);
-  font-style: normal;
-  left: 15px;
-  pointer-events: none;
-  position: absolute;
-  right: 15px;
-}
-
-.editor-footer {
-  padding: 10px;
-  display: grid;
-  grid-template-areas:
-  "left middle right";
-  font-size: 14px;
-  color: grey;
-
-}
-
-.footer-right {
-  grid-area: right;
-  justify-self: end;
-}
-
-.footer__button {
-    display: flex;
-    flex-direction: row;
-    align-items:center;
-    background:#383838;
-    color: white;
-    height: 22px;
-    padding-left: 13px;
-    padding-bottom: 13px;
-    margin: 3px 0;
-    font-size: 10px;
-    letter-spacing: .25px;
-    font-family: -apple-system,sans-serif;
-    font-weight: 600;
-    user-select: none;
-    text-transform: uppercase;
-    white-space: nowrap;
-    line-height: 22px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.Footer_button_text {
-  padding-top: 10px;
-  padding-right: 5px;
-  color: white;
-  font-size: 10px;
-  letter-spacing: .25px;
-  font-family: -apple-system,sans-serif;
-  font-weight: 600;
-
+    margin-left: 100px;
 }

@@ -18,7 +18,6 @@ import ScratchPad from "./components/ScratchPad";
 import Note from "./components/Note";
 import LogoutButton from "./components/auth/LogoutButton";
 import NoteBooks from "./components/Notebooks";
-import NoteHeader from "./components/NoteHeader";
 
 
 function App() {
@@ -84,14 +83,14 @@ function App() {
           <Home />
         </ProtectedRoute>
         <ProtectedRoute path="/note" exact={true} authenticated={authenticated}>
-          <Note placeholder={"Start writing or drag files"} title={"Title"}/>
+          <Note placeholder={"Write something or insert a heart ♥"} title={"Title"}/>
         </ProtectedRoute>
         <ProtectedRoute path="/notebooks" exact={true}>
           <NoteBooks />
         </ProtectedRoute>
       </Switch>
       <Route exact path="/test">
-        <NoteHeader />
+        <ScratchPad />
       </Route>
     </BrowserRouter>
   );
