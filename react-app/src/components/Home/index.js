@@ -5,6 +5,7 @@ import ScratchPad from '../ScratchPad'
 import TagCloud from '../TagCloud'
 import {getNotes} from "../../store/notes"
 import "./index.css"
+import "../NotesWidget/index.css"
 import { getTags } from '../../store/tags'
 
 

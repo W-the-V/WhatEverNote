@@ -5,6 +5,7 @@ import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { createNote, editNote, deleteNote }  from "../../store/notes"
 import "./index.css";
+import "../Note/index.css"
 
 
 
@@ -47,7 +48,6 @@ const CustomToolbar = () => (
 <select class="ql-font">
         <option selected>Sans Serif</option>
         <option value="inconsolata">Inconsolata</option>
-        <option value="roboto">Roboto</option>
         <option value="mirza">Mirza</option>
         <option value="arial">Arial</option>
 </select>
@@ -102,13 +102,14 @@ Quill.register(Size, true);
 const Font = Quill.import("formats/font");
 Font.whitelist = [
   "arial",
-  "comic-sans",
-  "courier-new",
-  "georgia",
-  "helvetica",
-  "lucida"
+  "mirza",
+  "sans serif",
+  "inconsolata",
 ];
 Quill.register(Font, true);
+
+// const FontStyle = Quill.import('attributors/style/font');
+// Quill.register(FontStyle, true);
 
 function Note(props) {
 

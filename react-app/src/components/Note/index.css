@@ -1,4 +1,4 @@
-.ql-font span[data-label="Roboto"]::before {
+/* .ql-font span[data-label="Roboto"]::before {
   font-family: "Roboto";
 }
 .ql-font-roboto {
@@ -28,7 +28,7 @@
 .ql-font-lucida,
 .ql-font span[data-value="lucida"]::before {
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-}
+} */
 /* Set content for sizes */
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="14px"]::before {
   content: 'Normal';

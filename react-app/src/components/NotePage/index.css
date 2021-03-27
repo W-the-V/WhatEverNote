@@ -1,18 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
+
 .ql-font-arial,
 .ql-font span[data-value="arial"]::before {
   font-family: Arial, sans-serif;
 }
-.ql-font-comic-sans,
-.ql-font span[data-value="comic-sans"]::before {
-  font-family: "Comic Sans MS", cursive, sans-serif;
+.ql-font-mirza,
+.ql-font span[data-value="mirza"]::before {
+  font-family: "Mirza", cursive, sans-serif;
 }
-.ql-font-courier-new,
-.ql-font span[data-value="courier-new"]::before {
-  font-family: "Courier New";
+.ql-font-roboto,
+.ql-font span[data-value="lato"]::before {
+  font-family: 'roboto', sans-serif;
 }
-.ql-font-georgia,
-.ql-font span[data-value="georgia"]::before {
-  font-family: Georgia, serif;
+
+.ql-font-inconsolata,
+.ql-font span[data-value="inconsolata"]::before {
+  font-family: Inconsolata, serif;
 }
 .ql-font-helvetica,
 .ql-font span[data-value="helvetica"]::before {
