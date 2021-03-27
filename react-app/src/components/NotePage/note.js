@@ -185,8 +185,8 @@ function Note(props) {
         <CustomToolbar />
         <div className="editor__container">
         {editorHtml? <ReactQuill
-          defaultValue={editorHtml.toString()}
-          onChange={()=>handleChange(Quill?.state?.value)}
+          defaultValue={editorHtml}
+          onChange={handleChange(Quill?.state?.value)}
           placeholder={props.placeholder}
           modules={modules}
           formats={formats}
