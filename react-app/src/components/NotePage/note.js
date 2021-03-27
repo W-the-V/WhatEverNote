@@ -128,16 +128,18 @@ function Note(props) {
   },[props.note])
   
   // console.log(quill, "this is quill")
-  function insertText() {
+  function autoSave() {
     const currentSelection = quill.getSelection()
-    if(currentSelection !== null){
-      const cursorPosition = quill.getSelection().index;
-      if(quill){
-        quill.setContents(cursorPosition, Quill.state?.value);  
-        quill.setSelection(cursorPosition + 1);
-      }
+    // if(currentSelection !== null){
+    //   const cursorPosition = quill.getSelection().index;
+    //   // console.log("WHAT IS HAPPENING")
+    //   //   quill.setContents(cursorPosition, Quill.state?.value);  
+    //   //   quill.setSelection(cursorPosition + 1);
+    //   //   setEditorHtml(Quill.state?.value)
+        
+      
 
-    }
+    // }
   }
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -227,14 +229,16 @@ function Note(props) {
 //       this.setState({ emailTemplate });
 //       return;
 // ()=>setEditorHtml(ReactQuill?.state?.value)
-    return (
+      return (
+    <>
+    
       <div className="text-editor">
         
-        <CustomToolbar />
+       <CustomToolbar />
         <div className="editor__container" id="editor__container">
         {editorHtml?<ReactQuill
           defaultValue={editorHtml}
-          onChange={()=>insertText()}
+          onChange={()=>autoSave()}
           placeholder={props.placeholder}
           modules={quill.modules}
           formats={formats}
@@ -249,7 +253,10 @@ function Note(props) {
           </div>
         </div>
       </div>
+
+      </>
     );
+    
 }
 
 
