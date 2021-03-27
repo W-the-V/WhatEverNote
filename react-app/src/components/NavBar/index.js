@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux"
 import { NavLink } from 'react-router-dom';
@@ -6,6 +7,38 @@ import LogoutButton from '../auth/LogoutButton';
 
 const NavBar = ({ setAuthenticated }) => {
   let user = useSelector(state => state.session.user)
+=======
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, Redirect } from "react-router-dom";
+import "./index.css";
+import LogoutButton from "../auth/LogoutButton";
+import { deactivateTagModal, activateTagModal } from "../../store/tagmodal";
+import { createNote } from "../../store/notes"
+import { createNotebook } from "../../store/notebooks"
+
+const NavBar = ({ setAuthenticated }) => {
+  let user = useSelector((state) => state.session.user);
+  let TagModal = useSelector((state) => state.tagModal.status);
+  let notebooks = useSelector((state) => state.notebooks.notebooks)
+  const dispatch = useDispatch();
+  const tagClick = (e) => {
+    if (TagModal) dispatch(deactivateTagModal());
+    else dispatch(activateTagModal());
+  };
+
+
+  const addNewNote = () => {
+    let defaultNotebook;
+    if (notebooks){
+      defaultNotebook = notebooks.filter(notebook => notebook.default_notebook)[0]
+      const defaultNote = {Title: "Default Note", Text: "<p>Start writing your note</p>", notebook_id: defaultNotebook.id}
+      dispatch(createNote(defaultNote, user.id))
+      
+    }
+  }
+  // addNewNote()
+>>>>>>> origin/SaturdayRhea
   return (
     <nav>
       <div className="nav_top__circles">
@@ -32,12 +65,20 @@ const NavBar = ({ setAuthenticated }) => {
 
           </div>
           <div className="icon__holder note_icon">
-            <i className="fas fa-file-alt"></i>
+            <NavLink to="/notes" exact={true}>
+              <i className="fas fa-file-alt"></i>
+            </NavLink>
           </div>
         </div>
         <div className="middle2_nav__container">
         <div className="icon__holder notebook_icon">
+<<<<<<< HEAD
           <i className="fas fa-book"></i>
+=======
+          <NavLink to="/notebooks">
+          <i className="fas fa-book"></i>
+          </NavLink>
+>>>>>>> origin/SaturdayRhea
         </div>
         <div className="icon__holder tag_icon">
           <i className="fas fa-tag"></i>
@@ -52,31 +93,7 @@ const NavBar = ({ setAuthenticated }) => {
         </div>
         </div>
       </div>
-      {/* <ul>
-        <li>
-          <NavLink to="/" exact={true} activeClassName="active">
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/login" exact={true} activeClassName="active">
-            Login
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/sign-up" exact={true} activeClassName="active">
-            Sign Up
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/users" exact={true} activeClassName="active">
-            Users
-          </NavLink>
-        </li>
-        <li>
-          <LogoutButton setAuthenticated={setAuthenticated} />
-        </li> */}
-      {/* </ul> */}
+    
     </nav>
   );
 }

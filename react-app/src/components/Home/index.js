@@ -5,12 +5,21 @@ import ScratchPad from '../ScratchPad'
 import TagCloud from '../TagCloud'
 import {getNotes} from "../../store/notes"
 import "./index.css"
+<<<<<<< HEAD
+=======
+import "../NotesWidget/index.css"
+import { getTags } from '../../store/tags'
+>>>>>>> origin/SaturdayRhea
 
 
 const Home = () => {
     const dispatch = useDispatch()
     let user = useSelector(state => state.session.user)
     let mapnotes = useSelector(state => state.notes?.notes)
+<<<<<<< HEAD
+=======
+    let maptags = useSelector(state => state.tags)
+>>>>>>> origin/SaturdayRhea
     let notes;
     if (mapnotes){
         notes = mapnotes.flat()
@@ -22,6 +31,10 @@ const Home = () => {
     let timeofDay=(date.getHours()>12)? "afternoon":"morning"
     useEffect(()=>{
         dispatch(getNotes(user.id))
+<<<<<<< HEAD
+=======
+        dispatch(getTags(user.id))
+>>>>>>> origin/SaturdayRhea
 
     }, [dispatch])
     return (
@@ -43,7 +56,14 @@ const Home = () => {
             <TagCloud/>
         </div>
         
+<<<<<<< HEAD
             </>
     )
 }
 export default Home
+=======
+    </>
+  );
+};
+export default Home;
+>>>>>>> origin/SaturdayRhea

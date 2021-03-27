@@ -22,13 +22,13 @@ def get_one_note(note_id):
 def get_all_notes(user_id):
 
     notebooks = Notebook.query.filter_by(user_id = user_id).all()
-    return jsonify({"notes":[notebook.to_dict()["notes"] for notebook in notebooks]})
+    return jsonify({"notes":[ note for notebook in notebooks for note in notebook.to_dict()['notes']]})
 
-def add_note(user_id):
+def add_note(userDataObject):
     note_data = json.loads(request.data.decode("utf-8"))
-
-    note = Note(title = note_data["title"],
-    text = note_data["text"],
+    print(note_data, "THIS IS NOTE DATA FROM API ROUTE")
+    note = Note(title = note_data["Title"],
+    text = note_data["Text"],
     notebook_id = note_data["notebook_id"])
     
     db.session.add(note)

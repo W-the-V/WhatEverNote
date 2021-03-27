@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
     theme = db.Column(db.Boolean(), nullable=True)
     bgroundimg = db.Column(db.Integer(), nullable=True)
     notebooks = db.relationship("Notebook", backref='User', cascade="all, delete-orphan")
-    tags = db.relationship("Tag", backref='User', lazy=False, cascade="all, delete-orphan")
+    tags = db.relationship("Tag", backref="User", cascade="all, delete-orphan")
 
     @property
     def password(self):
@@ -63,10 +63,24 @@ class Notebook(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "name": self.name,
+            "updated_at":self.updated_at,
+            "default_notebook": self.default_notebook,
+            "notes": [note.other_to_dict() for note in self.notes]
+        }
+    def to_other_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "name": self.name,
+            "updated_at":self.updated_at,
             "notes": [note.to_dict() for note in self.notes]
         }
 
-
+Notes_To_Tags = db.Table('notes_to_tags', db.Model.metadata, db.Column
+                         ("tags_id", db.Integer, db.ForeignKey(
+                             "tags.id"), primary_key=True), db.Column
+                         ("notes_id", db.Integer, db.ForeignKey("notes.id"),
+                          primary_key=True))
 class Note(db.Model):
     __tablename__ = 'notes'
 
@@ -74,6 +88,8 @@ class Note(db.Model):
     title = db.Column(db.String(75), default="Untitled")
     text = db.Column(db.Text, nullable=True)
     notebook_id = db.Column(db.Integer, db.ForeignKey('notebooks.id'))
+    tags = db.relationship("Tag", back_populates='notes',
+                           secondary="notes_to_tags")
     created_at = db.Column(db.DateTime, nullable=False,
                           default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, nullable=False,
@@ -93,6 +109,7 @@ class Note(db.Model):
             "title": self.title,
             "text": self.text,
             "notebook_id": self.notebook_id,
+            "updated_at": self.updated_at,
             "tags": [tag.to_dict() for tag in self.tags]
         }
 
@@ -100,20 +117,16 @@ class Note(db.Model):
     #                        secondary="Notes_To_Tags")
 
 
-# Notes_To_Tags = db.Table('notes_to_tags', db.Model.metadata, db.Column
-#                          ("tags_id", db.Integer, db.ForeignKey(
-#                              "tags.id"), primary_key=True), db.Column
-#                          ("notes_id", db.Integer, db.ForeignKey("notes.id"),
-#                           primary_key=True))
 
 
 
-class Notes_To_Tags(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    tags_id = db.Column(db.Integer, db.ForeignKey('tags.id'))
-    notes_id = db.Column(db.Integer, db.ForeignKey('notes.id'))
-    notes = db.relationship("Note", backref='tag', lazy=False)
-    tags = db.relationship("Tag", backref='note', lazy=False)
+
+# class Notes_To_Tags(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     tags_id = db.Column(db.Integer, db.ForeignKey('tags.id'))
+#     notes_id = db.Column(db.Integer, db.ForeignKey('notes.id'))
+#     notes = db.relationship("Note", backref='tag', lazy=False)
+#     tags = db.relationship("Tag", backref='note', lazy=False)
 
 
 class Tag(db.Model):
@@ -122,6 +135,9 @@ class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     name = db.Column(db.String(30), nullable=True)
+    notes = db.relationship("Note", back_populates='tags',
+                           secondary="notes_to_tags")
+    # user=db.relationship("User", back_populates="Tag")
 
     def to_dict(self):
         return {
