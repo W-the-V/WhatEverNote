@@ -1,7 +1,7 @@
 #note-header {
   display: flex;
   height: 44px;
-  margin-left: 100px;
+  /* margin-left: 100px; */
   margin-right: 30px;
   align-items: center;
   padding: 8px 12px 4px;

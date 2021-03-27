@@ -29,7 +29,7 @@ const NotebookTableItem = ({NoteBook}) => {
             <td>{user.username}</td>
             <td>{NoteBook.updated_at}</td>
             <td onClick={()=>setShowActions(true)}>{showNoteActions? <Dropdown items={noteActions}/>: <span>...</span>}</td>
-            {/* {showActions? <Dropdown items={notebookActions} />:null} */}
+             {showActions? <Dropdown items={notebookActions} />:null} 
         </tr>
             {caretDown && NoteBook.notes.map(note => (<tr className="NoteOnNotebooksTable">
                 <td class="SubTable-item"><i className="fas fa-file-alt"></i>{note.title}</td>

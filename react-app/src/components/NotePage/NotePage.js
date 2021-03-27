@@ -4,21 +4,28 @@ import {getNotes} from "../../store/notes"
 import "./index.css"
 import Note from "./note"
 import NoteInList from "./NoteInList"
+import NoteHeader from "../NoteHeader/index"
+import { useParams } from 'react-router'
+import { getNotebooks } from '../../store/notebooks'
 
 const NotePage = () => {
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(getNotes(user.id))
+        dispatch(getNotebooks(user.id))
 
     }, [dispatch])
     let user = useSelector(state => state.session.user)
     let mapnotes = useSelector(state => state.notes?.notes)
 
     let notes=[{id: 9999, title:"Untitled", text: "Add text", tags: {id:5550000, name: "untitled"}}];
-     if (mapnotes){
+    let {notebookid} = useParams()
+    if (!notebookid && mapnotes){
         notes = mapnotes
-
+    } else if (mapnotes){
+        notes = mapnotes.filter(note => note.notebook_id === notebookid)
     }
+    
     
    
     let sortCriteriaList = ["updatedAt", "createdAt", "title", "tag"]
@@ -27,7 +34,11 @@ const NotePage = () => {
     const [ascending, setAscending] = useState(false)
     const [selectedNote, setSelectedNote] = useState(notes[0])
     useEffect(()=>{
-        
+        switch (ascending && sortCriteria === "updatedAt"){
+            notes.sort((a, b) => {
+                
+            })
+        }
     }, [ascending, sortCriteria])
     return(
     <div className="Note-Page__container">
@@ -49,11 +60,15 @@ const NotePage = () => {
             <div>
                 {notes.map(note =>(
                     <div onClick={()=>setSelectedNote(note)} key={note.id}><NoteInList note={note} /></div>
-                ))}
+                    ))}
             </div>
         
     </div>
+    <div className="note-page__editor__container">
+        <NoteHeader />
         <Note note={selectedNote}/>
+
+    </div>
     </div>
     )
     
