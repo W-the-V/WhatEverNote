@@ -108,12 +108,14 @@ Quill.register(Font, true);
 // Quill.register(FontStyle, true);
 
 function Note(props) {
+  // React.useEffect(() => {
+  //   return () => {
+
+  //    };
+  // }, [parentProp]);
 
   const [editorHtml, setEditorHtml] = useState('')
-  let handleChange = (html) => {
-    setEditorHtml(html)
-
-  }
+  
   useEffect(()=>{
   
     if(props.note && props.note.text){
@@ -122,7 +124,7 @@ function Note(props) {
     if (editorHtml){
         return 
     }
-})
+},[props.note])
 
   
   const handleSubmit = (e) => {
@@ -184,9 +186,9 @@ function Note(props) {
         {console.log(editorHtml)}
         <CustomToolbar />
         <div className="editor__container">
-        {editorHtml? <ReactQuill
+        {editorHtml?<ReactQuill
           defaultValue={editorHtml}
-          onChange={handleChange(Quill?.state?.value)}
+          onChange={()=>setEditorHtml(Quill?.state?.value)}
           placeholder={props.placeholder}
           modules={modules}
           formats={formats}
