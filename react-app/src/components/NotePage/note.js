@@ -4,8 +4,9 @@ import {useDispatch} from 'react-redux'
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { createNote, editNote, deleteNote }  from "../../store/notes"
-import "./index.css";
 import "../Note/index.css"
+import "./index.css";
+
 
 
 
@@ -157,6 +158,7 @@ function Note(props) {
     return (
       <div className="text-editor">
         <CustomToolbar />
+        <div className="editor__container">
         <ReactQuill
           value={editorHtml}
           onChange={(e) => setEditorHtml(Quill.state?.value)}
@@ -164,7 +166,7 @@ function Note(props) {
           modules={modules}
           formats={formats}
         />
-        {console.log({props}, "FROM RETURN")}
+        </div>
         <div className="editor-footer">
           <div className="footer__save__text">
             <p>all changes saved.</p>

@@ -58,7 +58,7 @@
   width: 160px;
 }
 .text-editor{
-  margin-left: 100px;
+  /* margin-left: 100px; */
   width: 80%;
   background-color: white;
   border: 0px;
@@ -95,9 +95,10 @@
 }
 
 .editor-footer {
-  padding: 0px;
-  padding-right: 10px;
+  position: fixed;
+  bottom: 0px;
   display: grid;
+  width: 65%;
   grid-template-areas:
   "left middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle right";
   font-size: 14px;

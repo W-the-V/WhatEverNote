@@ -43,9 +43,7 @@
 .ql-size span[data-value="large"]::before {
   font-size: 20px !important;
 }
-.text-editor{
-    margin-left: 100px;
-}
+
 .Note-Page__container{
   margin-left: 70px;
   width: 100%;
