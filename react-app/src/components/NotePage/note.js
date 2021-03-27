@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import {useDispatch} from 'react-redux'
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { createNote, editNote, deleteNote }  from "../../store/notes"
+import { createNote, editNote, deleteNote, saveNote }  from "../../store/notes"
 import "../Note/index.css"
 import "./index.css";
 let editorId = "editor__container"
@@ -107,7 +107,7 @@ Quill.register(Font, true);
 // Quill.register(FontStyle, true);
 
 function Note(props) {
-  
+  const dispatch = useDispatch()
   // React.useEffect(() => {
   //   return () => {
 
@@ -127,9 +127,16 @@ function Note(props) {
     }
   },[props.note])
   
-  // console.log(quill, "this is quill")
   function autoSave() {
-    const currentSelection = quill.getSelection()
+    // setTimeout(()=>{
+    //   dispatch(saveNote({
+    //     title: props.note.title,
+    //     text: Quill?.state?.value,
+    //     notebook_id: props.note.notebook_id
+
+    //   }))
+    // },1000)
+    // const currentSelection = quill.getSelection()
     // if(currentSelection !== null){
     //   const cursorPosition = quill.getSelection().index;
     //   // console.log("WHAT IS HAPPENING")
@@ -145,22 +152,25 @@ function Note(props) {
     e.preventDefault()
   }
   let quill = new Quill('#editor__container', {
-    modules: {
-      toolbar: {
-        container: "#toolbar",
-        handlers: {
-          undo: undoChange,
-          insertText: insertText
-        }
-      },
+     
       history: {
         delay: 500,
-        maxStack: 100,
+        maxStack: 20,
         userOnly: true
       },
       
-    }
+    
   });
+  const modules = {
+    toolbar: {
+      container: "#toolbar",
+      handlers: {
+        undo: undoChange,
+        autoSave: autoSave
+      }
+    },
+  }
+  console.log(quill)
   let formats=[
     "header",
     "font",
@@ -240,7 +250,7 @@ function Note(props) {
           defaultValue={editorHtml}
           onChange={()=>autoSave()}
           placeholder={props.placeholder}
-          modules={quill.modules}
+          modules={modules}
           formats={formats}
         />:null}
         </div>

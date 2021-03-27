@@ -3,6 +3,7 @@ const GET_NOTES = "notes/GET_NOTES";
 const REMOVE_NOTE = "notes/REMOVE_NOTE";
 const EDIT_NOTE = "notes/EDIT_NOTE";
 const ADD_NOTE = "notes/ADD_NOTE";
+const SAVE_NOTE = "notes/SAVE_NOTE";
 
 
 const get = (notes) => ({
@@ -20,6 +21,11 @@ const add = (note) => ({
   type: ADD_NOTE,
   note,
 });
+
+export const saveNote = (note) =>({
+  type: SAVE_NOTE,
+  note,
+})
 
 const remove = (userId, noteId) => ({
   type: REMOVE_NOTE,
@@ -93,7 +99,11 @@ const notesReducer = (state = {}, action) => {
       delete newState[action.noteId];
       return newState;
     }
-    case ADD_NOTE:
+    case SAVE_NOTE: {
+      const newState = deepcopy(state)
+      newState.savedNote = action.note
+      return newState
+    }
     case EDIT_NOTE: {
       return {
         ...state,
