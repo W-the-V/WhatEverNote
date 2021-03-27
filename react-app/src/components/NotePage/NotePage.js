@@ -17,8 +17,8 @@ const NotePage = () => {
 
     }, [dispatch])
     let user = useSelector(state => state.session.user)
-    let mapnotes = useSelector(state => state.notes?.notes)
-    let notes=[{id: 9999, title:"Untitled", text: "Add text", tags: {id:5550000, name: "untitled"}}];
+    let notes = useSelector(state => state.notes?.notes)
+    // let notes=[{id: 9999, title:"Untitled", text: "Add text", tags: {id:5550000, name: "untitled"}}];
     // let {notebookid} = useParams()
     // if (!notebookid && mapnotes){
         //     notes = mapnotes
@@ -32,7 +32,7 @@ let sortCriteriaList = ["updatedAt", "createdAt", "title", "tag"]
 const [sortCriteriaDD, setSortCriteriaDD] = useState(false)
 const [sortCriteria, setSortCriteria] = useState(sortCriteriaList[0])
 const [ascending, setAscending] = useState(false)
-const [selectedNote, setSelectedNote] = useState(notes[0])
+const [selectedNote, setSelectedNote] = useState("")
 // useEffect(()=>{
     //     switch (ascending && sortCriteria === "updatedAt"){
         //         notes.sort((a, b) => {
@@ -42,13 +42,17 @@ const [selectedNote, setSelectedNote] = useState(notes[0])
             // }, [ascending, sortCriteria])
     let urlPath = useLocation()
     let path = urlPath.pathname.split("/")
+    let noteSelected
+    if (urlPath.pathname.indexOf("notes") != -1){
+        noteSelected = notes?.filter(note => note.id === Number(path[path.length-1]))[0]
+    }
     useEffect(()=>{
-        if (urlPath.pathname.indexOf("notes") != -1){
-            let noteSelected = mapnotes?.filter(note => note.id === Number(path[path.length-1]))
-            console.log(noteSelected)
-            setSelectedNote(noteSelected)
+        setSelectedNote(noteSelected)
+        if (selectedNote){
+            return 
         }
-    },[])
+    },[noteSelected])
+    
     
     return(
     <div className="Note-Page__container">
@@ -59,7 +63,7 @@ const [selectedNote, setSelectedNote] = useState(notes[0])
                 <span>Notes</span>
             </div>
             <div className="notesidebar__innerheader2">
-                <span>{`${notes.length} notes`}</span>
+                <span>{`${notes?.length} notes`}</span>
                 <div className="filter-sort-buttons__container">
                 {ascending? <i className="fas fa-sort-amount-up" onClick={()=>setAscending(true)}></i>:<i className="fas fa-sort-amount-down" onClick={()=>setAscending(false)}></i>}
                 <i className="fas fa-filter" onClick={()=>setSortCriteriaDD(true)}></i>
@@ -68,7 +72,7 @@ const [selectedNote, setSelectedNote] = useState(notes[0])
             </div>
             </div>
             <div>
-                {notes.map(note =>(
+                {notes?.map(note =>(
                     <div onClick={()=>setSelectedNote(note)} key={note.id}><NoteInList note={note} /></div>
                     ))}
             </div>

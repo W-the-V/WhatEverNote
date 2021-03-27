@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { render } from "react-dom";
 import {useDispatch} from 'react-redux'
 import ReactQuill, { Quill } from "react-quill";
@@ -109,7 +109,21 @@ Quill.register(Font, true);
 
 function Note(props) {
 
-  const [editorHtml, setEditorHtml] = useState("...")
+  const [editorHtml, setEditorHtml] = useState('')
+  let handleChange = (html) => {
+    setEditorHtml(html)
+
+  }
+  useEffect(()=>{
+  
+    if(props.note && props.note.text){
+      setEditorHtml(props.note.text)
+    }
+    if (editorHtml){
+        return 
+    }
+})
+
   
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -148,19 +162,35 @@ function Note(props) {
     "image",
     "color"
   ];
-
-
+// // ON THE COMPONENT
+// <ReactQuill
+// value={this.state.content}
+// onChange={value => {
+//    this.setState({ content: value }, () => {
+//     this.handleChange();
+//   });
+// }}
+// />
+// // AND THEN IN MY LOCAL HANDLECHANGE FUNCTION
+// if (e === undefined && this.state.content) {
+//       // Also have to set content cause of quill library bug
+//       let emailTemplate = this.state.emailTemplate;
+//       emailTemplate['content'] = this.state.content;
+//       this.setState({ emailTemplate });
+//       return;
+    
     return (
       <div className="text-editor">
+        {console.log(editorHtml)}
         <CustomToolbar />
         <div className="editor__container">
-        <ReactQuill
-          value={editorHtml}
-          onChange={(e) => setEditorHtml(Quill.state?.value)}
+        {editorHtml? <ReactQuill
+          defaultValue={editorHtml.toString()}
+          onChange={()=>handleChange(Quill?.state?.value)}
           placeholder={props.placeholder}
           modules={modules}
           formats={formats}
-        />
+        />:null}
         </div>
         <div className="editor-footer">
           <div className="footer__save__text">
