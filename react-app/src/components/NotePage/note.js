@@ -4,13 +4,11 @@ import {useDispatch} from 'react-redux'
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { createNote, editNote, deleteNote, saveNote }  from "../../store/notes"
+import { useSelectedNote } from '../../context/NoteContext';
 import "../Note/index.css"
 import "./index.css";
 let editorId = "editor__container"
 
-// 3000 millisec is maybe too long but too make sure that the problem is from creating 
-// Quill before DOM
-// let quill = new Quill()
 
 
 const CustomHeart = () => <span>♥</span>;
@@ -113,19 +111,19 @@ function Note(props) {
 
   //    };
   // }, [parentProp]);
-  // console.log("THIS IS CURSOR POSITION", cursorPosition)
+  const {selectedNote, setSelectedNote} = useSelectedNote()
   const [editorHtml, setEditorHtml] = useState('')
   // let quill;
   useEffect(()=>{
     // let container = document.getElementById(editorId);
     // quill = new Quill( container );
-    if(props.note && props.note.text){
-      setEditorHtml(props.note.text)
+    if(selectedNote && selectedNote.text){
+      setEditorHtml(selectedNote.text)
     }
     if (editorHtml){
       return 
     }
-  },[props.note])
+  },[selectedNote])
   
   function autoSave() {
     // setTimeout(()=>{
@@ -151,16 +149,16 @@ function Note(props) {
   const handleSubmit = (e) => {
     e.preventDefault()
   }
-  let quill = new Quill('#editor__container', {
+  // let quill = new Quill('#editor__container', {
      
-      history: {
-        delay: 500,
-        maxStack: 20,
-        userOnly: true
-      },
+  //     history: {
+  //       delay: 500,
+  //       maxStack: 20,
+  //       userOnly: true
+  //     },
       
     
-  });
+  // });
   const modules = {
     toolbar: {
       container: "#toolbar",
@@ -170,7 +168,7 @@ function Note(props) {
       }
     },
   }
-  console.log(quill)
+  
   let formats=[
     "header",
     "font",
@@ -240,14 +238,12 @@ function Note(props) {
 //       return;
 // ()=>setEditorHtml(ReactQuill?.state?.value)
       return (
-    <>
-    
+      <div>
       <div className="text-editor">
-        
        <CustomToolbar />
         <div className="editor__container" id="editor__container">
         {editorHtml?<ReactQuill
-          defaultValue={editorHtml}
+          defaultValue={selectedNote.text}
           onChange={()=>autoSave()}
           placeholder={props.placeholder}
           modules={modules}
@@ -263,8 +259,7 @@ function Note(props) {
           </div>
         </div>
       </div>
-
-      </>
+      </div>
     );
     
 }

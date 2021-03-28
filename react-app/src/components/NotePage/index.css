@@ -270,6 +270,9 @@
     border-radius: 4px;
     cursor: pointer;
 }
+#root{
+  height: 0px;
+}
 
 .Footer_button_text {
   padding-top: 10px;

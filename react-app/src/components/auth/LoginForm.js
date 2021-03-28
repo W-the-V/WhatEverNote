@@ -46,10 +46,6 @@ const LoginForm = ({
     //       <Redirect to="/home"/>
     //       )
     //     }
-        
-      
-    console.log("+++++++++++++++++++++++++",user)
-    
     setErrors(userAuthen)
 
     

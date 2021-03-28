@@ -1,60 +1,94 @@
 import React, { useEffect, useState } from 'react'
-import {useLocation} from "react-router-dom"
 import { useSelector,useDispatch } from 'react-redux'
+import { NavLink, Redirect, useLocation } from "react-router-dom";
 import {getNotes} from "../../store/notes"
 import "./index.css"
 import Note from "./note"
 import NoteInList from "./NoteInList"
 import NoteHeader from "../NoteHeader/index"
-import { useParams } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 import { getNotebooks } from '../../store/notebooks'
-
+import NoteDropDown from './NoteDropDown';
+import { useSelectedNote } from '../../context/NoteContext';
 const NotePage = () => {
+    const history = useHistory()
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(getNotes(user.id))
         dispatch(getNotebooks(user.id))
-
     }, [dispatch])
     let user = useSelector(state => state.session.user)
     let notes = useSelector(state => state.notes?.notes)
-    // let notes=[{id: 9999, title:"Untitled", text: "Add text", tags: {id:5550000, name: "untitled"}}];
-    // let {notebookid} = useParams()
-    // if (!notebookid && mapnotes){
-        //     notes = mapnotes
-        // } else if (mapnotes){
-            //     notes = mapnotes.filter(note => note.notebook_id === notebookid)
-            // }
-            
-            
-            
-let sortCriteriaList = ["updatedAt", "createdAt", "title", "tag"]
-const [sortCriteriaDD, setSortCriteriaDD] = useState(false)
-const [sortCriteria, setSortCriteria] = useState(sortCriteriaList[0])
-const [ascending, setAscending] = useState(false)
-const [selectedNote, setSelectedNote] = useState("")
-// useEffect(()=>{
-    //     switch (ascending && sortCriteria === "updatedAt"){
-        //         notes.sort((a, b) => {
-            
-            //         })
-            //     }
-            // }, [ascending, sortCriteria])
+    let sortCriteriaList = ["updatedAt", "title"]
+    const [ascending, setAscending] = useState(false)
+    const {selectedNote, setSelectedNote} = useSelectedNote()
+    const [sortCriteriaDD, setSortCriteriaDD] = useState(false)
+    const [sortCriteria, setSortCriteria] = useState(sortCriteriaList[0])
     let urlPath = useLocation()
     let path = urlPath.pathname.split("/")
-    let noteSelected
-    if (urlPath.pathname.indexOf("notes") != -1){
-        noteSelected = notes?.filter(note => note.id === Number(path[path.length-1]))[0]
-    }
+    let noteSelected;
+    
     useEffect(()=>{
-        setSelectedNote(noteSelected)
-        if (selectedNote){
-            return 
+        if(notes){
+        if(ascending && sortCriteria === "updatedAt"){
+                notes.sort((a, b) => {
+                 return a.updated_at - b.updated_at
+                    })
+    
+                }
+        else if (ascending && sortCriteria === "title"){
+            notes.sort((a,b) => {
+                let aTitle = a.title.toUpperCase()
+                let bTitle = b.title.toUpperCase()
+                if (aTitle < bTitle){
+                    return -1
+                }
+                if (bTitle < aTitle){
+                    return 1
+                }
+                return 0
+            })
+            
         }
-    },[noteSelected])
+        else if (!ascending && sortCriteria === "updatedAt"){
+            notes.sort((a, b) => {
+                return b.updated_at - a.updated_at
+                   })
+                   
+        }
+        else if (!ascending && sortCriteria === "title"){
+            notes.sort((a,b) => {
+                let aTitle = a.title.toUpperCase()
+                let bTitle = b.title.toUpperCase()
+                if (aTitle > bTitle){
+                    return -1
+                }
+                if (bTitle < aTitle){
+                    return 1
+                }
+                return 0
+            })
+            
+        
+            setSelectedNote(notes[0])
+        }
+        }
+            }, [ascending, sortCriteria])        
+      
+    if (path.indexOf("notes") != -1){
+        if(path[path.length-1]==='notes'){
+            notes=notes
+        }
+        else{
+        noteSelected = notes?.filter(note => note.id === Number(path[path.length-1]))[0]
+        }
+    }else{
+        notes = notes?.filter(note => note.notebok_id=== Number(path[path.length-1]))[0]
+    }
     
     
-    return(
+    
+return(
     <div className="Note-Page__container">
         <div className="notesidebar__container">
         <div className="notesidebar__header">
@@ -64,8 +98,9 @@ const [selectedNote, setSelectedNote] = useState("")
             </div>
             <div className="notesidebar__innerheader2">
                 <span>{`${notes?.length} notes`}</span>
-                <div className="filter-sort-buttons__container">
-                {ascending? <i className="fas fa-sort-amount-up" onClick={()=>setAscending(true)}></i>:<i className="fas fa-sort-amount-down" onClick={()=>setAscending(false)}></i>}
+                <div onClick={()=>setSortCriteriaDD(true)} className="filter-sort-buttons__container">
+                {sortCriteriaDD?<NoteDropDown items={sortCriteriaList} sortCriteriaDD={sortCriteriaDD} setSortCriteriaDD={setSortCriteriaDD} setSortCriteria={setSortCriteria}/>:null}
+                {ascending? <i className="fas fa-sort-amount-up" onClick={()=>setAscending(false)}></i>:<i className="fas fa-sort-amount-down" onClick={()=>setAscending(true)}></i>}
                 <i className="fas fa-filter" onClick={()=>setSortCriteriaDD(true)}></i>
 
             </div>

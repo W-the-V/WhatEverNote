@@ -15,7 +15,9 @@ const NotesWidget=({notes}) => {
             </div>
                 <div className="N_Widget__holder">
                     {notes? notes.map(note => (
+                        <NavLink to={`/notes/${note.id}`}>
                         <NoteThumbnail key={note.id} note={note} />
+                        </NavLink>
                     )):null}
 
                 </div>

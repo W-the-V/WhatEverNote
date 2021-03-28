@@ -18,12 +18,15 @@ const NavBar = ({ setAuthenticated }) => {
   };
 
 
-  const addNewNote = () => {
+  const addNewNote = async () => {
     let defaultNotebook;
     if (notebooks){
       defaultNotebook = notebooks.filter(notebook => notebook.default_notebook)[0]
       const defaultNote = {Title: "Default Note", Text: "<p>Start writing your note</p>", notebook_id: defaultNotebook.id}
-      dispatch(createNote(defaultNote, user.id))
+      let newNote = await dispatch(createNote(defaultNote, user.id))
+      return (
+        <Redirect to={`/notes/${newNote.id}`}/>
+      )
       
     }
   }
@@ -35,7 +38,7 @@ const NavBar = ({ setAuthenticated }) => {
         <div className="nav_circles search-circle">
           <i className="fas fa-search"></i>
         </div>
-        <div className="nav_circles plus-circle">
+        <div className="nav_circles plus-circle" onClick={addNewNote}>
           <i className="fas fa-plus"></i>
         </div>
       </div>
