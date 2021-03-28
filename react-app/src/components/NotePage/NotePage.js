@@ -30,8 +30,11 @@ const NotePage = () => {
     let path = urlPath.pathname.split("/")
     let noteSelected;
     
+    
+    
     useEffect(()=>{
         if(notes){
+        setSelectedNote("")
         if(ascending && sortCriteria === "updatedAt"){
                 notes.sort((a, b) => {
                  return a.updated_at - b.updated_at
@@ -83,9 +86,12 @@ const NotePage = () => {
         }
         else{
         noteSelected = notes?.filter(note => note.id === Number(path[path.length-1]))[0]
+        setSelectedNote(noteSelected)
         }
     }else{
         notes = notes?.filter(note => note.notebok_id=== Number(path[path.length-1]))[0]
+        setSelectedNote(noteSelected)
+
     }
     
     
