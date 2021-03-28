@@ -117,6 +117,7 @@ return(
     </div>
     <div className="note-page__editor__container">
         <NoteHeader />
+       
         {console.log(selectedNote, "FROM NOTEPAGE JS")}
        { selectedNote? <Note /> : <div>loading...</div>}
 

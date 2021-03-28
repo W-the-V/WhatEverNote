@@ -7,9 +7,9 @@ import { createNote, editNote, deleteNote, saveNote }  from "../../store/notes"
 import { useSelectedNote } from '../../context/NoteContext';
 import "../Note/index.css"
 import "./index.css";
-let editorId = "editor__container"
 
-const CustomUndo = () => (
+
+export const CustomUndo = () => (
   <svg viewBox="0 0 18 18">
     <polygon className="ql-fill ql-stroke" points="6 10 4 12 2 10 6 10" />
     <path
@@ -30,21 +30,16 @@ function redoChange() {
 
 
 
-const CustomToolbar = () => (
+export const CustomToolbar = () => (
   <div id="toolbar" className="toolbar">
   
 <span class="ql-formats">
 <button className="ql-undo">
         <CustomUndo />
       </button>
-<select class="ql-font">
-        <option selected>Sans Serif</option>
-        <option value="inconsolata">Inconsolata</option>
-        <option value="mirza">Mirza</option>
-        <option value="arial">Arial</option>
-</select>
-</span>
+<select class="ql-font"></select>
 
+</span>
 
 <span class="ql-formats">
 <select class="ql-size"></select>
@@ -79,52 +74,30 @@ const CustomToolbar = () => (
   </div>
 );
 
-// Add sizes to whitelist and register them
-const Size = Quill.import("formats/size");
-Size.whitelist = ["extra-small", "small", "medium", "large"];
-const registerSize = () => Quill.register(Size, true);
-
-
-// Add fonts to whitelist and register them
-const Font = Quill.import("formats/font");
-Font.whitelist = [
-  "arial",
-  "mirza",
-  "sans serif",
-  "inconsolata",
-];
-const registerFont = () => Quill.register(Font, true);
-
 
 function Note(props) {
   const dispatch = useDispatch()
-
   const {selectedNote, setSelectedNote} = useSelectedNote()
   const [editorHtml, setEditorHtml] = useState("")
   const [loaded, setLoaded] = useState(false)
-
 
   useEffect(()=>{
     if(selectedNote && selectedNote.text){
       setEditorHtml(selectedNote.text)
       setLoaded(true)
       console.log("YOU WORKING if selectednote && ")
-      const Size = Quill.import("formats/size");
-      registerSize()
-      registerFont()
+
+
     }
     if (editorHtml){
       console.log("YOU WORKING if editorHtml")
-      const Size = Quill.import("formats/size");
-      registerSize()
-      registerFont()
+
 
       return 
     }
-    registerSize()
-    registerFont()
+
     
-  },[selectedNote])
+  },[selectedNote, setSelectedNote])
   
   function autoSave() {
 
@@ -168,17 +141,17 @@ function Note(props) {
     "image",
     "color"
   ]
-  Quill.import()
+
 
        return (
       <div>
       <div className="text-editor" id="editor__container">
       
-        <div className="editor__container" >
+        <div className="editor__container" id="toolbar" >
 
         
-        {editorHtml? <CustomToolbar /> : null }
         
+        <CustomToolbar />
       {editorHtml?
         <ReactQuill
           value={editorHtml}
