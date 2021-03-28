@@ -36,7 +36,7 @@
   font-size: 14px !important;
 }
 .ql-size-medium,
-.ql-size span[data-value="medium"]::before {
+.ql-size span[data-value="normal"]::before {
   font-size: 18px !important;
 }
 .ql-size-large,

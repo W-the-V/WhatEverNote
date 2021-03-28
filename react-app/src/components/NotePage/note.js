@@ -9,13 +9,6 @@ import "../Note/index.css"
 import "./index.css";
 let editorId = "editor__container"
 
-
-
-const CustomHeart = () => <span>♥</span>;
-
-
-
-
 const CustomUndo = () => (
   <svg viewBox="0 0 18 18">
     <polygon className="ql-fill ql-stroke" points="6 10 4 12 2 10 6 10" />
@@ -33,9 +26,10 @@ function undoChange() {
 function redoChange() {
   this.quill.history.redo();
 }
-/*
- * Custom toolbar component including the custom heart button and dropdowns
- */
+
+
+
+
 const CustomToolbar = () => (
   <div id="toolbar" className="toolbar">
   
@@ -88,7 +82,7 @@ const CustomToolbar = () => (
 // Add sizes to whitelist and register them
 const Size = Quill.import("formats/size");
 Size.whitelist = ["extra-small", "small", "medium", "large"];
-Quill.register(Size, true);
+const registerSize = () => Quill.register(Size, true);
 
 
 // Add fonts to whitelist and register them
@@ -99,7 +93,7 @@ Font.whitelist = [
   "sans serif",
   "inconsolata",
 ];
-Quill.register(Font, true);
+const registerFont = () => Quill.register(Font, true);
 
 
 function Note(props) {
@@ -111,37 +105,29 @@ function Note(props) {
 
 
   useEffect(()=>{
-
     if(selectedNote && selectedNote.text){
       setEditorHtml(selectedNote.text)
-     
       setLoaded(true)
+      console.log("YOU WORKING if selectednote && ")
+      const Size = Quill.import("formats/size");
+      registerSize()
+      registerFont()
     }
     if (editorHtml){
+      console.log("YOU WORKING if editorHtml")
+      const Size = Quill.import("formats/size");
+      registerSize()
+      registerFont()
+
       return 
     }
+    registerSize()
+    registerFont()
+    
   },[selectedNote])
   
   function autoSave() {
-    // setTimeout(()=>{
-    //   dispatch(saveNote({
-    //     title: props.note.title,
-    //     text: Quill?.state?.value,
-    //     notebook_id: props.note.notebook_id
 
-    //   }))
-    // },1000)
-    // const currentSelection = quill.getSelection()
-    // if(currentSelection !== null){
-    //   const cursorPosition = quill.getSelection().index;
-    //   // console.log("WHAT IS HAPPENING")
-    //   //   quill.setContents(cursorPosition, Quill.state?.value);  
-    //   //   quill.setSelection(cursorPosition + 1);
-    //   //   setEditorHtml(Quill.state?.value)
-        
-      
-
-    // }
   }
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -186,20 +172,23 @@ function Note(props) {
 
        return (
       <div>
-      <div className="text-editor">
-      <CustomToolbar />
+      <div className="text-editor" id="editor__container">
+      
+        <div className="editor__container" >
+
         
-        <div className="editor__container" id="editor__container">
-        {console.log(selectedNote, "THIS IS FROM RETURN")}
-        {console.log(editorHtml, "EDITOR HTML FROM RETURN")}
-        {editorHtml?<ReactQuill
+        {editorHtml? <CustomToolbar /> : null }
+        
+      {editorHtml?
+        <ReactQuill
           value={editorHtml}
           bounds={"#editor__container"}
           onChange={()=>autoSave()}
           placeholder={props.placeholder}
           modules={modules}
           formats={formats}
-        />:null}
+        />
+        :null}
         </div>
         <div className="editor-footer">
           <div className="footer__save__text">
