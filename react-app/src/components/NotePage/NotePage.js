@@ -11,6 +11,8 @@ import { getNotebooks } from '../../store/notebooks'
 import NoteDropDown from './NoteDropDown';
 import { useSelectedNote } from '../../context/NoteContext';
 const NotePage = () => {
+
+
     const history = useHistory()
     const dispatch = useDispatch()
     useEffect(()=>{
@@ -115,7 +117,8 @@ return(
     </div>
     <div className="note-page__editor__container">
         <NoteHeader />
-        <Note note={selectedNote}/>
+        {console.log(selectedNote, "FROM NOTEPAGE JS")}
+       { selectedNote? <Note /> : <div>loading...</div>}
 
     </div>
     </div>

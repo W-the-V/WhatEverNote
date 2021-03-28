@@ -101,24 +101,21 @@ Font.whitelist = [
 ];
 Quill.register(Font, true);
 
-// const FontStyle = Quill.import('attributors/style/font');
-// Quill.register(FontStyle, true);
 
 function Note(props) {
   const dispatch = useDispatch()
-  // React.useEffect(() => {
-  //   return () => {
 
-  //    };
-  // }, [parentProp]);
   const {selectedNote, setSelectedNote} = useSelectedNote()
-  const [editorHtml, setEditorHtml] = useState('')
-  // let quill;
+  const [editorHtml, setEditorHtml] = useState("")
+  const [loaded, setLoaded] = useState(false)
+
+
   useEffect(()=>{
-    // let container = document.getElementById(editorId);
-    // quill = new Quill( container );
+
     if(selectedNote && selectedNote.text){
       setEditorHtml(selectedNote.text)
+     
+      setLoaded(true)
     }
     if (editorHtml){
       return 
@@ -149,23 +146,23 @@ function Note(props) {
   const handleSubmit = (e) => {
     e.preventDefault()
   }
-  // let quill = new Quill('#editor__container', {
-     
-  //     history: {
-  //       delay: 500,
-  //       maxStack: 20,
-  //       userOnly: true
-  //     },
-      
+  // let quill = new Quill('#editor__container', { 
     
   // });
+
+
   const modules = {
     toolbar: {
       container: "#toolbar",
       handlers: {
         undo: undoChange,
         autoSave: autoSave
-      }
+      },
+      history: {
+        delay: 500,
+        maxStack: 20,
+        userOnly: true
+      },
     },
   }
   
@@ -186,64 +183,18 @@ function Note(props) {
     "color"
   ]
   Quill.import()
-  // const modules = {
-  //   toolbar: {
-  //     container: "#toolbar",
-  //     handlers: {
-        
-  //       undo: undoChange,
-  //       insertText: insertText
 
-  //     }
-  //   },
-  //   history: {
-  //     delay: 500,
-  //     maxStack: 100,
-  //     userOnly: true
-  //   }
-    
-  // };
-
-  // const formats = [
-  //   "header",
-  //   "font",
-  //   "size",
-  //   "bold",
-  //   "italic",
-  //   "underline",
-  //   "strike",
-  //   "blockquote",
-  //   "list",
-  //   "bullet",
-  //   "indent",
-  //   "link",
-  //   "image",
-  //   "color"
-  // ];
-// // ON THE COMPONENT
-// <ReactQuill
-// value={this.state.content}
-// onChange={value => {
-//    this.setState({ content: value }, () => {
-//     this.handleChange();
-//   });
-// }}
-// />
-// // AND THEN IN MY LOCAL HANDLECHANGE FUNCTION
-// if (e === undefined && this.state.content) {
-//       // Also have to set content cause of quill library bug
-//       let emailTemplate = this.state.emailTemplate;
-//       emailTemplate['content'] = this.state.content;
-//       this.setState({ emailTemplate });
-//       return;
-// ()=>setEditorHtml(ReactQuill?.state?.value)
-      return (
+       return (
       <div>
       <div className="text-editor">
-       <CustomToolbar />
+      <CustomToolbar />
+        
         <div className="editor__container" id="editor__container">
+        {console.log(selectedNote, "THIS IS FROM RETURN")}
+        {console.log(editorHtml, "EDITOR HTML FROM RETURN")}
         {editorHtml?<ReactQuill
-          defaultValue={selectedNote.text}
+          value={editorHtml}
+          bounds={"#editor__container"}
           onChange={()=>autoSave()}
           placeholder={props.placeholder}
           modules={modules}
@@ -260,7 +211,8 @@ function Note(props) {
         </div>
       </div>
       </div>
-    );
+    ) 
+   
     
 }
 
