@@ -2,6 +2,7 @@ from app.config import Config
 from flask import Flask, Blueprint, jsonify, json, request, session
 from flask_sqlalchemy import SQLAlchemy
 from app.models import Note, Notebook, db
+from flask_login import current_user
 
 notebook_routes = Blueprint("notebook_routes",
                             __name__,
@@ -22,8 +23,8 @@ def get_all_notebooks(user_id):
 def add_notebook(user_id):
     notebook_data = json.loads(request.data.decode("utf-8"))
 
-    notebook = Notebook(name = notebook_data["name"],
-                        user_id = notebook_data["user_id"])
+    notebook = Notebook(name = notebook_data,
+                        user_id = current_user.id)
     
     db.session.add(notebook)
     db.session.commit()
@@ -35,8 +36,8 @@ def delete_notebook(notebook_id):
     #     db.delete(note)
     #     db.session.commit()
 
-    notebook = Notebook.query.filter_by(id = notebook_id)
-
+    notebook = Notebook.query.filter_by(id = notebook_id).first()
+    print("THIS IS THE DELETE ROUTE.......", notebook)
     db.session.delete(notebook)
     db.session.commit()
     return jsonify({"message": "Notebook successfully deleted"})
@@ -44,11 +45,13 @@ def delete_notebook(notebook_id):
 def edit_notebook(notebook_id):
     edit_notebook_data = json.loads(request.data.decode("utf-8"))
     notebook = get_one_notebook(notebook_id)
-
+    print(edit_notebook_data)
     if notebook.name is not edit_notebook_data["name"]:
         notebook.name = edit_notebook_data["name"]
     if notebook.user_id is not edit_notebook_data["user_id"]:
         notebook.user_id = edit_notebook_data["user_id"]
+    
+    notebook.default_notebook = edit_notebook_data["default_notebook"]
     
     db.session.commit()
     return jsonify(notebook.to_dict())

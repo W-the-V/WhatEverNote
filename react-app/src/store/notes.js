@@ -59,7 +59,7 @@ export const createNote = (data, userId) => async (dispatch) => {
 };
 
 export const editNote = (data) => async (dispatch) => {
-  const response = await fetch(`/api/notes/${data.id}`, {
+  const response = await fetch(`/api/user/${data.user_id}/notes/${data.id}`, {
     method: "put",
     headers: {
       "Content-Type": "application/json",
@@ -74,8 +74,8 @@ export const editNote = (data) => async (dispatch) => {
   }
 };
 
-export const deleteNote = (noteId) => async (dispatch) => {
-  const response = await fetch(`/api/notes/${noteId}`, {
+export const deleteNote = (userId, noteId) => async (dispatch) => {
+  const response = await fetch(`/api/user/${userId}/notes/${noteId}`, {
     method: "delete",
   });
 

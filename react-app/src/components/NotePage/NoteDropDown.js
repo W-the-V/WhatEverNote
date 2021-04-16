@@ -14,17 +14,18 @@ function NoteDropDown({ items, sortCriteriaDD, setSortCriteriaDD, setSortCriteri
   
   return (
     <div className="notedropdown__container">
+       <span onClick={()=>setSortCriteriaDD(false)}>X</span>
       <div
         tabIndex={0}
         className="notedropdown-header"
         role="button"
-        onKeyPress={() => toggle(!sortCriteriaDD)}
-        onClick={() => toggle(!sortCriteriaDD)}
+        
       >
       </div>
 
       {sortCriteriaDD && (
-        <div className="dropdown-list">
+        <div className="dropdown-list__notes">
+         
           {items.map((item) => (
             <div className="dropdown-list-item" key={item}>
               <button type="button" className="list-item" onClick={() => setSortCriteria(item)}>
@@ -38,9 +39,5 @@ function NoteDropDown({ items, sortCriteriaDD, setSortCriteriaDD, setSortCriteri
   );
 };
 
-const clickOutsideConfig = {
-  handleClickOutside: () => NoteDropDown.handleClickOutside,
-};
 
-onClickOutside(NoteDropDown, clickOutsideConfig);
 export default NoteDropDown

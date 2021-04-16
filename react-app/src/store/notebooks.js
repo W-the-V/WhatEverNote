@@ -30,7 +30,7 @@ export const getNotebooks = (userId) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(get(data.notebooks));
-    return response;
+    return data;
   }
 };
 
@@ -51,7 +51,7 @@ export const createNotebook = (data, userId) => async (dispatch) => {
 };
 
 export const updateNotebooks = (data) => async (dispatch) => {
-  const response = await fetch(`/api/notebooks/${data.id}`, {
+  const response = await fetch(`/api/user/${data.user_id}/notebooks/${data.id}`, {
     method: "put",
     headers: {
       "Content-Type": "application/json",
@@ -66,9 +66,10 @@ export const updateNotebooks = (data) => async (dispatch) => {
   }
 };
 
-export const deleteNotebooks = (notebookId) => async (dispatch) => {
-  const response = await fetch(`/api/notebooks/${notebookId}`, {
+export const deleteNotebooks = (notebookId, user_id) => async (dispatch) => {
+  const response = await fetch(`/api/user/${user_id}/notebooks/${notebookId}`, {
     method: "delete",
+    
   });
 
   if (response.ok) {

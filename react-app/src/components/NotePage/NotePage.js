@@ -106,7 +106,7 @@ return(
             </div>
             <div className="notesidebar__innerheader2">
                 <span>{`${notes?.length} notes`}</span>
-                <div onClick={()=>setSortCriteriaDD(true)} className="filter-sort-buttons__container">
+                <div className="filter-sort-buttons__container">
                 {sortCriteriaDD?<NoteDropDown items={sortCriteriaList} sortCriteriaDD={sortCriteriaDD} setSortCriteriaDD={setSortCriteriaDD} setSortCriteria={setSortCriteria}/>:null}
                 {ascending? <i className="fas fa-sort-amount-up" onClick={()=>setAscending(false)}></i>:<i className="fas fa-sort-amount-down" onClick={()=>setAscending(true)}></i>}
                 <i className="fas fa-filter" onClick={()=>setSortCriteriaDD(true)}></i>
