@@ -38,7 +38,7 @@ const NotePage = () => {
         setSelectedNote("")
         if(ascending && sortCriteria === "updatedAt"){
                 notes.sort((a, b) => {
-                 return a.updated_at - b.updated_at
+                 return new Date(a.updated_at) - new Date(b.updated_at)
                     })
     
                 }
@@ -58,7 +58,7 @@ const NotePage = () => {
         }
         else if (!ascending && sortCriteria === "updatedAt"){
             notes.sort((a, b) => {
-                return b.updated_at - a.updated_at
+                return new Date(b.updated_at) - new Date(a.updated_at)
                    })
                    
         }

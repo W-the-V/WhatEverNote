@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
 import "./index.css";
@@ -6,11 +6,13 @@ import LogoutButton from "../auth/LogoutButton";
 import { deactivateTagModal, activateTagModal } from "../../store/tagmodal";
 import { createNote } from "../../store/notes"
 import { createNotebook } from "../../store/notebooks"
+import Search from "./search";
 
 const NavBar = ({ setAuthenticated }) => {
   let user = useSelector((state) => state.session.user);
   let TagModal = useSelector((state) => state.tagModal.status);
   let notebooks = useSelector((state) => state.notebooks.notebooks)
+  const [showSearch, setShowSearch] = useState(false)
   const dispatch = useDispatch();
   const tagClick = (e) => {
     if (TagModal) dispatch(deactivateTagModal());
@@ -35,9 +37,10 @@ const NavBar = ({ setAuthenticated }) => {
     <nav className="homeNavBarOuter">
       <div className="nav_top__circles">
         <div className="nav_circles letter-circle">{user.firstName[0]}</div>
-        <div className="nav_circles search-circle">
+        <div className="nav_circles search-circle" onClick={()=>setShowSearch(true)}>
           <i className="fas fa-search"></i>
         </div>
+          {showSearch? <Search setShowSearch={setShowSearch}/>: null}
         <div className="nav_circles plus-circle" onClick={addNewNote}>
           <i className="fas fa-plus"></i>
         </div>
