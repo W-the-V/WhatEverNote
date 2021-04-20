@@ -12,6 +12,7 @@ const rootReducer = combineReducers({
   notebooks: notebooksReducer,
   tags: tagsReducer,
   tagModal: tagModalReducer,
+  
 });
 
 let enhancer;

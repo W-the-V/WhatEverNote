@@ -7,6 +7,7 @@ import { deleteNote, editNote } from "../../store/notes"
 
 import "./index.css"
 
+
 const NotesDropDown = ({userId, setShowNoteActions, Note}) => {
     const [showUpdateName, setShowUpdateName] = useState(false)
     const [showDeleteWarning, setShowDeleteWarning] = useState(false)
@@ -36,6 +37,32 @@ const NotesDropDown = ({userId, setShowNoteActions, Note}) => {
     }
     const DeleteNote= async (e) => {
         e.preventDefault()
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires="+d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+          }
+          function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i = 0; i < ca.length; i++) {
+              var c = ca[i];
+              while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+              }
+              if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+              }
+            }
+            return {};
+          }
+          let deletedNotes =getCookie(`${userId}DeletedNotes`)
+          if (deletedNotes){
+              deletedNotes = JSON.parse(deletedNotes)
+          }
+          deletedNotes[Note.id]= Note
+          setCookie(`${userId}DeletedNotes`,JSON.stringify(deletedNotes), 30 )
         await dispatch(deleteNote(userId, Note.id))
         setShowDeleteWarning(false)
 
@@ -47,7 +74,6 @@ const NotesDropDown = ({userId, setShowNoteActions, Note}) => {
         setShowMove(false)
 
     }
-    console.log(moveNoteBook)
     
     Modal.setAppElement("#root");
     return (

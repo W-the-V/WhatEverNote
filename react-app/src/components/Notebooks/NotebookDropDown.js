@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux"
 import { createNote } from "../../store/notes"
 import { updateNotebooks, deleteNotebooks } from "../../store/notebooks"
 
+
 import "./index.css"
 
 const NotebookDropDown = ({userId, setShowActions, Notebook}) => {
@@ -36,6 +37,7 @@ const NotebookDropDown = ({userId, setShowActions, Notebook}) => {
     }
     const DeleteNoteBook = async (e) => {
         e.preventDefault()
+        
         await dispatch(deleteNotebooks(Notebook.id, userId))
         setShowDeleteWarning(false)
 

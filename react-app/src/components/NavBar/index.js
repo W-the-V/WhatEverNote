@@ -72,9 +72,11 @@ const NavBar = ({ setAuthenticated }) => {
         </div>
         </div>
         <div className="middle3_nav__container">
+          <NavLink to="/trash">
           <div className="icon__holder trash_icon">
             <i className="fas fa-trash"></i>
           </div>
+          </NavLink>
         </div>
       </div>
     

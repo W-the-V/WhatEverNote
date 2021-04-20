@@ -7,7 +7,7 @@ const NoteInList = ({note}) => {
             <span className="note-title">{note.title}</span>
             <span className="note-text">{note.text}</span>
             <div className="note-list-updated-tags__container">
-            <span className="note-updated">{note.updated_at}</span>
+            <span className="note-updated">{new Date(note.updated_at).toLocaleDateString()}</span>
             {note.tags.length? note.tags.map(tag => (
                 <span className="notelist-tag" key={tag.id}>{tag.name}</span>
             )):null}
