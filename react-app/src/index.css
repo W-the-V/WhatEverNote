@@ -7,7 +7,7 @@ body{
     background-color: white;
 }
 
-p {
+p, span, button{
     font-family: 'Lato', sans-serif;
 }
 

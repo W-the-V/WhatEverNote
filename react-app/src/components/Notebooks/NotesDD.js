@@ -55,14 +55,14 @@ const NotesDropDown = ({userId, setShowNoteActions, Note}) => {
                 return c.substring(name.length, c.length);
               }
             }
-            return {};
+            return JSON.stringify({});
           }
           let deletedNotes =getCookie(`${userId}DeletedNotes`)
           if (deletedNotes){
               deletedNotes = JSON.parse(deletedNotes)
           }
           deletedNotes[Note.id]= Note
-          setCookie(`${userId}DeletedNotes`,JSON.stringify(deletedNotes), 30 )
+          await setCookie(`${userId}DeletedNotes`,JSON.stringify(deletedNotes), 30 )
         await dispatch(deleteNote(userId, Note.id))
         setShowDeleteWarning(false)
 
