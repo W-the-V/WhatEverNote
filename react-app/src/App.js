@@ -20,6 +20,7 @@ import NotePage from "./components/NotePage/NotePage"
 import LogoutButton from "./components/auth/LogoutButton";
 import NoteBooks from "./components/Notebooks";
 import NoteHeader from "./components/NoteHeader";
+import DeletePage from "./components/deletePage/deletePage";
 
 
 function App() {
@@ -87,8 +88,19 @@ function App() {
         <ProtectedRoute path="/notes" exact={true} authenticated={authenticated}>
           <NotePage />
         </ProtectedRoute>
+        <ProtectedRoute path="/notebooks/:id"
+        exact={true}>
+          <NotePage />
+        </ProtectedRoute>
+        <ProtectedRoute path="/notes/:id"
+        exact={true}>
+          <NotePage />
+        </ProtectedRoute>
         <ProtectedRoute path="/notebooks" exact={true}>
           <NoteBooks />
+        </ProtectedRoute>
+        <ProtectedRoute path="/trash" exact={true}>
+          <DeletePage />
         </ProtectedRoute>
       </Switch>
       <Route exact path="/test">

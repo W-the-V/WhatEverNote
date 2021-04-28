@@ -1,11 +1,13 @@
 /* TODO Add site wide styles */
 @import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@700&family=Open+Sans:wght@300;400&family=Roboto:wght@100;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
+
 body{
     margin: 0;
     background-color: white;
 }
 
-p {
+p, span, button{
     font-family: 'Lato', sans-serif;
 }
 

@@ -1,23 +1,15 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { render } from "react-dom";
 import {useDispatch} from 'react-redux'
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { createNote, editNote, deleteNote }  from "../../store/notes"
+import { createNote, editNote, deleteNote, saveNote }  from "../../store/notes"
+import { useSelectedNote } from '../../context/NoteContext';
+import "../Note/index.css"
 import "./index.css";
 
 
-
-const CustomHeart = () => <span>♥</span>;
-
-function insertHeart() {
-  const cursorPosition = this.quill.getSelection().index;
-  this.quill.insertText(cursorPosition, "♥");
-  this.quill.setSelection(cursorPosition + 1);
-}
-
-
-const CustomUndo = () => (
+export const CustomUndo = () => (
   <svg viewBox="0 0 18 18">
     <polygon className="ql-fill ql-stroke" points="6 10 4 12 2 10 6 10" />
     <path
@@ -34,25 +26,20 @@ function undoChange() {
 function redoChange() {
   this.quill.history.redo();
 }
-/*
- * Custom toolbar component including the custom heart button and dropdowns
- */
-const CustomToolbar = () => (
+
+
+
+
+export const CustomToolbar = () => (
   <div id="toolbar" className="toolbar">
   
 <span class="ql-formats">
 <button className="ql-undo">
         <CustomUndo />
       </button>
-<select class="ql-font">
-        <option selected>Sans Serif</option>
-        <option value="inconsolata">Inconsolata</option>
-        <option value="roboto">Roboto</option>
-        <option value="mirza">Mirza</option>
-        <option value="arial">Arial</option>
-</select>
-</span>
+<select class="ql-font"></select>
 
+</span>
 
 <span class="ql-formats">
 <select class="ql-size"></select>
@@ -84,58 +71,61 @@ const CustomToolbar = () => (
 <button class="ql-video"></button>
 
 </span>
-
-{/* <select className="ql-insertCustomTags">
-      <option value="1">One</option>
-      <option value="2">Two</option>
-    </select> */}
   </div>
 );
 
-// Add sizes to whitelist and register them
-const Size = Quill.import("formats/size");
-Size.whitelist = ["extra-small", "small", "medium", "large"];
-Quill.register(Size, true);
-
-
-// Add fonts to whitelist and register them
-const Font = Quill.import("formats/font");
-Font.whitelist = [
-  "arial",
-  "comic-sans",
-  "courier-new",
-  "georgia",
-  "helvetica",
-  "lucida"
-];
-Quill.register(Font, true);
 
 function Note(props) {
+  const dispatch = useDispatch()
+  const {selectedNote, setSelectedNote} = useSelectedNote()
+  const [editorHtml, setEditorHtml] = useState("")
+  const [loaded, setLoaded] = useState(false)
 
-  const [editorHtml, setEditorHtml] = useState("...")
+  useEffect(()=>{
+    if(selectedNote && selectedNote.text){
+      setEditorHtml(selectedNote.text)
+      setLoaded(true)
+      console.log("YOU WORKING if selectednote && ")
+
+
+    }
+    if (editorHtml){
+      console.log("YOU WORKING if editorHtml")
+
+
+      return 
+    }
+
+    
+  },[selectedNote, setSelectedNote])
   
+  function autoSave() {
+
+  }
   const handleSubmit = (e) => {
     e.preventDefault()
   }
+  // let quill = new Quill('#editor__container', { 
+    
+  // });
+
 
   const modules = {
     toolbar: {
       container: "#toolbar",
       handlers: {
-        insertHeart: insertHeart,
-        undo: undoChange
-
-      }
+        undo: undoChange,
+        autoSave: autoSave
+      },
+      history: {
+        delay: 500,
+        maxStack: 20,
+        userOnly: true
+      },
     },
-    history: {
-      delay: 500,
-      maxStack: 100,
-      userOnly: true
-    }
-    
-  };
-
-  const formats = [
+  }
+  
+  let formats=[
     "header",
     "font",
     "size",
@@ -150,20 +140,29 @@ function Note(props) {
     "link",
     "image",
     "color"
-  ];
+  ]
 
 
-    return (
-      <div className="text-editor">
+       return (
+      <div>
+      <div className="text-editor" id="editor__container">
+      
+        <div className="editor__container" id="toolbar" >
+
+        
+        
         <CustomToolbar />
+      {editorHtml?
         <ReactQuill
           value={editorHtml}
-          onChange={(e) => setEditorHtml(Quill.state?.value)}
+          bounds={"#editor__container"}
+          onChange={()=>autoSave()}
           placeholder={props.placeholder}
           modules={modules}
           formats={formats}
         />
-        {console.log({props}, "FROM RETURN")}
+        :null}
+        </div>
         <div className="editor-footer">
           <div className="footer__save__text">
             <p>all changes saved.</p>
@@ -173,7 +172,10 @@ function Note(props) {
           </div>
         </div>
       </div>
-    );
+      </div>
+    ) 
+   
+    
 }
 
 

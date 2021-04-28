@@ -64,6 +64,7 @@ class Notebook(db.Model):
             "user_id": self.user_id,
             "name": self.name,
             "updated_at":self.updated_at,
+            "default_notebook": self.default_notebook,
             "notes": [note.other_to_dict() for note in self.notes]
         }
     def to_other_dict(self):

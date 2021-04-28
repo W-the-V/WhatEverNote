@@ -6,17 +6,20 @@ import './index.css';
 import App from './App';
 import configureStore from './store';
 import SplashContextProvider from './context/SplashContext'
+import NoteContextProvider from "./context/NoteContext"
 
 const store = configureStore();
 
 function Root() {
   return (
     <SplashContextProvider>
+      <NoteContextProvider>
       <ReduxProvider store={store}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
       </ReduxProvider>
+      </NoteContextProvider>
     </SplashContextProvider>
   )
 }

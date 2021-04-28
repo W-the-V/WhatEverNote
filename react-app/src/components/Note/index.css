@@ -1,4 +1,4 @@
-.ql-font span[data-label="Roboto"]::before {
+/* .ql-font span[data-label="Roboto"]::before {
   font-family: "Roboto";
 }
 .ql-font-roboto {
@@ -28,22 +28,7 @@
 .ql-font-lucida,
 .ql-font span[data-value="lucida"]::before {
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-}
-/* Set content for sizes */
-.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="14px"]::before {
-  content: 'Normal';
-  font-size: 14px !important;
-}
-
-.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="16px"]::before {
-  content: 'Large';
-  font-size: 16px !important;
-}
-
-.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="18px"]::before {
-  content: 'Huge';
-  font-size: 18px !important;
-}
+} */
 
 
 .ql-showHtml {
@@ -58,7 +43,7 @@
   width: 160px;
 }
 .text-editor{
-  margin-left: 100px;
+  /* margin-left: 100px; */
   width: 80%;
   background-color: white;
   border: 0px;
@@ -95,9 +80,10 @@
 }
 
 .editor-footer {
-  padding: 0px;
-  padding-right: 10px;
+  position: fixed;
+  bottom: 0px;
   display: grid;
+  width: 65%;
   grid-template-areas:
   "left middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle right";
   font-size: 14px;
