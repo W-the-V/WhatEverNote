@@ -7,12 +7,14 @@ import { deactivateTagModal, activateTagModal } from "../../store/tagmodal";
 import { createNote } from "../../store/notes"
 import { createNotebook } from "../../store/notebooks"
 import Search from "./search";
+import Starred from "./starred";
 
 const NavBar = ({ setAuthenticated }) => {
   let user = useSelector((state) => state.session.user);
   let TagModal = useSelector((state) => state.tagModal.status);
   let notebooks = useSelector((state) => state.notebooks.notebooks)
-  const [showSearch, setShowSearch] = useState(false)
+  const [showSearch, setShowSearch] = useState(false);
+  const [showStarred, setShowStarred] = useState(false);
   const dispatch = useDispatch();
   const tagClick = (e) => {
     if (TagModal) dispatch(deactivateTagModal());
@@ -32,7 +34,7 @@ const NavBar = ({ setAuthenticated }) => {
       
     }
   }
-  // addNewNote()
+  
   return (
     <nav className="homeNavBarOuter">
       <div className="nav_top__circles">
@@ -52,9 +54,10 @@ const NavBar = ({ setAuthenticated }) => {
               <i className="fas fa-home"></i>
             </NavLink>
           </div>
-          <div className="icon__holder star_icon">
+          <div className="icon__holder star_icon" onClick={()=>setShowStarred(true)}>
             <i className="fas fa-star"></i>
           </div>
+          {showStarred? <Starred setShowStarred={setShowStarred}/>:null}
           <div className="icon__holder note_icon">
             <NavLink to="/notes" exact={true}>
               <i className="fas fa-file-alt"></i>
