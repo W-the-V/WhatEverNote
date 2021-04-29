@@ -5,8 +5,10 @@
   margin-right: 30px;
   align-items: center;
   padding: 8px 12px 4px;
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   text-rendering: optimizeLegibility;
+  border-bottom: none;
 }
 
 .container {
@@ -17,7 +19,7 @@
 
 .left-container {
   flex: 1;
-  min-width: 220px;
+  min-width: 300px;
 }
 
 .right-container {
@@ -66,7 +68,7 @@ button {
   outline: none;
   background-color: transparent;
   border-radius: 3px;
-  transition: background-color .2s;
+  transition: background-color 0.2s;
 }
 
 .divider {
@@ -82,19 +84,22 @@ button {
   max-width: 100%;
   min-width: 0;
   display: flex;
-  align-items: center;
 }
 
 #notebook-button {
   min-width: 60px;
   display: flex;
   justify-content: space-between;
+  background-color: white;
+  margin-top: 5px;
 }
 
 #notebook-name {
-  color:grey;
+  color: green;
+  font-weight: bold;
 }
-div, span {
+div,
+span {
   outline-style: none;
 }
 
@@ -103,5 +108,5 @@ div, span {
 }
 
 .notebook-icon-container {
-  margin-right: 50px
+  margin-right: 50px;
 }
