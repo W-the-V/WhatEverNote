@@ -14,7 +14,6 @@ function NoteHeader({ selectedNote }) {
       let current = notebooks.filter(
         (notebook) => notebook.id === selected.notebook_id
       );
-      console.log(current);
       return (
         <>
           <div className="notebook-label">
@@ -53,7 +52,7 @@ function NoteHeader({ selectedNote }) {
 					</button> */}
           {selectedNote && findInfo(notebooks, selectedNote)}
         </div>
-        <div className="right-container container">
+        {/* <div className="right-container container">
           <div className="who-can-see">Only You</div>
           <span>
             <button className="share-button">Share</button>
@@ -72,7 +71,7 @@ function NoteHeader({ selectedNote }) {
               "Find within note",
             ]}
           />
-        </div>
+        </div> */}
       </div>
     </>
   );

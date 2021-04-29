@@ -140,7 +140,7 @@ const NotePage = () => {
       <div className="note-page__editor__container">
         <NoteHeader selectedNote={selectedNote} />
         {/* {console.log(selectedNote, "FROM NOTEPAGE JS")} */}
-        {selectedNote ? <Note /> : <div>Please select a Note</div>}
+        {selectedNote ? <Note /> : null}
 
         {/* <Note /> */}
       </div>
