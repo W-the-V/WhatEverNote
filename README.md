@@ -1,6 +1,7 @@
-# Whatevernote
 
-![https://media.giphy.com/media/9DfwSdKRW5TczgYwej/giphy.gif](https://media.giphy.com/media/9DfwSdKRW5TczgYwej/giphy.gif)
+<p align="center">
+  <img src="https://media.giphy.com/media/9DfwSdKRW5TczgYwej/giphy.gif" />
+</p>
 
 Whatevernote is a pixel-perfect clone of Evernote.com, with a twist. Create sortable notes and notebooks. Customize your creations with the React Quill text editor toolbar. 
 * **Python/Flask** and **React with Redux** power this project.
@@ -9,4 +10,4 @@ Whatevernote is a pixel-perfect clone of Evernote.com, with a twist. Create sort
 * User **edits are stored in state** during the session and `POST`'ed upon **logout**.
 * This clone reflects Evernote's **2021 update** focusing on **improving** weak areas of the UI such as user authentication and the tags system.
 
-![https://i.imgur.com/BocDlkF.png](https://i.imgur.com/BocDlkF.png)
+![https://media.giphy.com/media/PHvZ0n7Ps9d2Fshtvu/giphy.gif](https://media.giphy.com/media/PHvZ0n7Ps9d2Fshtvu/giphy.gif)
