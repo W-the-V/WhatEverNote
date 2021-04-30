@@ -28,7 +28,7 @@ const NotePage = () => {
   let urlPath = useLocation();
   let path = urlPath.pathname.split("/");
   let noteSelected;
-
+  console.log(selectedNote);
   const noteClick = (note) => {
     setSelectedNote(note);
   };
@@ -139,10 +139,8 @@ const NotePage = () => {
       </div>
       <div className="note-page__editor__container">
         <NoteHeader selectedNote={selectedNote} />
-        {/* {console.log(selectedNote, "FROM NOTEPAGE JS")} */}
-        {selectedNote ? <Note /> : null}
-
-        {/* <Note /> */}
+        {console.log(selectedNote, "FROM NOTEPAGE JS")}
+        {selectedNote && <Note />}
       </div>
     </div>
   );

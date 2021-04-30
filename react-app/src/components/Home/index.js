@@ -7,6 +7,7 @@ import { getNotes } from "../../store/notes";
 import "./index.css";
 import "../NotesWidget/index.css";
 import { getTags } from "../../store/tags";
+import { getNotebooks } from "../../store/notebooks";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(getNotes(user.id));
     dispatch(getTags(user.id));
+    dispatch(getNotebooks(user.id));
   }, [dispatch]);
   return (
     <>

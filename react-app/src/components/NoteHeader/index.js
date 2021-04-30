@@ -14,6 +14,7 @@ function NoteHeader({ selectedNote }) {
       let current = notebooks.filter(
         (notebook) => notebook.id === selected.notebook_id
       );
+      console.log(selected);
       return (
         <>
           <div className="notebook-label">
@@ -21,7 +22,7 @@ function NoteHeader({ selectedNote }) {
               <span id="notebook-icon-container">
                 <i className="fas fa-book"></i>
               </span>
-              <span id="notebook-name">{current[0].name}</span>
+              <span id="notebook-name">{current[0]?.name}</span>
             </button>
             <div></div>
           </div>
@@ -32,7 +33,7 @@ function NoteHeader({ selectedNote }) {
             <span id="notebook-icon-container">
               <i className="fas fa-file-alt"></i>
             </span>
-            <span id="notebook-name">{selected.title}</span>
+            <span id="notebook-name">{selected?.title}</span>
           </button>
         </>
       );
