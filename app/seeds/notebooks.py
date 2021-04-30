@@ -25,10 +25,18 @@ def seed_notebooks():
             x -= 1
     else:
         while x >= 0:
-            n = Notebook(
-                user_id=User.query.filter_by(firstName="Demo").first().id,
-                name=notebook_names[random.randint
-                                    (0, len(notebook_names) - 1)])
+            if x == 10:
+                n = Notebook(
+                    user_id=User.query.filter_by(firstName="Demo").first().id,
+                    name=notebook_names[random.randint
+                                        (0, len(notebook_names) - 1)],
+                    default_notebook=True)
+            else:
+                n = Notebook(
+                    user_id=User.query.filter_by(firstName="Demo").first().id,
+                    name=notebook_names[random.randint
+                                        (0, len(notebook_names) - 1)])
+
             db.session.add(n)
             db.session.commit()
             x -= 1

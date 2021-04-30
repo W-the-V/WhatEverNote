@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink, Redirect, useHistory } from "react-router-dom";
 import "./index.css";
 import LogoutButton from "../auth/LogoutButton";
 import { deactivateTagModal, activateTagModal } from "../../store/tagmodal";
 import { createNote } from "../../store/notes";
 import { createNotebook } from "../../store/notebooks";
+import { getNotes } from "../../store/notes";
+import { useSelectedNote } from "../../context/NoteContext";
 import Search from "./search";
 // import Starred from "./starred";
 
@@ -13,6 +15,9 @@ const NavBar = ({ setAuthenticated }) => {
   let user = useSelector((state) => state.session.user);
   let TagModal = useSelector((state) => state.tagModal.status);
   let notebooks = useSelector((state) => state.notebooks.notebooks);
+  let notes = useSelector((state) => state.notes?.notes);
+  const history = useHistory();
+  const { selectedNote, setSelectedNote } = useSelectedNote();
   const [showSearch, setShowSearch] = useState(false);
   const [showStarred, setShowStarred] = useState(false);
   const dispatch = useDispatch();
@@ -23,18 +28,19 @@ const NavBar = ({ setAuthenticated }) => {
 
   const addNewNote = async () => {
     let defaultNotebook;
-    if (notebooks) {
-      defaultNotebook = notebooks.filter(
-        (notebook) => notebook.default_notebook
-      )[0];
-      const defaultNote = {
-        Title: "Default Note",
-        Text: "<p>Start writing your note</p>",
-        notebook_id: defaultNotebook.id,
-      };
-      let newNote = await dispatch(createNote(defaultNote, user.id));
-      return <Redirect to={`/notes/${newNote.id}`} />;
-    }
+
+    defaultNotebook = notebooks.filter(
+      (notebook) => notebook.default_notebook
+    )[0];
+    const defaultNote = {
+      Title: "Default Note",
+      Text: "<p>Start writing your note</p>",
+      notebook_id: defaultNotebook.id,
+    };
+    let newNote = await dispatch(createNote(defaultNote, user.id));
+    dispatch(getNotes(user.id));
+    setSelectedNote(newNote);
+    history.push(`/notes`);
   };
 
   return (
@@ -67,7 +73,11 @@ const NavBar = ({ setAuthenticated }) => {
           </div>
           {/* {showStarred ? <Starred setShowStarred={setShowStarred} /> : null} */}
           <div className="icon__holder note_icon">
-            <NavLink to="/notes" exact={true}>
+            <NavLink
+              to="/notes"
+              exact={true}
+              onClick={() => setSelectedNote(notes[0])}
+            >
               <i className="fas fa-file-alt"></i>
             </NavLink>
           </div>
