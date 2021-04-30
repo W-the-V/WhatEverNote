@@ -10,4 +10,7 @@ Whatevernote is a pixel-perfect clone of Evernote.com, with a twist. Create sort
 * User **edits are stored in state** during the session and `POST`'ed upon **logout**.
 * This clone reflects Evernote's **2021 update** focusing on **improving** weak areas of the UI such as user authentication and the tags system.
 
-![https://media.giphy.com/media/PHvZ0n7Ps9d2Fshtvu/giphy.gif](https://media.giphy.com/media/PHvZ0n7Ps9d2Fshtvu/giphy.gif)
+<p align="center">
+  <img src="https://media.giphy.com/media/PHvZ0n7Ps9d2Fshtvu/giphy.gif" />
+</p>
+
