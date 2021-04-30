@@ -7,7 +7,7 @@ import { deactivateTagModal, activateTagModal } from "../../store/tagmodal";
 import { createNote } from "../../store/notes"
 import { createNotebook } from "../../store/notebooks"
 import Search from "./search";
-import Starred from "./starred";
+
 
 const NavBar = ({ setAuthenticated }) => {
   let user = useSelector((state) => state.session.user);
@@ -57,7 +57,7 @@ const NavBar = ({ setAuthenticated }) => {
           <div className="icon__holder star_icon" onClick={()=>setShowStarred(true)}>
             <i className="fas fa-star"></i>
           </div>
-          {showStarred? <Starred setShowStarred={setShowStarred}/>:null}
+          {/* {showStarred? <Starred setShowStarred={setShowStarred}/>:null} */}
           <div className="icon__holder note_icon">
             <NavLink to="/notes" exact={true}>
               <i className="fas fa-file-alt"></i>
