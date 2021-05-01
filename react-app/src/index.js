@@ -7,12 +7,14 @@ import App from './App';
 import configureStore from './store';
 import SplashContextProvider from './context/SplashContext'
 import NoteContextProvider from "./context/NoteContext"
+import  TagModalContextProvider from './context/tagModalContext';
 
 const store = configureStore();
 
 function Root() {
   return (
     <SplashContextProvider>
+      <TagModalContextProvider>
       <NoteContextProvider>
       <ReduxProvider store={store}>
         <BrowserRouter>
@@ -20,6 +22,7 @@ function Root() {
         </BrowserRouter>
       </ReduxProvider>
       </NoteContextProvider>
+      </TagModalContextProvider>
     </SplashContextProvider>
   )
 }

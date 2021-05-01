@@ -10,6 +10,7 @@ import { getNotebooks } from "../../store/notebooks";
 import NoteDropDown from "./NoteDropDown";
 import { useSelectedNote } from "../../context/NoteContext";
 import Note from "./note"
+import TagModal from "../TagModal";
 const NotePage = () => {
   let user = useSelector((state) => state.session.user);
   let notes = useSelector((state) => state.notes?.notes);
@@ -91,6 +92,7 @@ const NotePage = () => {
   
   return (
     <div className="Note-Page__container">
+      <TagModal />
       <div className="notesidebar__container">
         <div className="notesidebar__header">
           <div className="notesidebar__innerheader">

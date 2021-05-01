@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
 import "./index.css";
@@ -8,6 +8,7 @@ import { createNote } from "../../store/notes";
 import { createNotebook } from "../../store/notebooks";
 import { getNotes } from "../../store/notes";
 import { useSelectedNote } from "../../context/NoteContext";
+import { useTagModal } from "../../context/tagModalContext";
 import Search from "./search";
 
 const NavBar = ({ setAuthenticated }) => {
@@ -17,6 +18,9 @@ const NavBar = ({ setAuthenticated }) => {
   let notes = useSelector((state) => state.notes?.notes);
   const history = useHistory();
   const { selectedNote, setSelectedNote } = useSelectedNote();
+  const {showTagModal, setShowTagModal} = useTagModal()
+  const [firstNote, setFirstNote] = useState({})
+
   const [showSearch, setShowSearch] = useState(false);
   const [showStarred, setShowStarred] = useState(false);
   const dispatch = useDispatch();
@@ -24,7 +28,11 @@ const NavBar = ({ setAuthenticated }) => {
     if (TagModal) dispatch(deactivateTagModal());
     else dispatch(activateTagModal());
   };
-
+  useEffect(()=>{
+    if(notes){
+      setFirstNote(notes[0])
+    }
+  }, [dispatch,notes])
   const addNewNote = async () => {
     let defaultNotebook;
 
@@ -75,7 +83,7 @@ const NavBar = ({ setAuthenticated }) => {
             <NavLink
               to="/notes"
               exact={true}
-              onClick={() => setSelectedNote(notes[0])}
+              onClick={() => setSelectedNote(firstNote)}
             >
               <i className="fas fa-file-alt"></i>
             </NavLink>
@@ -87,7 +95,7 @@ const NavBar = ({ setAuthenticated }) => {
               <i className="fas fa-book"></i>
             </NavLink>
           </div>
-          <div className="icon__holder tag_icon">
+          <div className="icon__holder tag_icon" onClick={()=>setShowTagModal(true)}>
             <i className="fas fa-tag"></i>
           </div>
           <div className="icon__holder user_icon">

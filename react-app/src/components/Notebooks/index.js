@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useHistory } from "react-router-dom"
 import Modal from "react-modal"
+import TagModal from "../TagModal"
 import {useSelector, useDispatch} from "react-redux"
 import "./index.css"
 import NotebookTableItem from "./NotebookTableItem"
@@ -83,6 +84,7 @@ const NoteBooks = () => {
     }
     return(
     <div className="NoteBook_Page__Container">
+        <TagModal />
         <Modal
             isOpen={showNewNotebook}
             contentLabel="NewNotebook"

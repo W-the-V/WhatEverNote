@@ -1,10 +1,15 @@
 import * as deepcopy from "deepcopy"
-const GET_TAGS = "notes/GET_TAGS";
+const GET_TAGS = "tags/GET_TAGS";
+const ADD_TAG = "tags/ADD_TAG"
 
 const get = (tags) => ({
     type: GET_TAGS,
     tags,
   });
+const add = (tag) => ({
+  type: ADD_TAG,
+  tag
+})
 
 export  const getTags = (id) => async (dispatch) => {
     const response = await fetch(`/api/user/${id}/tags`);
@@ -14,6 +19,22 @@ export  const getTags = (id) => async (dispatch) => {
       dispatch(get(tags));
     }
   };
+  export const createTag = (data, userId) => async (dispatch) => {
+    const response = await fetch(`/api/user/${userId}/tags`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  
+    if (response.ok) {
+      const tag = await response.json();
+      dispatch(add(tag));
+      return tag;
+    }
+  };
+
 
   const initialState = {};
   let newState;
@@ -22,6 +43,11 @@ export  const getTags = (id) => async (dispatch) => {
       case GET_TAGS: {
         newState= deepcopy(state);
         newState.tags = action.tags
+        return newState
+      }
+      case ADD_TAG: {
+        newState = deepcopy(state)
+        newState.tags.push(action.tag)
         return newState
       }
       

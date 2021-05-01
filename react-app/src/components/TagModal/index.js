@@ -1,12 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import Modal from "react-modal";
+import {getTags, createTag} from "../../store/tags"
 import { deactivateTagModal, activateTagModal } from "../../store/tagmodal";
+import { useTagModal } from "../../context/tagModalContext";
+
 import "./index.css";
 const TagModal = () => {
   const dispatch = useDispatch();
-  const TagModalState = useSelector((state) => state.tagModal.status);
+  // const TagModalState = useSelector((state) => state.tagModal.status);
+  let user = useSelector((state) => state.session.user);
+  const tags = useSelector((state) => state.tags?.tags?.tags)
   const [addTagModal, setAddTagModal] = useState(false);
+  const [newTag, setNewTag] = useState('')
+  const {showTagModal, setShowTagModal} = useTagModal()
+  const [searchParameter, setSearchParameter] = useState('')
+    const [searchResults, setSearchResults] = useState([])
+    useEffect(()=>{
+      if (searchParameter){
+          let searchTagsRes = tags.filter( tag => tag.name.toLowerCase().includes(searchParameter))
+          setSearchResults(searchTagsRes)
+      }else{
+          setSearchResults([])
+      }
+  },[setSearchParameter, searchParameter])
+  useEffect(()=> {
+    dispatch(getTags(user.id))
+  }, [dispatch])
+  console.log(tags)
   Modal.setAppElement("#root");
   const closeModal = () => {
     dispatch(deactivateTagModal());
@@ -14,17 +36,22 @@ const TagModal = () => {
   const addTag = () => {
     setAddTagModal(!addTagModal);
   };
+  const addNewTag = async () => {
+    await dispatch(createTag({name:newTag, user_id: user.id}, user.id))
+    
+
+  }
   return (
     <>
       <Modal
-        isOpen={TagModalState}
+        isOpen={showTagModal}
         contentLabel="Tags"
         className="tagInner"
         overlayClassName="tagOuter"
-        onRequestClose={closeModal}
+        onRequestClose={()=>setShowTagModal(false)}
       >
         <div className="tagInnerShell">
-          <button className="closeIcoShell" onClick={closeModal}>
+          <button className="closeIcoShell" onClick={()=>setShowTagModal(false)}>
             <i className="fas fa-times closeIco"></i>
           </button>
           <div className="tagHeaderShell">
@@ -36,14 +63,29 @@ const TagModal = () => {
           <div className="searchBarShell">
             <form className="tagSearch">
               <input
-                type="search"
+                type="text"
                 className="searchInput"
                 placeholder="Find tags..."
-              ></input>
+                value={searchParameter}
+                onChange={(e)=>setSearchParameter(e.target.value)}
+              />
               <button className="searchIcon" type="submit">
                 <i className="fas fa-search"></i>
               </button>
             </form>
+          </div>
+          <div className="searchResults">
+            {searchResults.map(result => (
+              <div>
+              <span key={result.id}>{result.name}</span>
+                {result.notes.map(note => (
+                  <NavLink key={note.id} to={`notes/${note.id}`}>
+                    <span>{note.title}</span>
+                  </NavLink>
+                ))}
+              </div>
+            ))}
+
           </div>
         </div>
       </Modal>
@@ -59,9 +101,11 @@ const TagModal = () => {
             <i className="fas fa-times closeIco"></i>
           </button>
           <p className="createTitle">Create new tag</p>
-          {/* <form className="tagCreate">
-            <input type=text
-          </form> */}
+          <form className="tagCreate" onSubmit={addNewTag}>
+            <label>New tag</label>
+            <input type="text" value={newTag} onChange={(e)=> setNewTag(e.target.value)}/>
+            <button type="submit">+ New Tag</button>
+          </form>
         </div>
       </Modal>
     </>
