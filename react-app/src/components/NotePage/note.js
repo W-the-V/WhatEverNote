@@ -18,6 +18,7 @@ export const CustomUndo = () => (
   </svg>
 );
 
+
 function undoChange() {
   // document.getElementById("reactQuillShell").history.undo();
   // console.log(this.quill);
@@ -27,6 +28,13 @@ function undoChange() {
 function redoChange() {
   this.quill.history.redo();
 }
+
+// form.onsubmit = function() {
+//   // Populate hidden form on submit
+//   var about = document.querySelector('input[name=about]');
+//   about.value = JSON.stringify(this.quill.getContents());
+  
+//   console.log("Submitted", (form).serialize(), (form).serializeArray());}
 
 export const CustomToolbar = () => (
   <div id="toolbar" className="toolbar">
@@ -67,12 +75,13 @@ export const CustomToolbar = () => (
   </div>
 );
 
-function Note(props) {
+const Note = (props) => {
+  
   const dispatch = useDispatch();
   const { selectedNote, setSelectedNote } = useSelectedNote();
   const [editorHtml, setEditorHtml] = useState("");
   const [loaded, setLoaded] = useState(false);
-
+  
   useEffect(() => {
     if (selectedNote && selectedNote.text) {
       setEditorHtml(selectedNote.text);
@@ -85,7 +94,7 @@ function Note(props) {
       return;
     }
   }, [selectedNote, setSelectedNote]);
-
+ 
   function autoSave(e) {
     console.log(e);
   }
@@ -137,14 +146,16 @@ function Note(props) {
             <ReactQuill
               value={editorHtml}
               bounds={"#editor__container"}
-              onChange={(e) => autoSave(e)}
-              placeholder={props.placeholder}
+              
+              // placeholder={props.placeholder}
               modules={modules}
               formats={formats}
               id="reactQuillShell"
             />
           ) : null}
         </div>
+        
+
         <div className="editor-footer">
           <div className="footer__save__text">
             <p>all changes saved.</p>

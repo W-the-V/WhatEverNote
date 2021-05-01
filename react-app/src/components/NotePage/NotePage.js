@@ -3,13 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Redirect, useLocation } from "react-router-dom";
 import { getNotes } from "../../store/notes";
 import "./index.css";
-import Note from "./note";
 import NoteInList from "./NoteInList";
 import NoteHeader from "../NoteHeader/index";
 import { useHistory, useParams } from "react-router";
 import { getNotebooks } from "../../store/notebooks";
 import NoteDropDown from "./NoteDropDown";
 import { useSelectedNote } from "../../context/NoteContext";
+import Note from "./note"
 const NotePage = () => {
   let user = useSelector((state) => state.session.user);
   let notes = useSelector((state) => state.notes?.notes);
@@ -28,7 +28,7 @@ const NotePage = () => {
   let urlPath = useLocation();
   let path = urlPath.pathname.split("/");
   let noteSelected;
-  console.log(selectedNote);
+  // console.log(selectedNote);
   const noteClick = (note) => {
     setSelectedNote(note);
   };
@@ -87,7 +87,7 @@ const NotePage = () => {
     )[0];
     setSelectedNote(noteSelected);
   }
-
+  
   return (
     <div className="Note-Page__container">
       <div className="notesidebar__container">
@@ -138,9 +138,10 @@ const NotePage = () => {
         </div>
       </div>
       <div className="note-page__editor__container">
-        <NoteHeader selectedNote={selectedNote} />
-        {console.log(selectedNote, "FROM NOTEPAGE JS")}
+        <NoteHeader selectedNote={selectedNote} userId={user.id} />
+        
         {selectedNote && <Note />}
+        {/* {selectedNote && <NoteWrapper />} */}
       </div>
     </div>
   );
