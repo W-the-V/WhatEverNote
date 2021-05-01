@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { render } from "react-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { createNote, editNote, deleteNote, saveNote } from "../../store/notes";
 import { useSelectedNote } from "../../context/NoteContext";
 import "../Note/index.css";
 import "./index.css";
-
 export const CustomUndo = () => (
   <svg viewBox="0 0 18 18">
     <polygon className="ql-fill ql-stroke" points="6 10 4 12 2 10 6 10" />
@@ -17,25 +16,19 @@ export const CustomUndo = () => (
     />
   </svg>
 );
-
-
 function undoChange() {
   // document.getElementById("reactQuillShell").history.undo();
   // console.log(this.quill);
   this.quill.history.undo();
 }
-
 function redoChange() {
   this.quill.history.redo();
 }
-
 // form.onsubmit = function() {
 //   // Populate hidden form on submit
 //   var about = document.querySelector('input[name=about]');
 //   about.value = JSON.stringify(this.quill.getContents());
-  
 //   console.log("Submitted", (form).serialize(), (form).serializeArray());}
-
 export const CustomToolbar = () => (
   <div id="toolbar" className="toolbar">
     <span class="ql-formats">
@@ -44,7 +37,6 @@ export const CustomToolbar = () => (
       </button>
       <select class="ql-font"></select>
     </span>
-
     <span class="ql-formats">
       <select class="ql-size"></select>
       <button class="ql-bold"></button>
@@ -56,7 +48,6 @@ export const CustomToolbar = () => (
       <button class="ql-blockquote"></button>
       {/* <button class="ql-strike"></button> */}
     </span>
-
     <span class="ql-formats">
       <button class="ql-list" value="ordered"></button>
       <button class="ql-list" value="bullet"></button>
@@ -74,14 +65,13 @@ export const CustomToolbar = () => (
     </span>
   </div>
 );
-
 const Note = (props) => {
-  
   const dispatch = useDispatch();
   const { selectedNote, setSelectedNote } = useSelectedNote();
   const [editorHtml, setEditorHtml] = useState("");
   const [loaded, setLoaded] = useState(false);
-  
+  const [ saving, setSaving ] = useState("all changes saved.")
+  const user = useSelector(state => state.session.user);
   useEffect(() => {
     if (selectedNote && selectedNote.text) {
       setEditorHtml(selectedNote.text);
@@ -90,21 +80,22 @@ const Note = (props) => {
     }
     if (editorHtml) {
       // console.log("YOU WORKING if editorHtml");
-
       return;
     }
   }, [selectedNote, setSelectedNote]);
- 
   function autoSave(e) {
     console.log(e);
   }
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  const handleSaveNote = () => {
+    let form = document.getElementsByClassName('ql-editor');
+  if(form && selectedNote){
+    form = form[0].innerHTML
+    let updatedNote = {id:selectedNote.id,user_id:user.id, title:selectedNote.title, notebook_id:selectedNote.notebook_id, text: form}
+    dispatch(editNote(updatedNote))
+    setSaving("all changes saved.")
+  }}
   // let quill = new Quill('#editor__container', {
-
   // });
-
   const modules = {
     toolbar: {
       container: "#toolbar",
@@ -119,7 +110,6 @@ const Note = (props) => {
       },
     },
   };
-
   let formats = [
     "header",
     "font",
@@ -136,29 +126,27 @@ const Note = (props) => {
     "image",
     "color",
   ];
-
   return (
     <div>
       <div className="text-editor" id="editor__container">
         <div className="editor__container" id="toolbar">
           <CustomToolbar />
+          <div onBlur={handleSaveNote} onFocus={() => setSaving("saving...")}>
           {editorHtml ? (
             <ReactQuill
               value={editorHtml}
               bounds={"#editor__container"}
-              
               // placeholder={props.placeholder}
               modules={modules}
               formats={formats}
               id="reactQuillShell"
             />
           ) : null}
+          </div>
         </div>
-        
-
         <div className="editor-footer">
           <div className="footer__save__text">
-            <p>all changes saved.</p>
+            <p>{saving}</p>
           </div>
           <div className="footer-right">
             <button className="footer__button" type="button">
@@ -172,5 +160,4 @@ const Note = (props) => {
     </div>
   );
 }
-
 export default Note;

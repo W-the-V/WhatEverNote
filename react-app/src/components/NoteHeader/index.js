@@ -19,17 +19,12 @@ function NoteHeader({ userId, selectedNote }) {
     dispatch(editNote(updatedNote))
   }}
   useEffect(()=>{
-    let interval;
+   
     if(selectedNote){
       setNoteTitle(selectedNote.title)
-      interval = setInterval(()=>{
-        handleSaveNote()
-        
-      }
-        , 10000)
-
+      
     }
-    return ()=> clearInterval(interval)
+    
   },[selectedNote])
   const findInfo = (notebooks, selected) => {
     if (notebooks) {
