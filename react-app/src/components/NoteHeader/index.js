@@ -11,10 +11,25 @@ function NoteHeader({ userId, selectedNote }) {
   const [expandStyle, setExpandStyle] = useState("flex: 1 0 10%");
   let notebooks = useSelector((state) => state.notebooks.notebooks);
   const dispatch = useDispatch()
+  const handleSaveNote = () => {
+    let form = document.getElementsByClassName('ql-editor');
+  if(form && selectedNote){
+    form = form[0].innerHTML
+    let updatedNote = {id:selectedNote.id,user_id:userId,title:noteTitle, notebook_id:selectedNote.notebook_id, text: form}
+    dispatch(editNote(updatedNote))
+  }}
   useEffect(()=>{
+    let interval;
     if(selectedNote){
       setNoteTitle(selectedNote.title)
+      interval = setInterval(()=>{
+        handleSaveNote()
+        
+      }
+        , 10000)
+
     }
+    return ()=> clearInterval(interval)
   },[selectedNote])
   const findInfo = (notebooks, selected) => {
     if (notebooks) {
@@ -22,13 +37,8 @@ function NoteHeader({ userId, selectedNote }) {
         (notebook) => notebook.id === selected.notebook_id
       );
       
-      const handleSaveNote = () => {
-        let form = document.getElementsByClassName('ql-editor');
-      if(form && selectedNote){
-        form = form[0].innerHTML
-        let updatedNote = {id:selectedNote.id,user_id:userId,title:noteTitle, notebook_id:selectedNote.notebook_id, text: form}
-        dispatch(editNote(updatedNote))
-      }}
+      
+      
       
       return (
         <>
