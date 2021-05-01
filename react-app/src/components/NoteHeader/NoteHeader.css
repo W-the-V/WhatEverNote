@@ -110,3 +110,13 @@ span {
 .notebook-icon-container {
   margin-right: 50px;
 }
+
+.title-edit {
+opacity: 0;
+transition: .05s;
+}
+.title-edit:hover{
+opacity: .8;
+transition: .05s;
+
+}
