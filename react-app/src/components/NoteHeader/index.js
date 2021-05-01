@@ -16,6 +16,7 @@ function NoteHeader({ userId, selectedNote }) {
       setNoteTitle(selectedNote.title)
     }
   },[selectedNote])
+  
   const findInfo = (notebooks, selected) => {
     if (notebooks) {
       let current = notebooks.filter(

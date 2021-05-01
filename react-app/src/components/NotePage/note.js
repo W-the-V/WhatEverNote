@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { render } from "react-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { createNote, editNote, deleteNote, saveNote } from "../../store/notes";
@@ -17,6 +17,8 @@ export const CustomUndo = () => (
     />
   </svg>
 );
+
+
 
 
 function undoChange() {
@@ -81,6 +83,8 @@ const Note = (props) => {
   const { selectedNote, setSelectedNote } = useSelectedNote();
   const [editorHtml, setEditorHtml] = useState("");
   const [loaded, setLoaded] = useState(false);
+  const [ saving, setSaving ] = useState("all changes saved.")
+  const user = useSelector(state => state.session.user);
   
   useEffect(() => {
     if (selectedNote && selectedNote.text) {
@@ -98,9 +102,15 @@ const Note = (props) => {
   function autoSave(e) {
     console.log(e);
   }
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  const handleSaveNote = () => {
+
+    let form = document.getElementsByClassName('ql-editor');
+  if(form && selectedNote){
+    form = form[0].innerHTML
+    let updatedNote = {id:selectedNote.id,user_id:user.id, title:selectedNote.title, notebook_id:selectedNote.notebook_id, text: form}
+    dispatch(editNote(updatedNote))
+    setSaving("all changes saved.")
+  }}
   // let quill = new Quill('#editor__container', {
 
   // });
@@ -142,6 +152,7 @@ const Note = (props) => {
       <div className="text-editor" id="editor__container">
         <div className="editor__container" id="toolbar">
           <CustomToolbar />
+          <div onBlur={handleSaveNote} onFocus={() => setSaving("saving...")}>
           {editorHtml ? (
             <ReactQuill
               value={editorHtml}
@@ -153,12 +164,13 @@ const Note = (props) => {
               id="reactQuillShell"
             />
           ) : null}
+          </div>
         </div>
         
 
         <div className="editor-footer">
           <div className="footer__save__text">
-            <p>all changes saved.</p>
+            <p>{saving}</p>
           </div>
           <div className="footer-right">
             <button className="footer__button" type="button">
