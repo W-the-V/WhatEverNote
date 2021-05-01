@@ -9,6 +9,9 @@ const NotesWidget = ({ notes }) => {
   const onclick = (note) => {
     setSelectedNote(note);
   };
+
+
+  
   return (
     <>
       <div className="Notes_Widget__container">
@@ -23,7 +26,7 @@ const NotesWidget = ({ notes }) => {
         <div className="N_Widget__holder">
           {notes
             ? notes.map((note) => (
-                <NavLink onClick={() => onclick(note)} to={`/notes/${note.id}`}>
+                <NavLink key={note.id} onClick={() => onclick(note)} to={`/notes/${note.id}`}>
                   <NoteThumbnail key={note.id} note={note} />
                 </NavLink>
               ))

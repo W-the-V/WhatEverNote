@@ -15,6 +15,7 @@ const NotePage = () => {
   let notes = useSelector((state) => state.notes?.notes);
   const history = useHistory();
   const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch(getNotes(user.id));
     dispatch(getNotebooks(user.id));

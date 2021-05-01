@@ -16,6 +16,10 @@ export const CustomUndo = () => (
     />
   </svg>
 );
+
+
+
+
 function undoChange() {
   // document.getElementById("reactQuillShell").history.undo();
   // console.log(this.quill);
@@ -61,7 +65,7 @@ export const CustomToolbar = () => (
     <span class="ql-formats">
       <button class="ql-link"></button>
       <button class="ql-image"></button>
-      <button class="ql-video"></button>
+      {/* <button class="ql-video"></button> */}
     </span>
   </div>
 );
@@ -72,26 +76,30 @@ const Note = (props) => {
   const [loaded, setLoaded] = useState(false);
   const [ saving, setSaving ] = useState("all changes saved.")
   const user = useSelector(state => state.session.user);
+  
   useEffect(() => {
     if (selectedNote && selectedNote.text) {
       setEditorHtml(selectedNote.text);
       setLoaded(true);
-      // console.log("YOU WORKING if selectednote && ");
+ 
     }
     if (editorHtml) {
-      // console.log("YOU WORKING if editorHtml");
+
+
       return;
     }
   }, [selectedNote, setSelectedNote]);
-  function autoSave(e) {
-    console.log(e);
-  }
-  const handleSaveNote = () => {
-    let form = document.getElementsByClassName('ql-editor');
+
+  const handleSaveNote = async () => {
+  let noteTitle = document.getElementById('note-title-input').value
+  let form = document.getElementsByClassName('ql-editor');
   if(form && selectedNote){
     form = form[0].innerHTML
-    let updatedNote = {id:selectedNote.id,user_id:user.id, title:selectedNote.title, notebook_id:selectedNote.notebook_id, text: form}
-    dispatch(editNote(updatedNote))
+    let updatedNote = {id:selectedNote.id,user_id:user.id, title:noteTitle, notebook_id:selectedNote.notebook_id, text: form}
+    let res = await dispatch(editNote(updatedNote))
+    if(res){
+      setSelectedNote(updatedNote)
+    }
     setSaving("all changes saved.")
   }}
   // let quill = new Quill('#editor__container', {

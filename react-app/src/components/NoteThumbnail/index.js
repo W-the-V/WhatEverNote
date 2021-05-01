@@ -3,12 +3,16 @@ import "./index.css"
 
 const NoteThumbnail = ({note}) => {
 
+        const createMarkup = () => {
+        return {__html: note.text}
+    }
+
     return (
         <div className="Note_Thumbnail__container">
             <div className="Inner_Note_thumbnail">
                 <div className="text_holder">
                     <span id="note_thumbnail_title">{note.title}</span>
-                    <span>{note.text}</span>
+                    <div dangerouslySetInnerHTML={createMarkup()}></div>
 
                 </div>
 
