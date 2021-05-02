@@ -345,3 +345,17 @@ form fieldset{
         font-family: 'Lato', sans-serif; 
       color: #737373;
   }
+
+  .notebook-dropdown-header {
+      display: flex;
+      flex-direction: row;
+      
+  }
+
+  .notebook-dropdown-title {
+      width: 50%
+  }
+
+  .notebook-dropdown-span {
+      width: 50%
+  }

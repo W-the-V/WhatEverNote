@@ -4,9 +4,7 @@ import React from 'react'
 import './index.css'
 
 function Tags() {
-  const tags = useSelector((state) => state?.tags?.tags?.tags)
-  console.log(tags, "THIS IS TAGS")
-  
+  const tags = useSelector((state) => state?.tags?.tags?.tags)  
   let data;
   if (tags !== undefined){
     data = tags.map(tag => {

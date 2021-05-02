@@ -8,7 +8,7 @@ import NotebookTableItem from "./NotebookTableItem"
 import { getNotebooks, createNotebook } from "../../store/notebooks";
 
 const NoteBooks = () => {
-    
+    const [showActions, setShowActions] = useState(false)
     const [notebookSearch, setNotebookSeach] = useState("")
     const [showNewNotebook, setShowNewNotebook] = useState(false)
     const [newNotebookName, setNewNotebookName] = useState('')
@@ -113,7 +113,7 @@ const NoteBooks = () => {
                 <i className="fas fa-search" onClick={searchNotebooks}></i>
             </div>
         </div>
-        <div className="Notebook__Table__Container">
+        <div className="Notebook__Table__Container" onClick={() => setShowActions(false)}>
             <div className="Notebook-Table-Header__Container">
                 <div>
                     {notebooks?<p><span>{notebooks?.length}</span> notebooks</p>:<p>notebooks</p>}
