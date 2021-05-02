@@ -84,6 +84,8 @@ const Note = (props) => {
   const user = useSelector(state => state.session.user);
   const tags = useSelector(state => state.tags?.tags?.tags)
   let notebooks = useSelector(state => state.notebooks?.notebooks)
+  
+
   useEffect(() => {
     if (selectedNote && selectedNote.text) {
       setEditorHtml(selectedNote.text);
@@ -95,11 +97,12 @@ const Note = (props) => {
       return;
     }
   }, [selectedNote, setSelectedNote]);
-
+  
   const handleSaveNote = async () => {
-  let noteTitle = document.getElementById('note-title-input').value
-  let form = document.getElementsByClassName('ql-editor');
-  if(form && selectedNote){
+    let noteTitleHtmlCollection = document.getElementsByClassName('grab-note-title');
+    let noteTitle = noteTitleHtmlCollection["notebook-name"]?.textContent ? noteTitleHtmlCollection["notebook-name"]?.textContent : document.getElementById("note-title-input").value 
+    let form = document.getElementsByClassName('ql-editor');
+    if(form && selectedNote){
     form = form[0].innerHTML
     let updatedNote = {id:selectedNote.id,user_id:user.id, title:noteTitle, notebook_id:selectedNote.notebook_id, text: form}
     let res = await dispatch(editNote(updatedNote))

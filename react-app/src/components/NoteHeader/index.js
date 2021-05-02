@@ -25,6 +25,7 @@ function NoteHeader({ userId, selectedNote }) {
     if(selectedNote){
       setNoteTitle(selectedNote.title)
       setText(selectedNote.title)
+      setEdit(false)
     }
     
   },[selectedNote])
@@ -64,33 +65,37 @@ function NoteHeader({ userId, selectedNote }) {
           <div className="divider">
             <i className="fas fa-grip-lines-vertical"></i>
           </div>
-          <button type="button" id="notebook-button">
+
+          <div className="notebook-label">
+          <button type="button" id="notebook-button" className='notebook-button'>
             <span id="notebook-icon-container">
               <i className="fas fa-file-alt"></i>
             </span>
-          </button>
-            
-          <div className='title-edit'>
-          
-          {edit ? 
-          <div>  
-          <input type="text" id='note-title-input' className='note-title-input' value={text} placeholder={text} onChange={(e)=>setText(e.target.value)}/>
-          <span onClick={() => setEdit(false)}> done</span>
+            {edit ? 
+          <div >  
+          <input type="text" id='note-title-input' value={text} placeholder={text} onChange={(e)=>setText(e.target.value)}/>
+          <span onClick={() => setEdit(false)}>  save title</span>
 
-          <i class="fas fa-pencil-alt"></i></div>
+          </div>
           :
 
           
-            <div>
-                        <span id="notebook-name">{noteTitle}</span>
-                        
-                        <span onClick={() => setEdit(true)}> <i class="fas fa-pencil-alt"></i></span>
+            <div className='title-edit-container'>
+                        <span id="notebook-name" className='grab-note-title'>{text}</span>
+                
+                        <div onClick={() => setEdit(true)} className='title-edit'><i class="fas fa-pencil-alt"></i></div>
 
             </div>
 
           
             }
-            </div>
+          </button>
+          </div>
+            
+          
+          
+          
+            
 
         </>
       );
