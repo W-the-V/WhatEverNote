@@ -143,7 +143,7 @@ class Tag(db.Model):
         return {
             "id": self.id,
             "user_id": self.user_id,
-            "name": self.name,
+            "name": self.name
         }
 
     def other_to_dict(self):

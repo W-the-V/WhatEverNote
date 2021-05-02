@@ -98,3 +98,11 @@
 .searchIcon:hover {
   color: green;
 }
+.searchResults{
+  display: flex;
+  flex-direction: column;
+}
+.searchResults>div{
+  display: flex;
+  flex-direction: column;
+}

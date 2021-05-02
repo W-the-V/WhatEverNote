@@ -1,7 +1,7 @@
 from app.config import Config
 from flask import Flask, Blueprint, jsonify, json, request, session
 from flask_sqlalchemy import SQLAlchemy
-from app.models import Tag, db
+from app.models import Tag, db, Note
 
 
 tag_routes = Blueprint("tags", __name__, url_prefix="/api/user/<int:user_id>")
@@ -15,7 +15,7 @@ def get_one_tag(tag_id):
 
 def get_all_tags(user_id):
     tags = Tag.query.filter_by(user_id = user_id).all()
-    return jsonify({"tags": [tag.to_dict() for tag in tags]})
+    return jsonify({"tags": [tag.other_to_dict() for tag in tags]})
 
 def add_tag(user_id):
     tag_data = json.loads(request.data.decode("utf-8"))
@@ -69,3 +69,15 @@ def delete_user_note(user_id, tag_id):
 @tag_routes.route("/tags/<int:tag_id>", methods=['PUT'])
 def edit_user_tag(user_id, tag_id):
     return edit_tag(tag_id)
+
+#add_tag_to_note
+@tag_routes.route("/tags/<int:tag_id>/note", methods=['POST'])
+def add_tag_to_note(user_id, tag_id):
+    edit_tag_data = json.loads(request.data.decode("utf-8"))
+    note = Note.query.filter_by(id = edit_tag_data['note_id']).first()
+    tag = get_one_tag(tag_id)
+    tag.notes.append(note)
+    db.session.add(tag)
+    db.session.commit()
+    return jsonify(tag.other_to_dict())
+    

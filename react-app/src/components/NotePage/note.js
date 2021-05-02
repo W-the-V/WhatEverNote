@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import { render } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ReactQuill, { Quill } from "react-quill";
+import { NavLink, useHistory } from "react-router-dom"
 import "react-quill/dist/quill.snow.css";
 import { createNote, editNote, deleteNote, saveNote } from "../../store/notes";
+import {createTag, createNoteToTag} from "../../store/tags"
 import { useSelectedNote } from "../../context/NoteContext";
 import "../Note/index.css";
 import "./index.css";
+import deepcopy from "deepcopy";
 export const CustomUndo = () => (
   <svg viewBox="0 0 18 18">
     <polygon className="ql-fill ql-stroke" points="6 10 4 12 2 10 6 10" />
@@ -71,17 +74,20 @@ export const CustomToolbar = () => (
 );
 const Note = (props) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { selectedNote, setSelectedNote } = useSelectedNote();
   const [editorHtml, setEditorHtml] = useState("");
   const [loaded, setLoaded] = useState(false);
+  const [addTag, setAddTag] = useState({})
+  const [tagAdd, setTagAdd] = useState('')
   const [ saving, setSaving ] = useState("all changes saved.")
   const user = useSelector(state => state.session.user);
-  
+  const tags = useSelector(state => state.tags?.tags?.tags)
+  let notebooks = useSelector(state => state.notebooks?.notebooks)
   useEffect(() => {
     if (selectedNote && selectedNote.text) {
       setEditorHtml(selectedNote.text);
       setLoaded(true);
- 
     }
     if (editorHtml) {
 
@@ -102,6 +108,33 @@ const Note = (props) => {
     }
     setSaving("all changes saved.")
   }}
+  const addNewTag = async () => {
+    let newTag = await dispatch(createTag({name:tagAdd, user_id: user.id}, user.id))
+    addTagToNote(newTag)
+  }
+  const addTagToNote = async (tag) => {
+    let data = {note_id: selectedNote.id, id: tag.id}
+    await dispatch(createNoteToTag(data, user.id))
+    let selectedNoteCopy = deepcopy(selectedNote)
+    selectedNoteCopy.tags.push(tag)
+    setSelectedNote(selectedNoteCopy)
+    setTagAdd('')
+  }
+  const addNewNote = async () => {
+    let defaultNotebook;
+
+    defaultNotebook = notebooks.filter(
+      (notebook) => notebook.default_notebook
+    )[0];
+    const defaultNote = {
+      Title: "Default Note",
+      Text: "<p>Start writing your note</p>",
+      notebook_id: defaultNotebook.id,
+    };
+    let newNote = await dispatch(createNote(defaultNote, user.id));
+    setSelectedNote(newNote);
+    history.push(`/notes`);
+  };
   // let quill = new Quill('#editor__container', {
   // });
   const modules = {
@@ -153,13 +186,29 @@ const Note = (props) => {
           </div>
         </div>
         <div className="editor-footer">
+          <div className='selected-note-tags__container'>
+            <div className="selected-note-tags">
+              {selectedNote.tags && selectedNote.tags.map(tag => (
+                <span key={tag.id} className="selectedNote__individualtag">{tag.name}</span>
+              ))}
+            </div>
+            <div>
+                <span className="addTag" onClick={addNewTag}>+ Add Tag</span>
+                <input type="text" value={tagAdd} onChange={(e)=>setTagAdd(e.target.value)} placeholder="find a tag or add a tag..."/>
+            </div>
+            <div>
+              {(tagAdd && tags)&&tags.filter(tag => tag.name.toLowerCase().includes(tagAdd.toLowerCase())).map(tag => (
+                <span className="selectedNote__individualtag" onClick={()=>addTagToNote(tag)}>{tag.name}</span>
+              ))}
+            </div>
+          </div>
+          <div className="footer-right">
           <div className="footer__save__text">
             <p>{saving}</p>
           </div>
-          <div className="footer-right">
-            <button className="footer__button" type="button">
+            <button className="footer__button" type="button" onClick={addNewNote}>
               <p className="Footer_button_text">
-                New Note <i className="fas fa-caret-down"></i>
+                Add New Note 
               </p>
             </button>
           </div>

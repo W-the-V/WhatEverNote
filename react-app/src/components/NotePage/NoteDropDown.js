@@ -28,7 +28,9 @@ function NoteDropDown({ items, sortCriteriaDD, setSortCriteriaDD, setSortCriteri
          
           {items.map((item) => (
             <div className="dropdown-list-item" key={item}>
-              <button type="button" className="list-item" onClick={() => setSortCriteria(item)}>
+              <button type="button" className="list-item" onClick={() => {
+                setSortCriteria(item)
+                setSortCriteriaDD(false)}}>
                 <span>{item}</span>
               </button>
             </div>

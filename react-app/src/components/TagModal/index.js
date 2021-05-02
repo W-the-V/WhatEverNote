@@ -38,7 +38,7 @@ const TagModal = () => {
   };
   const addNewTag = async () => {
     await dispatch(createTag({name:newTag, user_id: user.id}, user.id))
-    
+   
 
   }
   return (
@@ -77,9 +77,10 @@ const TagModal = () => {
           <div className="searchResults">
             {searchResults.map(result => (
               <div>
-              <span key={result.id}>{result.name}</span>
+              <span key={result.id}><i className="fas fa-tag"></i>{result.name}</span>
                 {result.notes.map(note => (
-                  <NavLink key={note.id} to={`notes/${note.id}`}>
+                  <NavLink key={note.id} to={`notes/${note.id}`} onClick={()=>setShowTagModal(false)}>
+              <i className="fas fa-file-alt"></i>
                     <span>{note.title}</span>
                   </NavLink>
                 ))}
