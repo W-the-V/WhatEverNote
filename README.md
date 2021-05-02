@@ -25,7 +25,7 @@ https://whatevernote-app.herokuapp.com/
     .
     ├── dev-requirements.txt
     ├── requirements.txt            
-    ├── Dockerfile                  # Instructions to create imager layer                   
+    ├── Dockerfile                  # Instructions to create image layer                   
     ├── Pipfile                     
     ├── Pifile.lock                  
     ├── README.md
