@@ -1,17 +1,19 @@
 import { TagCloud } from 'react-tagcloud'
+import { useSelector } from 'react-redux'
 import React from 'react'
 import './index.css'
 
 function Tags() {
-    const data = [
-        { value: 'Personal', count: 28 },
-        { value: 'Coding', count: 30 },
-        { value: 'Vacation', count: 28 },
-        { value: 'Group Project', count: 38 },
-        { value: 'HTML5', count: 33 },
-        { value: 'MongoDB', count: 18 },
-        { value: 'CSS3', count: 20 },
-      ]
+  const tags = useSelector((state) => state?.tags?.tags?.tags)
+  console.log(tags, "THIS IS TAGS")
+  
+  let data;
+  if (tags !== undefined){
+    data = tags.map(tag => {
+    return {value: tag.name, count: tag.notes.length }
+  })
+}
+  console.log(data, "what is happening")
       const options = {
         luminosity: 'dark',
         hue: 'green',
@@ -19,9 +21,10 @@ function Tags() {
     return (
     <div className="Tags_Widget__container">
         <div className="N_Widget__header">
-            <span className="Note_Widget_Note">POPULAR TAGS <i className="arrow right"></i></span>
+            <span className="Note_Widget_Note">MY TAGS <i className="arrow right"></i></span>
         </div>
         <span>
+        {tags?   
         <TagCloud
         className="tagcloud"
         colorOptions={options}
@@ -29,7 +32,8 @@ function Tags() {
         maxSize={35}
         tags={data}
         onClick={tag => alert(`'${tag.value}' was selected!`)}
-        />
+        /> : null
+      }
         </span>
     </div>
         
