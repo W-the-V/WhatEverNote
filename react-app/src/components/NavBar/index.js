@@ -5,17 +5,18 @@ import "./index.css";
 import LogoutButton from "../auth/LogoutButton";
 import { deactivateTagModal, activateTagModal } from "../../store/tagmodal";
 import { createNote } from "../../store/notes";
+import * as sessionActions from '../../store/session';
 import { createNotebook } from "../../store/notebooks";
 import { getNotes } from "../../store/notes";
 import { useSelectedNote } from "../../context/NoteContext";
 import Search from "./search";
-// import Starred from "./starred";
 
 const NavBar = ({ setAuthenticated }) => {
   let user = useSelector((state) => state.session.user);
   let TagModal = useSelector((state) => state.tagModal.status);
   let notebooks = useSelector((state) => state.notebooks.notebooks);
   let notes = useSelector((state) => state.notes?.notes);
+  const [showMenu, setShowMenu] = useState(false);
   const history = useHistory();
   const { selectedNote, setSelectedNote } = useSelectedNote();
   const [showSearch, setShowSearch] = useState(false);
@@ -43,10 +44,28 @@ const NavBar = ({ setAuthenticated }) => {
     history.push(`/notes`);
   };
 
+  const openMenu = () => {
+    if (showMenu) return;
+    setShowMenu(true);
+  };
+
+  const logout = (e) => {
+    e.preventDefault();
+    dispatch(sessionActions.logout());
+  };
+
+
   return (
     <nav className="homeNavBarOuter">
       <div className="nav_top__circles">
-        <div className="nav_circles letter-circle">{user.firstName[0]}</div>
+        <div className="nav_circles letter-circle" onClick={openMenu}>{user.firstName[0]}</div>
+        {showMenu && (
+        <ul className="profile-dropdown">
+          <li>
+            <button onClick={logout}>Log Out</button>
+          </li>
+        </ul>
+      )}
         <div
           className="nav_circles search-circle"
           onClick={() => setShowSearch(true)}

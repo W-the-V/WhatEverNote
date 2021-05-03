@@ -33,3 +33,7 @@ https://whatevernote-app.herokuapp.com/
     ├── react-app                   # React with Redux frontend folder
     ├── images
    
+   ## Usage
+1. `git clone`
+2. `cd` into
+3. 

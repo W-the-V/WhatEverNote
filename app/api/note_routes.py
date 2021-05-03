@@ -2,6 +2,7 @@ from app.config import Config
 from flask import Flask, Blueprint, jsonify, json, request, session
 from flask_sqlalchemy import SQLAlchemy
 from app.models import Note, Notebook, db
+import datetime
 
 
 note_routes = Blueprint("note_routes",
@@ -51,6 +52,7 @@ def edit_note(note_id):
         note.text = edit_note_data["text"]
     if note.notebook_id is not edit_note_data["notebook_id"]:
         note.notebook_id = edit_note_data["notebook_id"]
+    note.updated_at = datetime.datetime.now()
     
     db.session.commit()
     return jsonify(note.to_dict())
