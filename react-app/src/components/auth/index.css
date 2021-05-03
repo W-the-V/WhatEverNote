@@ -15,7 +15,6 @@ body {
   max-width: 512px;
   margin: 0px auto 18px auto;
   padding: 62.12px 99px 48px;
-  /* width: 314px; */
   box-shadow: 0px 4px 24px rgb(0 0 0 / 10%);
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -180,18 +179,18 @@ input[type="submit" i] {
 .form__button:hover {
   background-color: rgba(34, 217, 0);
 }
-#Logout-Button{
+#Logout-Button {
   position: absolute;
   height: 300px;
   width: 300px;
 }
-.form__error__container{
+.form__error__container {
   height: 15px;
   display: flex;
   justify-content: center;
   padding-left: 5px;
 }
-.form__error__text{
+.form__error__text {
   color: red;
   font-size: 13px;
 }

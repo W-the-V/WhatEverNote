@@ -1,10 +1,10 @@
 .dropdown-wrapper {
-  width: 28px;
+  width: 175px;
   height: 100%;
 }
 .dropdown-header {
   padding: 2px;
-  width: 28px;
+  width: 175px;
   height: 100%;
   border: none;
   background-color: transparent;
@@ -12,13 +12,14 @@
   cursor: pointer;
   outline: none;
   font-size: 20px;
-  flex-direction: column;
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content:flex-end;
 }
 
 .ellipsis {
-  margin-top: 10px;
+  margin-right: 10px;
   height: 24px;
   width: 24px;
   display: flex;
@@ -51,6 +52,10 @@
   color: black;
   background-color: white;
   padding: 8px 12px;
+}
+
+.dropdown-list {
+  margin-right: 20px;
 }
 
 .dropdown-list,

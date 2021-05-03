@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import WhyThumbnail from "../WhyThumbnail"
 import SplashNav from "../SplashNav"
 import SplashSidebar from "../SplashSidebar"
+import DevBio from "../DevBio";
 import capture from "../../images/captureIcon.png"
 import together from "../../images/togetherIcon.png"
 import fast from "../../images/fastIcon.png"
@@ -30,6 +31,13 @@ const Whywhatevernote = () => {
                 <span className="Why_EX1">A home for what's important</span>
                 <span className="Why_EX2">Get quick access to the information </span>
                 <div>THIS WILL BE A SCREENSHOT</div>
+            </div>
+
+            <div className="meet-devs">
+                <h1>Meet the Developers</h1>
+                <div className="dev-info">
+                    <DevBio />
+                </div>
             </div>
 
         </div>

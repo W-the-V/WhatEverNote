@@ -5,7 +5,7 @@ import onClickOutside from 'react-onclickoutside';
 
 
 function Dropdown({ items }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [selection, setSelection] = useState([]);
 
   Dropdown.handleClickOutside = () => setOpen(false);
