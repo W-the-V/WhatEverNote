@@ -1,0 +1,21 @@
+.dev-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+}
+
+.image-container {
+  height: 200px;
+  width: 200px;
+  margin-left: 50px;
+}
+
+.dev-image {
+  object-fit: contain;
+  height: 200px;
+  width: 200px;
+  padding-left: 30px;
+}
+
