@@ -45,6 +45,7 @@ nav {
   display: flex;
   align-content: center;
   justify-content: center;
+  cursor: pointer;
 }
 .letter-circle {
   font-family: "Ewert", cursive;
@@ -70,6 +71,9 @@ nav {
 .plus-circle {
   background-color: #05a729;
 }
+.plus-circle:hover {
+  background-color: rgba(34, 217, 0);
+}
 .icon__holder {
   width: 55px;
   height: 31px;
@@ -82,43 +86,60 @@ nav {
 .icon__holder:hover {
   background-color: #424546;
 }
-.search-Drop-Down__container{
+.search-Drop-Down__container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 12px;
   width: 350px;
-  min-height: 300px;
+  height: 300px;
   position: absolute;
+  overflow-y: scroll;
   background-color: white;
-  box-shadow:0 2px 6px rgba(98, 97, 97, 0.493);
-    background-color: white;
-    padding:0px;
-    left: 60px;
+  box-shadow: 0 2px 6px rgba(98, 97, 97, 0.8);
+  background-color: white;
+  padding: 0px;
+  left: 65px;
+  border-radius: 12px;
 }
-.search-input__container{
+.search-input__container {
   margin-top: 10px;
   display: flex;
   flex-direction: row;
+  width: 90%;
+  padding-top: 10px;
 }
-.search-input__container input{
-  border:none;
+.searchText {
+  width: 80%;
+  border: 1px solid black;
+  outline: 1px solid rgb(168, 168, 168);
+  padding-left: 10px;
 }
-.close_DD{
-  position:absolute;
+.search-input__container input {
+  border: none;
+}
+.close_DD {
+  font-size: 26px;
+  position: absolute;
   right: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 10px;
+  top: 18px;
   color: rgb(168, 168, 168);
   padding: 8px;
   width: 30px;
   height: 30px;
   box-sizing: border-box;
   border-radius: 20px;
+  cursor: pointer;
 }
-.close_DD:hover{
-  background-color: yellowgreen;
-  color:white;
+.close_DD:hover {
+  color: green;
+}
+.searchItems {
+  border-radius: 12px;
+}
+.searchItems :hover {
+  background-color: green;
 }

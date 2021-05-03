@@ -10,15 +10,15 @@
 }
 .N_Widget__header {
   display: flex;
-  margin-top: 15px;
+  margin-top: 20px;
   padding: 0 6px;
-  flex-direction: column;
+  flex-direction: row;
   font-family: "Roboto", sans-serif;
   font-size: 15px;
 }
 .N_Widget__header span {
-  padding: 5px;
   font-weight: bolder;
+  margin-left: 10px;
 }
 .Note_Widget_Recent {
   color: #65ab2f;
