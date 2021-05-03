@@ -41,12 +41,22 @@ https://whatevernote-app.herokuapp.com/
     ├── images
    
    ## Run From Source
-Use these commands install and run the development version of Whavernote:
-1. `git clone https://github.com/W-the-V/WhatEverNote.git`
-2. `cd app`
-3. `flask run`
-4. `cd ..`
-5. `cd react-app`
-6. `npm start`
-
+***Use these commands install and run the development version of Whavernote:***
+<br>
+`git clone https://github.com/W-the-V/WhatEverNote.git`
+<br>
+<img src="https://media.giphy.com/media/g1DML46NGSibBTdF6P/giphy.gif">
+<br>
+`cd app`
+<br>
+`flask run`
+<br>
+`cd ..`
+<br>
+`cd react-app`
+<br>
+`npm start`
 ## Database - *Flask & SQLAlchemy*
+<p align="center">
+  <img src="https://github.com/W-the-V/EverNoteClone/raw/main/images/pythonschema.png" />
+</p>
