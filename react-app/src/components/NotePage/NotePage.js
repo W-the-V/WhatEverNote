@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, Redirect, useLocation } from "react-router-dom";
+import {useLocation } from "react-router-dom";
 import { getNotes } from "../../store/notes";
 import "./index.css";
 import NoteInList from "./NoteInList";
@@ -10,11 +10,13 @@ import { getNotebooks } from "../../store/notebooks";
 import NoteDropDown from "./NoteDropDown";
 import { useSelectedNote } from "../../context/NoteContext";
 import Note from "./note"
+import TagModal from "../TagModal";
 const NotePage = () => {
   let user = useSelector((state) => state.session.user);
   let notes = useSelector((state) => state.notes?.notes);
   const history = useHistory();
   const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch(getNotes(user.id));
     dispatch(getNotebooks(user.id));
@@ -35,7 +37,7 @@ const NotePage = () => {
 
   useEffect(() => {
     if (notes) {
-      //   setSelectedNote("");
+      
       if (ascending && sortCriteria === "updatedAt") {
         notes.sort((a, b) => {
           return new Date(a.updated_at) - new Date(b.updated_at);
@@ -72,24 +74,29 @@ const NotePage = () => {
         setSelectedNote(notes[0]);
       }
     }
-  }, [ascending, sortCriteria]);
-
-  if (path.indexOf("notes") != -1) {
+  }, [setAscending, setSortCriteria]);
+useEffect(()=>{
+  
+  if (path.includes("notes") && notes) {
     if (path[path.length - 1] === "notes") {
       notes = notes;
     } else {
-      noteSelected = notes?.filter((note) => note.id === selectedNote?.id)[0];
+      noteSelected = notes.filter((note) => note.id === Number(path[path.length-1]))[0];
+      
       setSelectedNote(noteSelected);
-    }
-  } else if (path.indexOf("notebooks") != -1) {
+      
+  } }else if (path.indexOf("notebooks") != -1) {
     notes = notes?.filter(
       (note) => (note.notebook_id === note.id) === selectedNote?.id
     )[0];
     setSelectedNote(noteSelected);
   }
+
+},[selectedNote, notes, dispatch])
   
   return (
     <div className="Note-Page__container">
+      <TagModal />
       <div className="notesidebar__container">
         <div className="notesidebar__header">
           <div className="notesidebar__innerheader">

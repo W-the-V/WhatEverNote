@@ -42,7 +42,7 @@ def delete_note(note_id):
     db.session.commit()
     return jsonify({"message": "Note successfully deleted"})
 
-def edit_note(note_id):
+def edit_note(user_id, note_id):
     edit_note_data = json.loads(request.data.decode("utf-8"))
     note = get_one_note(note_id)
 
@@ -55,7 +55,8 @@ def edit_note(note_id):
     note.updated_at = datetime.datetime.now()
     
     db.session.commit()
-    return jsonify(note.to_dict())
+    notebooks = Notebook.query.filter_by(user_id = user_id).all()
+    return jsonify({"notes":[ note for notebook in notebooks for note in notebook.to_dict()['notes']]})
 
 #------------------------------------------------------------------------------
 #                    RESTful Routes -- Notes
@@ -78,4 +79,4 @@ def delete_user_note(user_id, note_id):
 #edit
 @note_routes.route("/notes/<int:note_id>", methods=['PUT'])
 def edit_user_note(user_id, note_id):
-    return edit_note(note_id)
+    return edit_note(user_id, note_id)

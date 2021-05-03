@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { render } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ReactQuill, { Quill } from "react-quill";
+import { NavLink, useHistory } from "react-router-dom"
 import "react-quill/dist/quill.snow.css";
 import { createNote, editNote, deleteNote, saveNote } from "../../store/notes";
+import {createTag, createNoteToTag} from "../../store/tags"
 import { useSelectedNote } from "../../context/NoteContext";
 import "../Note/index.css";
 import "./index.css";
-
+import deepcopy from "deepcopy";
 export const CustomUndo = () => (
   <svg viewBox="0 0 18 18">
     <polygon className="ql-fill ql-stroke" points="6 10 4 12 2 10 6 10" />
@@ -26,18 +28,14 @@ function undoChange() {
   // console.log(this.quill);
   this.quill.history.undo();
 }
-
 function redoChange() {
   this.quill.history.redo();
 }
-
 // form.onsubmit = function() {
 //   // Populate hidden form on submit
 //   var about = document.querySelector('input[name=about]');
 //   about.value = JSON.stringify(this.quill.getContents());
-  
 //   console.log("Submitted", (form).serialize(), (form).serializeArray());}
-
 export const CustomToolbar = () => (
   <div id="toolbar" className="toolbar">
     <span class="ql-formats">
@@ -46,7 +44,6 @@ export const CustomToolbar = () => (
       </button>
       <select class="ql-font"></select>
     </span>
-
     <span class="ql-formats">
       <select class="ql-size"></select>
       <button class="ql-bold"></button>
@@ -58,7 +55,6 @@ export const CustomToolbar = () => (
       <button class="ql-blockquote"></button>
       {/* <button class="ql-strike"></button> */}
     </span>
-
     <span class="ql-formats">
       <button class="ql-list" value="ordered"></button>
       <button class="ql-list" value="bullet"></button>
@@ -72,49 +68,78 @@ export const CustomToolbar = () => (
     <span class="ql-formats">
       <button class="ql-link"></button>
       <button class="ql-image"></button>
-      <button class="ql-video"></button>
+      {/* <button class="ql-video"></button> */}
     </span>
   </div>
 );
-
 const Note = (props) => {
-  
   const dispatch = useDispatch();
+  const history = useHistory();
   const { selectedNote, setSelectedNote } = useSelectedNote();
   const [editorHtml, setEditorHtml] = useState("");
   const [loaded, setLoaded] = useState(false);
+  const [addTag, setAddTag] = useState({})
+  const [tagAdd, setTagAdd] = useState('')
   const [ saving, setSaving ] = useState("all changes saved.")
   const user = useSelector(state => state.session.user);
+  const tags = useSelector(state => state.tags?.tags?.tags)
+  let notebooks = useSelector(state => state.notebooks?.notebooks)
   
+
   useEffect(() => {
     if (selectedNote && selectedNote.text) {
       setEditorHtml(selectedNote.text);
       setLoaded(true);
-      // console.log("YOU WORKING if selectednote && ");
     }
     if (editorHtml) {
-      // console.log("YOU WORKING if editorHtml");
+
 
       return;
     }
   }, [selectedNote, setSelectedNote]);
- 
-  function autoSave(e) {
-    console.log(e);
-  }
-  const handleSaveNote = () => {
-
+  
+  const handleSaveNote = async () => {
+    let noteTitleHtmlCollection = document.getElementsByClassName('grab-note-title');
+    let noteTitle = noteTitleHtmlCollection["notebook-name"]?.textContent ? noteTitleHtmlCollection["notebook-name"]?.textContent : document.getElementById("note-title-input").value 
     let form = document.getElementsByClassName('ql-editor');
-  if(form && selectedNote){
+    if(form && selectedNote){
     form = form[0].innerHTML
-    let updatedNote = {id:selectedNote.id,user_id:user.id, title:selectedNote.title, notebook_id:selectedNote.notebook_id, text: form}
-    dispatch(editNote(updatedNote))
+    let updatedNote = {id:selectedNote.id,user_id:user.id, title:noteTitle, notebook_id:selectedNote.notebook_id, text: form}
+    let res = await dispatch(editNote(updatedNote))
+    if(res){
+      setSelectedNote(updatedNote)
+    }
     setSaving("all changes saved.")
   }}
+  const addNewTag = async () => {
+    let newTag = await dispatch(createTag({name:tagAdd, user_id: user.id}, user.id))
+    addTagToNote(newTag)
+  }
+  const addTagToNote = async (tag) => {
+    let data = {note_id: selectedNote.id, id: tag.id}
+    await dispatch(createNoteToTag(data, user.id))
+    let selectedNoteCopy = deepcopy(selectedNote)
+    selectedNoteCopy.tags.push(tag)
+    setSelectedNote(selectedNoteCopy)
+    setTagAdd('')
+  }
+  const addNewNote = async () => {
+    let defaultNotebook;
+
+    defaultNotebook = notebooks.filter(
+      (notebook) => notebook.default_notebook
+    )[0];
+    const defaultNote = {
+      Title: "Default Note",
+      Text: "<p>Start writing your note</p>",
+      notebook_id: defaultNotebook.id,
+    };
+    let newNote = await dispatch(createNote(defaultNote, user.id));
+    setSelectedNote(newNote);
+    history.push(`/notes`);
+  };
   // let quill = new Quill('#editor__container', {
-
   // });
-
   const modules = {
     toolbar: {
       container: "#toolbar",
@@ -129,7 +154,6 @@ const Note = (props) => {
       },
     },
   };
-
   let formats = [
     "header",
     "font",
@@ -146,7 +170,6 @@ const Note = (props) => {
     "image",
     "color",
   ];
-
   return (
     <div>
       <div className="text-editor" id="editor__container">
@@ -157,7 +180,6 @@ const Note = (props) => {
             <ReactQuill
               value={editorHtml}
               bounds={"#editor__container"}
-              
               // placeholder={props.placeholder}
               modules={modules}
               formats={formats}
@@ -166,16 +188,30 @@ const Note = (props) => {
           ) : null}
           </div>
         </div>
-        
-
         <div className="editor-footer">
+          <div className='selected-note-tags__container'>
+            <div className="selected-note-tags">
+              {selectedNote.tags && selectedNote.tags.map(tag => (
+                <span key={tag.id} className="selectedNote__individualtag">{tag.name}</span>
+              ))}
+            </div>
+            <div>
+                <span className="addTag" onClick={addNewTag}>+ Add Tag</span>
+                <input type="text" value={tagAdd} onChange={(e)=>setTagAdd(e.target.value)} placeholder="find a tag or add a tag..."/>
+            </div>
+            <div>
+              {(tagAdd && tags)&&tags.filter(tag => tag.name.toLowerCase().includes(tagAdd.toLowerCase())).map(tag => (
+                <span className="selectedNote__individualtag" onClick={()=>addTagToNote(tag)}>{tag.name}</span>
+              ))}
+            </div>
+          </div>
+          <div className="footer-right">
           <div className="footer__save__text">
             <p>{saving}</p>
           </div>
-          <div className="footer-right">
-            <button className="footer__button" type="button">
+            <button className="footer__button" type="button" onClick={addNewNote}>
               <p className="Footer_button_text">
-                New Note <i className="fas fa-caret-down"></i>
+                Add New Note 
               </p>
             </button>
           </div>
@@ -184,5 +220,4 @@ const Note = (props) => {
     </div>
   );
 }
-
 export default Note;

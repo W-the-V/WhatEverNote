@@ -103,10 +103,8 @@ const notesReducer = (state = {}, action) => {
       return newState;
     }
     case EDIT_NOTE: {
-      return {
-        ...state,
-        [action.note.id]: action.note,
-      };
+      return action.note
+      
     }
     default:
       return state;

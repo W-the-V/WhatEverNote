@@ -8,6 +8,7 @@ import "./index.css";
 import "../NotesWidget/index.css";
 import { getTags } from "../../store/tags";
 import { getNotebooks } from "../../store/notebooks";
+import TagModal from "../TagModal";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const Home = () => {
   }, [dispatch]);
   return (
     <>
+    <TagModal />
       <div className="home_page__container">
         <div className="home_photo">
           <div className="hello">

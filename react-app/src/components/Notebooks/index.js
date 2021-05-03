@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useHistory } from "react-router-dom";
-import Modal from "react-modal";
-import { useSelector, useDispatch } from "react-redux";
-import "./index.css";
-import NotebookTableItem from "./NotebookTableItem";
+import { NavLink, useHistory } from "react-router-dom"
+import Modal from "react-modal"
+import TagModal from "../TagModal"
+import {useSelector, useDispatch} from "react-redux"
+import "./index.css"
+import NotebookTableItem from "./NotebookTableItem"
 import { getNotebooks, createNotebook } from "../../store/notebooks";
 
 const NoteBooks = () => {
-  const [notebookSearch, setNotebookSeach] = useState("");
-  const [showNewNotebook, setShowNewNotebook] = useState(false);
-  const [newNotebookName, setNewNotebookName] = useState("");
-  const [ascending, setAscending] = useState(true);
-  const [notebooks, setNotebooks] = useState([]);
-  const user = useSelector((state) => state.session.user);
-  const dispatch = useDispatch();
-  const history = useHistory();
-  useEffect(async () => {
-    let testNotebooks = await dispatch(getNotebooks(user.id));
-    setNotebooks(testNotebooks.notebooks);
+    const [showActions, setShowActions] = useState(false)
+    const [notebookSearch, setNotebookSeach] = useState("")
+    const [showNewNotebook, setShowNewNotebook] = useState(false)
+    const [newNotebookName, setNewNotebookName] = useState('')
+    const [ascending, setAscending] = useState(true)
+    const [notebooks, setNotebooks] = useState([])
+    const user = useSelector(state => state.session.user);
+    const dispatch = useDispatch()
+    const history = useHistory()
+    useEffect(async ()=>{
+       let testNotebooks = await dispatch(getNotebooks(user.id))
+       setNotebooks(testNotebooks.notebooks)
   }, [user]);
-
   let testNotebooks = useSelector((state) => state.notebooks?.notebooks);
   const searchNotebooks = () => {
     let orignotebooks = [...notebooks];
@@ -76,36 +77,32 @@ const NoteBooks = () => {
   };
   return (
     <div className="NoteBook_Page__Container">
-      <Modal
-        isOpen={showNewNotebook}
-        contentLabel="NewNotebook"
-        className="NotebookInner"
-        overlayClassName="NotebookOuter"
-        onRequestClose={() => setShowNewNotebook(false)}
-      >
-        <div className="Notebook-action__container">
-          <form onSubmit={(e) => addNewNoteBook(e)}>
-            <h3>Create new notebook</h3>
-            <p>
-              Notebooks are useful for grouping notes around a common topic.
-              They can be private or shared.
-            </p>
-            <label>Name</label>
-            <input
-              type="text"
-              value={newNotebookName}
-              onChange={(e) => setNewNotebookName(e.target.value)}
-            />
+        <TagModal />
+        <Modal
+            isOpen={showNewNotebook}
+            contentLabel="NewNotebook"
+            className="NotebookInner"
+            overlayClassName="NotebookOuter"
+            onRequestClose={()=>setShowNewNotebook(false)}
+            >
+                <div className="Notebook-action__container">
+                    <form onSubmit={(e)=>addNewNoteBook(e)}>
+                        <h3>Create new notebook</h3>
+                        <p>Notebooks are useful for grouping notes around a common topic. They can be private or shared.</p>
+                        <label>Name</label>
+                        <input type="text" value={newNotebookName} onChange={(e)=>setNewNotebookName(e.target.value)}/>
+                        <div className="NoteAction_button__container">
+                        <button type="submit">Add New Notebook</button>
+                        <button type="button" onClick={cancelnewNotebook}>Cancel</button>
+                        </div>
+                    </form>
+                </div>
             <div className="NoteAction_button__container">
               <button type="submit">Add New Notebook</button>
               <button type="button" onClick={cancelnewNotebook}>
                 Cancel
               </button>
-            </div>
-          </form>
-        </div>
       </Modal>
-
       <div className="NoteBook_Page__Header">
         <h4>Notebooks</h4>
         <div className="search_input__container">

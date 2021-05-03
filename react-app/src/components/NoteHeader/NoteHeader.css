@@ -87,11 +87,12 @@ button {
 }
 
 #notebook-button {
-  min-width: 60px;
+  min-width: auto;
   display: flex;
   justify-content: space-between;
   background-color: white;
   margin-top: 5px;
+  padding-right: 0px;
 }
 
 #notebook-name {
@@ -109,4 +110,19 @@ span {
 
 .notebook-icon-container {
   margin-right: 50px;
+}
+
+.title-edit {
+opacity: .3;
+transition: .05s;
+}
+.title-edit:hover{
+opacity: 1;
+transition: .05s;
+
+}
+
+.title-edit-container {
+  display: flex;
+  flex-direction: row  ;
 }

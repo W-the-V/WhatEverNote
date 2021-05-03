@@ -284,3 +284,40 @@ i {
   width: 100%;
   height: 1000px;
 }
+.editor-footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 75%;
+
+}
+.selected-note-tags__container{
+  display: flex; 
+  flex-direction: row;
+  align-items: center;
+}
+.selected-note-tags{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.selectedNote__individualtag{
+  border-radius: 8px;
+  background-color: #c4c4c4;
+  max-height: 30px;
+  margin-right: 5px;
+  padding: 5px;
+}
+.addTag{
+  cursor: pointer;
+  margin-right: 5px;
+}
+.addTag:hover{
+  background-color: #c4c4c4;
+}
+.footer-right{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

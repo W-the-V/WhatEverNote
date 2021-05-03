@@ -38,15 +38,10 @@ const NotebookTableItem = ({ NoteBook }) => {
           <td onClick={() => setShowActions(true)}>
             <span className="notebookDots">...</span>
           </td>
-          {showActions ? (
-            <td>
-              <NotebookDropdown
-                userId={user.id}
-                setShowActions={setShowActions}
-                Notebook={NoteBook}
-              />
-            </td>
-          ) : null}
+            <td>{user.username}</td>
+            <td>{new Date(NoteBook.updated_at).toLocaleDateString()}</td>
+            <td onClick={() => showActions === false ? setShowActions(true) : setShowActions(false)}><span>...</span></td>
+            {showActions? <td><NotebookDropdown userId={user.id} setShowActions={setShowActions} Notebook={NoteBook} /></td>:null} 
         </tr>
         {caretDown &&
           NoteBook.notes.map((note) => (
