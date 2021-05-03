@@ -1,96 +1,91 @@
-.Deleted-Note-Page__container{
-    padding-left: 50px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    background-color: #F2F2F2;
-    
+.Deleted-Note-Page__container {
+  padding-left: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f2f2f2;
 }
-.deleted-notes{
-    display: flex;
-    flex-direction: column;
+.deleted-notes {
+  display: flex;
+  flex-direction: column;
 }
-.deletedItem{
-    padding-left: 10px;
-    display: flex;
-    flex-direction: column;
+.deletedItem {
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
 }
-.emptyTrash__button{
-    font-family: "Lato", sans-serif;
-    margin-left: 120px;
-    height: 30px;
-    border: 1px solid #737373;
-    border-radius: 5px;
-    cursor: pointer;
-    color: #737373;
-    font-size: 13px;
-    padding:2px 10px 3px 10px;
+.emptyTrash__button {
+  font-family: "Lato", sans-serif;
+  margin-left: 120px;
+  height: 30px;
+  border: 1px solid #737373;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #737373;
+  font-size: 13px;
+  padding: 2px 10px 3px 10px;
 }
-.emptyTrash__button:hover{
-    background-color: #aaaaaa;
+.emptyTrash__button:hover {
+  background-color: #aaaaaa;
 }
-.Deleted-Note-Page__content{
-    display:flex;
-    flex-direction: row;
+.Deleted-Note-Page__content {
+  display: flex;
+  flex-direction: row;
 }
-.Deleted-Note-Page__content div{
-    height: 100%;
+.Deleted-Note-Page__content div {
+  height: 100%;
 }
-.empty-trash__container{
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
+.empty-trash__container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.empty-trash__container i{
-    font-size: 65px;
-    color: #D9D9D9;
-    margin: 65px 45px;
-    
+.empty-trash__container i {
+  font-size: 65px;
+  color: #d9d9d9;
+  margin: 65px 45px;
 }
-.header>span{
-    color: #615f5f;
-    font-size: 14px;
+.header > span {
+  color: #615f5f;
+  font-size: 14px;
 }
-.trash-h1{
-    margin:0;
-    font-size: 18px;
-    font-weight: 400;
-    color: #333333;
+.trash-h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 400;
+  color: #333333;
 }
-.Deleted-Note-Page__container .notesidebar__container{
-    background-color: #F2F2F2;
-    overflow: hidden;
+.Deleted-Note-Page__container .notesidebar__container {
+  background-color: #f2f2f2;
+  overflow: hidden;
 }
-.Deleted-Note-Page__container .note-page__editor__container{
-    background-color: white;
+.Deleted-Note-Page__container .note-page__editor__container {
+  background-color: white;
 }
-.empty-trash-info{
-    color: #aaaaaa;
+.empty-trash-info {
+  color: #aaaaaa;
 }
-.header{
-    border-bottom: gray 1px solid;
-    width: 100%;
-    color: #333333;
-    padding-left: 20px;
-    padding-bottom: 13px;
+.header {
+  border-bottom: gray 1px solid;
+  width: 100%;
+  color: #333333;
+  padding-left: 20px;
+  padding-bottom: 13px;
 }
-.header>div{
-    width: 100%;
-    height: 60px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-items: stretch;
+.header > div {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: stretch;
 }
-.deletedItem>.restore{
-    padding-top: 12px;
-    padding-left: 12px;
-    cursor: pointer;
-
+.deletedItem > .restore {
+  padding-top: 12px;
+  padding-left: 12px;
+  cursor: pointer;
 }
-.deletedItem>.restore:hover{
-    background-color: #aaaaaa;
-
+.deletedItem > .restore:hover {
+  background-color: #aaaaaa;
 }
