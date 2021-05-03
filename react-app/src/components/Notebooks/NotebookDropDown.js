@@ -10,7 +10,6 @@ import "./index.css";
 
 const NotebookDropDown = ({ userId, setShowActions, Notebook }) => {
   let user = useSelector((state) => state.session.user);
-
   const [showUpdateName, setShowUpdateName] = useState(false);
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
   const [newName, setNewName] = useState(Notebook.name);
@@ -76,6 +75,7 @@ const NotebookDropDown = ({ userId, setShowActions, Notebook }) => {
   Modal.setAppElement("#root");
   return (
     <div className="NotebookDropDown__container">
+      
       <Modal
         isOpen={showUpdateName}
         contentLabel="NameNotebook"
@@ -132,10 +132,12 @@ const NotebookDropDown = ({ userId, setShowActions, Notebook }) => {
           </form>
         </div>
       </Modal>
-
-      <span onClick={() => setShowActions(false)} id="close">
+      <div className='notebook-dropdown-header'>
+      <h4 className='notebook-dropdown-title'>{Notebook.name}</h4>
+      <span className='notebook-dropdown-span' onClick={() => setShowActions(false)} id="close">
         X
       </span>
+      </div>
       <ul>
         <li onClick={addNewNote}>Add a new Note</li>
         <li onClick={() => setShowUpdateName(true)}>Rename Notebook</li>
