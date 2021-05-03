@@ -56,11 +56,6 @@ https://whatevernote-app.herokuapp.com/
 
 #### `npm start`
 
-## Database - *Flask & SQLAlchemy*
-<p align="center">
-  <img src="https://github.com/W-the-V/EverNoteClone/raw/main/images/pythonschema.png" />
-</p>
-
 # Code Highlights
 <details>
   <summary>Notebook CRUD</summary>
@@ -134,3 +129,41 @@ def edit_user_notebook(user_id, notebook_id):
 
 ```
 </details>
+<details>
+  <summary>Tag Model</summary>
+  
+  ```
+  
+  class Tag(db.Model):
+    __tablename__ = 'tags'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    name = db.Column(db.String(30), nullable=True)
+    notes = db.relationship("Note", back_populates='tags',
+                           secondary="notes_to_tags")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "name": self.name,
+        }
+
+    def other_to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "name": self.name,
+            "notes": [note.to_dict() for note in self.notes]
+        }
+
+  
+  ```
+  
+## Database - *Flask & SQLAlchemy*
+<p align="center">
+  <img src="https://github.com/W-the-V/EverNoteClone/raw/main/images/pythonschema.png" />
+</p>
+
+  
