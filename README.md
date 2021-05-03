@@ -40,10 +40,13 @@ https://whatevernote-app.herokuapp.com/
     ├── react-app                   # React with Redux frontend folder
     ├── images
    
-   ## Usage
+   ## Run From Source
+Use these commands install and run the development version of Whavernote:
 1. `git clone https://github.com/W-the-V/WhatEverNote.git`
 2. `cd app`
 3. `flask run`
 4. `cd ..`
 5. `cd react-app`
 6. `npm start`
+
+## Database - *Flask & SQLAlchemy*
