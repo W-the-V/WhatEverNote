@@ -161,7 +161,10 @@ def edit_user_notebook(user_id, notebook_id):
   
   ```
   
+ </details>
+  
 ## Database - *Flask & SQLAlchemy*
+
 <p align="center">
   <img src="https://github.com/W-the-V/EverNoteClone/raw/main/images/pythonschema.png" />
 </p>
