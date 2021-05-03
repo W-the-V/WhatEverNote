@@ -61,3 +61,16 @@
     line-height: 1.5;
     font-family: "Open Sans", sans-serif;
 }
+
+.dev-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.meet-devs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
