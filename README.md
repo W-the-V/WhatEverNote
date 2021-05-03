@@ -35,5 +35,5 @@ https://whatevernote-app.herokuapp.com/
    
    ## Usage
 1. `git clone`
-2. `cd` into
-3. 
+2. `cd app`
+3. `flask run`
