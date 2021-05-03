@@ -37,3 +37,6 @@ https://whatevernote-app.herokuapp.com/
 1. `git clone`
 2. `cd app`
 3. `flask run`
+4. `cd ..`
+5. `cd react-app`
+6. `npm start`
