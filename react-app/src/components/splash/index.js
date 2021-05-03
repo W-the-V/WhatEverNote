@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux"
 import * as sessionActions from '../../store/session'
 import Modal from "react-modal";
 import mousePic from "../../images/mouse.png";
-import laptopPic from "../../images/laptopEvernote.png";
+import laptopPic from "../../images/splash-hero.png";
 import "./index.css";
 import SignUpForm from "../auth/SignUpForm";
 import LoginForm from "../auth/LoginForm";
@@ -121,7 +121,7 @@ const Splash = () => {
         </div>
         <div className="splash__section2__container">
           <div className="splash_Image__holder">
-            <img alt="logo" src={laptopPic} alt="laptop"/>
+            <img style={{imageRendering:"auto"}} alt="logo" src={laptopPic} alt="laptop"/>
           </div>
           <div className="splash_bullet__container">
             <div className="splash__bullet">
