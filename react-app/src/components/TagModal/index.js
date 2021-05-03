@@ -17,18 +17,22 @@ const TagModal = () => {
   const {showTagModal, setShowTagModal} = useTagModal()
   const [searchParameter, setSearchParameter] = useState('')
     const [searchResults, setSearchResults] = useState([])
+    useEffect(()=> {
+      dispatch(getTags(user.id))
+    }, [dispatch])
+    
     useEffect(()=>{
+      if((tags && tags.length )&& !searchParameter){
+        setSearchResults(tags)
+      }
       if (searchParameter){
           let searchTagsRes = tags.filter( tag => tag.name.toLowerCase().includes(searchParameter))
           setSearchResults(searchTagsRes)
       }else{
           setSearchResults([])
       }
-  },[setSearchParameter, searchParameter])
-  useEffect(()=> {
-    dispatch(getTags(user.id))
-  }, [dispatch])
-  console.log(tags)
+  },[setSearchParameter, searchParameter, tags,dispatch])
+  
   Modal.setAppElement("#root");
   const closeModal = () => {
     dispatch(deactivateTagModal());
@@ -74,12 +78,12 @@ const TagModal = () => {
               </button>
             </form>
           </div>
-          <div className="searchResults">
+          {searchResults.length && <div className="searchResults">
             {searchResults.map(result => (
-              <div>
-              <span key={result.id}><i className="fas fa-tag"></i>{result.name}</span>
+              <div key={result.id}>
+              <span ><i className="fas fa-tag"></i>{result.name}</span>
                 {result.notes.map(note => (
-                  <NavLink key={note.id} to={`notes/${note.id}`} onClick={()=>setShowTagModal(false)}>
+                  <NavLink key={`${note.id}+${result.id}`} to={`notes/${note.id}`} onClick={()=>setShowTagModal(false)}>
               <i className="fas fa-file-alt"></i>
                     <span>{note.title}</span>
                   </NavLink>
@@ -87,7 +91,7 @@ const TagModal = () => {
               </div>
             ))}
 
-          </div>
+          </div>}
         </div>
       </Modal>
       <Modal

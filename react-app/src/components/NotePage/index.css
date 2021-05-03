@@ -204,7 +204,7 @@ i {
 
 .ql-container.ql-snow {
   border: 0px;
-  height: 500px;
+  min-height: 760px;
   border-top: 0.1em solid gainsboro;
   border-bottom: 0.1em solid gainsboro;
 }
@@ -222,6 +222,9 @@ i {
   pointer-events: none;
   position: absolute;
   right: 15px;
+}
+.ql-container{
+  height: min-content;
 }
 
 .editor-footer {
@@ -283,7 +286,7 @@ i {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 1000px;
+  height: 2000px;
 }
 .editor-footer{
   display: flex;
