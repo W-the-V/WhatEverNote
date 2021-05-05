@@ -35,6 +35,9 @@
 <p align="center">
   <img src="images/addnote.gif" />
 </p>
+<p align="center">
+  <img src="images/notebookCRUD.gif" />
+</p>
 * Edit notes with the React Quill Rich Text Editor including functions such as undo, video embed, and image upload
 * Delete notes and restore them from trash for up to 30 days
 * Search and sort notebooks and notes
