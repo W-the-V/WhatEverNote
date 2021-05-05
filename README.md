@@ -41,7 +41,7 @@
   <img src="images/newnotebook.gif" />
 </p>
 
-<h2 align="center">Edit notes with the React Quill Rich Text Editor including functions such as undo, video embed, and image upload</h2>
+<h2 align="center">Edit notes</h2>
 <p align="center">
   <img src="images/addphoto.gif" />
 </p>
