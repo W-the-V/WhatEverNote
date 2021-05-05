@@ -30,15 +30,17 @@
     ├── app                         # Python & Flask backend folder
     ├── react-app                   # React with Redux frontend folder
     ├── images
-* Create notebooks and notes
+    
+<h2 align="center"> Create Notebooks and Notes</h3>
+<p align="center">
+  <img src="images/addnote.gif" />
+</p>
 * Edit notes with the React Quill Rich Text Editor including functions such as undo, video embed, and image upload
 * Delete notes and restore them from trash for up to 30 days
 * Search and sort notebooks and notes
 * Autosave for React Quill - coming soon as a package to npmjs.com
 
-<p align="center">
-  <img src="https://media.giphy.com/media/FcsVRSArKfpTkXk5BB/giphy.gif" />
-</p>
+
 
 
 
