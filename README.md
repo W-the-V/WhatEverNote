@@ -14,7 +14,7 @@
   </p>
 
 <p align="center">
-  <img src="https://media.giphy.com/media/PHvZ0n7Ps9d2Fshtvu/giphy.gif" />
+  <img src="images/helloworld.gif" />
 </p>
 
 ## About this project
