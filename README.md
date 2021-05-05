@@ -1,5 +1,5 @@
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)![Nodejs](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)![Redux](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)
-<h3 align="center"> Whatevernote: <i>An Evernote Clone</i></h3>
+<h1 align="center"> Whatevernote: <i>An Evernote Clone</i></h1>
 
 <p align="center">Whatevernote is a pixel-perfect clone of Evernote.com, with React Quill. Create sortable notes and notebooks. Customize your creations with the React Quill text editor toolbar. 
     <br />
@@ -17,9 +17,19 @@
   <img src="https://media.giphy.com/media/PHvZ0n7Ps9d2Fshtvu/giphy.gif" />
 </p>
 
-## About Whatevernote
-### Live Link:
-https://whatevernote-app.herokuapp.com/
+## About this project
+### Folder Structure
+
+    .
+    ├── dev-requirements.txt
+    ├── requirements.txt            
+    ├── Dockerfile                  # Instructions to create image layer                   
+    ├── Pipfile                     
+    ├── Pifile.lock                  
+    ├── README.md
+    ├── app                         # Python & Flask backend folder
+    ├── react-app                   # React with Redux frontend folder
+    ├── images
 * Create notebooks and notes
 * Edit notes with the React Quill Rich Text Editor including functions such as undo, video embed, and image upload
 * Delete notes and restore them from trash for up to 30 days
@@ -32,18 +42,7 @@ https://whatevernote-app.herokuapp.com/
 
 
 
-## Folder Structure
 
-    .
-    ├── dev-requirements.txt
-    ├── requirements.txt            
-    ├── Dockerfile                  # Instructions to create image layer                   
-    ├── Pipfile                     
-    ├── Pifile.lock                  
-    ├── README.md
-    ├── app                         # Python & Flask backend folder
-    ├── react-app                   # React with Redux frontend folder
-    ├── images
    
    ## Run From Source
 **Use these commands install and run the development version of Whavernote:**
