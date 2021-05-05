@@ -5,7 +5,7 @@
 
 
 
-Whatevernote is a pixel-perfect clone of Evernote.com, with a twist. Create sortable notes and notebooks. Customize your creations with the React Quill text editor toolbar. 
+Whatevernote is a pixel-perfect clone of Evernote.com, with a React Quill. Create sortable notes and notebooks. Customize your creations with the React Quill text editor toolbar. 
 
 <p align="center">
   <img src="https://media.giphy.com/media/PHvZ0n7Ps9d2Fshtvu/giphy.gif" />
