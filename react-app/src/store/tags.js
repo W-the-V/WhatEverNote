@@ -67,15 +67,12 @@ export  const getTags = (id) => async (dispatch) => {
       }
       case ADD_TAG: {
         newState = deepcopy(state)
-        newState.tags.tags.push(action.tag)
+        let tags = state.tags.tags
+        tags.push(action.tag)
+        newState.tags.tags = tags
         return newState
       }
-      case ADD_TAG_TO_NOTE: {
-        newState = deepcopy(state)
-        newState.tags = newState.tags.tags.filter(ele => ele.id != action.tag.id)
-        newState.tags.push(action.tag)
-        return newState
-      }
+      
       
       default:
         return state;

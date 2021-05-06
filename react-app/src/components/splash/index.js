@@ -377,6 +377,7 @@ const Splash = () => {
               <div>
                 <span>WhatEvernote</span>
               </div>
+            </div>
         </div>
         <hr style={{height:"3px",border:"none",color:"#333",backgroundColor:"#333"}}></hr>
         </div>

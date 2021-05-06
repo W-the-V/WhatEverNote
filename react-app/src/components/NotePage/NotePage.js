@@ -74,15 +74,15 @@ const NotePage = () => {
         setSelectedNote(notes[0]);
       }
     }
-  }, [setAscending, setSortCriteria]);
+  }, [setAscending,ascending, setSortCriteria, sortCriteria]);
 useEffect(()=>{
   
   if (path.includes("notes") && notes) {
     if (path[path.length - 1] === "notes") {
       notes = notes;
-    } else {
+    } else if (!selectedNote){
       noteSelected = notes.filter((note) => note.id === Number(path[path.length-1]))[0];
-      
+    
       setSelectedNote(noteSelected);
       
   } }else if (path.indexOf("notebooks") != -1) {
