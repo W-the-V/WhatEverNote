@@ -57,3 +57,10 @@ body{
     border:none;
     background-color: transparent;
 }
+
+.scratch-tag-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
