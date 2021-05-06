@@ -11,6 +11,7 @@ import capture from "../../images/captureIcon.png"
 import together from "../../images/togetherIcon.png"
 import fast from "../../images/fastIcon.png"
 import personalize from "../../images/personalizeIcon.png"
+import homeImage from "../../images/home-screenshot.png"
 import "./index.css"
 import { useDispatch, useSelector } from "react-redux";
 const Whywhatevernote = () => {
@@ -108,7 +109,9 @@ const Whywhatevernote = () => {
             <div className="Why_Explaination">
                 <span className="Why_EX1">A home for what's important</span>
                 <span className="Why_EX2">Get quick access to the information </span>
-                <div>THIS WILL BE A SCREENSHOT</div>
+                <div>
+                  <img alt="home-screenshot" src={homeImage}></img>
+                </div>
             </div>
 
             <div className="meet-devs">

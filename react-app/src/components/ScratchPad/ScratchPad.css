@@ -3,8 +3,8 @@
 .scratch-container {
   top: 540px;
   left: 85px;
-  height: 250px;
-  width: 281px;
+  height: 450px;
+  width: 1000px;
   border: 1px solid #FFEB81;
   background-color: #FFF4B9;
   border-radius: 8px;
@@ -18,12 +18,12 @@
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
 }
 
-.scratch-top-container {
+.scratch-top {
   display: flex;
   flex-direction: row;
   align-items: center;
   height: 40px;
-  width: 264px;
+  width: 1050px;
   padding: 16px 0px 10px;
   /* flex: none; */
   box-sizing: border-box;
@@ -44,11 +44,11 @@
   height: 50px;
   padding: 0px 10px 0px 4px;
   color: #333333;
-  font-size: 14px;
+  font-size: 24px;
   line-height: 16px;
   text-transform: uppercase;
   font-family: inherit;
-  font-weight: 700;
+  font-weight: 500;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -74,7 +74,7 @@
 
 .scratch-text-box {
   margin-left: 50px;
-  font-size: 14px;
+  font-size: 20px;
   border: none;
   outline: none;
   background-color: transparent;
