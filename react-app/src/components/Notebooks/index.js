@@ -150,3 +150,5 @@ const NoteBooks = () => {
 
     )
 }
+
+export default NoteBooks
