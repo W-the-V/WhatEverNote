@@ -66,7 +66,7 @@ const NavBar = ({ setAuthenticated }) => {
   return (
     <nav className="homeNavBarOuter">
       <div className="nav_top__circles">
-        <div className="nav_circles letter-circle" onClick={openMenu}>{user.firstName[0]}</div>
+        <div className="nav_circles letter-circle" onClick={openMenu} title='Log out'>{user.firstName[0]} </div>
         {showMenu && (
         <ul className="profile-dropdown">
           <li>
@@ -77,11 +77,12 @@ const NavBar = ({ setAuthenticated }) => {
         <div
           className="nav_circles search-circle"
           onClick={() => setShowSearch(true)}
+          title='Search'
         >
           <i className="fas fa-search"></i>
         </div>
         {showSearch ? <Search setShowSearch={setShowSearch} /> : null}
-        <div className="nav_circles plus-circle" onClick={addNewNote}>
+        <div className="nav_circles plus-circle" onClick={addNewNote} title='Add new note'>
           <i className="fas fa-plus"></i>
         </div>
       </div>
@@ -89,21 +90,22 @@ const NavBar = ({ setAuthenticated }) => {
         <div className="middle_nav__container">
           <div className="icon__holder home_icon">
             <NavLink to="/" exact={true} activeClassName="active">
-              <i className="fas fa-home"></i>
+              <i className="fas fa-home" title="Home"></i>
             </NavLink>
           </div>
-          <div
+          {/* <div
             className="icon__holder star_icon"
             onClick={() => setShowStarred(true)}
           >
             <i className="fas fa-star"></i>
-          </div>
+          </div> */}
           {/* {showStarred ? <Starred setShowStarred={setShowStarred} /> : null} */}
           <div className="icon__holder note_icon">
             <NavLink
               to="/notes"
               exact={true}
               onClick={() => setSelectedNote(firstNote)}
+              title='Notes'
             >
               <i className="fas fa-file-alt"></i>
             </NavLink>
@@ -111,20 +113,20 @@ const NavBar = ({ setAuthenticated }) => {
         </div>
         <div className="middle2_nav__container">
           <div className="icon__holder notebook_icon">
-            <NavLink to="/notebooks">
+            <NavLink to="/notebooks" title='Notebooks'>
               <i className="fas fa-book"></i>
             </NavLink>
           </div>
-          <div className="icon__holder tag_icon" onClick={()=>setShowTagModal(true)}>
+          <div className="icon__holder tag_icon" title='Tags' onClick={()=>setShowTagModal(true)}>
             <i className="fas fa-tag"></i>
           </div>
-          <div className="icon__holder user_icon">
+          {/* <div className="icon__holder user_icon">
             <i className="fas fa-user-friends"></i>
-          </div>
+          </div> */}
         </div>
         <div className="middle3_nav__container">
           <NavLink to="/trash">
-            <div className="icon__holder trash_icon">
+            <div className="icon__holder trash_icon" title='Trash'>
               <i className="fas fa-trash"></i>
             </div>
           </NavLink>
