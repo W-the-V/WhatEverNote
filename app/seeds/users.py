@@ -1,8 +1,8 @@
-from werkzeug.security import generate_password_hash
+# from werkzeug.security import generate_password_hash
 from app.models import db, User
-from faker import Faker
-import random
-fake = Faker()
+# from faker import Faker
+# import random
+# fake = Faker()
 
 
 # Adds a demo user, you can add other users here if you want
@@ -14,22 +14,22 @@ def seed_users():
         db.session.add(demo)
         db.session.commit()
 
-    x = 10
+    # x = 10
 
-    while x >= 0:
-        name = fake.first_name()
-        email = fake.email()
-        email = email.split("@")
-        email[0] = email[0] + f'{random.randint(0, 9999)}@'
-        email = ''.join(email)
-        u = User(firstName=name,
-                 lastName=fake.last_name(),
-                 username=f'{name}{random.randint(0,9999)}',
-                 email=email,
-                 password='password')
-        db.session.add(u)
-        db.session.commit()
-        x -= 1
+    # while x >= 0:
+    #     name = fake.first_name()
+    #     email = fake.email()
+    #     email = email.split("@")
+    #     email[0] = email[0] + f'{random.randint(0, 9999)}@'
+    #     email = ''.join(email)
+    #     u = User(firstName=name,
+    #              lastName=fake.last_name(),
+    #              username=f'{name}{random.randint(0,9999)}',
+    #              email=email,
+    #              password='password')
+    #     db.session.add(u)
+    #     db.session.commit()
+    #     x -= 1
 
 
 # Uses a raw SQL query to TRUNCATE the users table.

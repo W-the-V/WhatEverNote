@@ -1,7 +1,7 @@
 from app.models import db, User, Notebook
-from faker import Faker
+# from faker import Faker
 import random
-fake = Faker()
+# fake = Faker()
 
 
 def seed_notebooks():

@@ -3,7 +3,6 @@ from .users import seed_users, db
 from .notebooks import seed_notebooks
 from .notes import seed_notes
 from .tags import seed_tags
-from .notes_to_tags import seed_notes_to_tags
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
