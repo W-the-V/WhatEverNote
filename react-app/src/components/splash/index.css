@@ -307,7 +307,7 @@ splash__quote:hover {
 }
 
 .closeIcoOuterShell {
-  width: 24%;
+  width: 400px;
   max-width: 512px;
   display: flex;
   flex-direction: row;
