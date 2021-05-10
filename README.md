@@ -42,6 +42,8 @@
 </p>
 
 <h2 align="center">Edit notes</h2>
+<h4 align="center">Notes are saved in the database as HTML strings. Images are converted to base64 encoded blob strings and save on the database as well. </h4>
+
 <p align="center">
   <img src="images/addphoto.gif" />
 </p>
