@@ -318,6 +318,9 @@ export default notesReducer;
 ```
  
  </details>
+ 
+## Contributions? - *Autosave Package Coming Soon* 
+Want to contribute to Whatevernote? We're working on an open source release of our autosave functionality for use in all React Quill products. Create an issue to get started. 
   
 ## Database - *Flask & SQLAlchemy*
 
