@@ -46,6 +46,13 @@
   <img src="images/addphoto.gif" />
 </p>
 
+<h2 align="center">Autosave Notes</h2>
+<h4 align="center">Using focus and blur, notes are autosaved to the Redux Store and posted to the database upon logout.</h4>
+
+<p align="center">
+  <img src="images/autosavenote.gif" />
+</p>
+
 <h2 align="center">Delete Notes</h2>
 <h4 align="center">Deleted notes are stored in the trash as a cookie for 30 days.</h4>
 <p align="center">
