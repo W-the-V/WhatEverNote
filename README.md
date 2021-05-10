@@ -37,6 +37,8 @@
 </p>
 
 <h2 align="center"> Create Notebooks</h3>
+<h4 align="center">New notebooks are created with a default first note.</h4>
+
 <p align="center">
   <img src="images/newnotebook.gif" />
 </p>
