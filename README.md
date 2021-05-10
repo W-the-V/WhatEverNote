@@ -45,7 +45,12 @@
 <p align="center">
   <img src="images/addphoto.gif" />
 </p>
-* Delete notes and restore them from trash for up to 30 days
+
+<h2 align="center">Delete Notes</h2>
+<h4 align="center">Deleted notes are stored in the trash as a cookie for 30 days.</h4>
+<p align="center">
+  <img src="images/deletenote.gif" />
+</p>
 * Search and sort notebooks and notes
 * Autosave for React Quill - coming soon as a package to npmjs.com
 
