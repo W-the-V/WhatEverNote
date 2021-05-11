@@ -18,19 +18,7 @@
 </p>
 
 ## About this project
-### Folder Structure
 
-    .
-    ├── dev-requirements.txt
-    ├── requirements.txt            
-    ├── Dockerfile                  # Instructions to create image layer                   
-    ├── Pipfile                     
-    ├── Pifile.lock                  
-    ├── README.md
-    ├── app                         # Python & Flask backend folder
-    ├── react-app                   # React with Redux frontend folder
-    ├── images
-    
 <h2 align="center"> Create Notes</h3>
 <p align="center">
   <img src="images/addnote.gif" />
@@ -62,10 +50,21 @@
 <p align="center">
   <img src="images/deletenote.gif" />
 </p>
-* Search and sort notebooks and notes
 * Autosave for React Quill - coming soon as a package to npmjs.com
 
+### Folder Structure
 
+    .
+    ├── dev-requirements.txt
+    ├── requirements.txt            
+    ├── Dockerfile                  # Instructions to create image layer                   
+    ├── Pipfile                     
+    ├── Pifile.lock                  
+    ├── README.md
+    ├── app                         # Python & Flask backend folder
+    ├── react-app                   # React with Redux frontend folder
+    ├── images
+    
  
 
 
