@@ -27,7 +27,6 @@ def get_all_notes(user_id):
 
 def add_note(userDataObject):
     note_data = json.loads(request.data.decode("utf-8"))
-    print(note_data, "THIS IS NOTE DATA FROM API ROUTE")
     note = Note(title = note_data["Title"],
     text = note_data["Text"],
     notebook_id = note_data["notebook_id"])
