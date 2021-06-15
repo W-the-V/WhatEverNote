@@ -113,21 +113,6 @@ class Note(db.Model):
             "tags": [tag.to_dict() for tag in self.tags]
         }
 
-    # tags = db.relationship("Tag", back_populates='name',
-    #                        secondary="Notes_To_Tags")
-
-
-
-
-
-
-# class Notes_To_Tags(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     tags_id = db.Column(db.Integer, db.ForeignKey('tags.id'))
-#     notes_id = db.Column(db.Integer, db.ForeignKey('notes.id'))
-#     notes = db.relationship("Note", backref='tag', lazy=False)
-#     tags = db.relationship("Tag", backref='note', lazy=False)
-
 
 class Tag(db.Model):
     __tablename__ = 'tags'
@@ -137,7 +122,6 @@ class Tag(db.Model):
     name = db.Column(db.String(30), nullable=True)
     notes = db.relationship("Note", back_populates='tags',
                            secondary="notes_to_tags")
-    # user=db.relationship("User", back_populates="Tag")
 
     def to_dict(self):
         return {
