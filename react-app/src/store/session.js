@@ -16,17 +16,7 @@ const removeUser = () => {
     };
 };
 
-// not sure if should be handled by store or services...
-// export const authenticate = async () => {
-//     const response = await fetch("/api/auth/", {
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     });
-//     return await response.json();
-//   };
-  
-//   possibly converted 
+
   export const login = (email, password) => async (dispatch) => {
 
     const response = await fetch("/api/auth/login", {
@@ -108,11 +98,3 @@ export const sessionReducer = (state = {}, action) => {
 };
 
 export default sessionReducer;
-
-
-
-
-// export const loadUserData = (user) => async (dispatch) => {
-
-
-// }
