@@ -16,9 +16,6 @@ def get_one_note(note_id):
     note = Note.query.filter_by(id = note_id).first()
     return note
 
-# def get_all_notes(user_id):
-#     notebooks = Notebook.query.filter_by(userId = user_id).all()
-#     return jsonify({"notebooks": [notebook.to_dict() for notebook in notebooks]})
 
 def get_all_notes(user_id):
 
