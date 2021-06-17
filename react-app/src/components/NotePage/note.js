@@ -10,6 +10,8 @@ import { useSelectedNote } from "../../context/NoteContext";
 import "../Note/index.css";
 import "./index.css";
 import deepcopy from "deepcopy";
+
+// undo icon SVG path
 export const CustomUndo = () => (
   <svg viewBox="0 0 18 18">
     <polygon className="ql-fill ql-stroke" points="6 10 4 12 2 10 6 10" />
@@ -22,24 +24,20 @@ export const CustomUndo = () => (
 
 
 
-
+// methods from Quill working with React Quill
 function undoChange() {
-  // document.getElementById("reactQuillShell").history.undo();
-  // console.log(this.quill);
   this.quill.history.undo();
 }
 function redoChange() {
   this.quill.history.redo();
 }
-// form.onsubmit = function() {
-//   // Populate hidden form on submit
-//   var about = document.querySelector('input[name=about]');
-//   about.value = JSON.stringify(this.quill.getContents());
-//   console.log("Submitted", (form).serialize(), (form).serializeArray());}
+
 export const CustomToolbar = () => (
   <div id="toolbar" className="toolbar">
     <span class="ql-formats">
+//   grab button from Quill
       <button className="ql-undo">
+//   insert undo component
         <CustomUndo />
       </button>
       <select class="ql-font"></select>
@@ -51,9 +49,7 @@ export const CustomToolbar = () => (
       <button class="ql-underline"></button>
       <select class="ql-color"></select>
       <button class="ql-header" value="1"></button>
-      {/* <button class="ql-header" value="2"></button> */}
       <button class="ql-blockquote"></button>
-      {/* <button class="ql-strike"></button> */}
     </span>
     <span class="ql-formats">
       <button class="ql-list" value="ordered"></button>
@@ -61,17 +57,13 @@ export const CustomToolbar = () => (
       <button class="ql-indent" value="-1"></button>
       <button class="ql-indent" value="+1"></button>
     </span>
-    {/* <span class="ql-formats">
-      <button class="ql-direction" value="rtl"></button>
-      <select class="ql-align"></select>
-    </span> */}
     <span class="ql-formats">
       <button class="ql-link"></button>
       <button class="ql-image"></button>
-      {/* <button class="ql-video"></button> */}
     </span>
   </div>
 );
+
 const Note = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -85,19 +77,18 @@ const Note = (props) => {
   const tags = useSelector(state => state.tags?.tags?.tags)
   let notebooks = useSelector(state => state.notebooks?.notebooks)
   
-
+//   check that all relevant note data is grabbed and set it as active note
   useEffect(() => {
     if (selectedNote && selectedNote.text) {
       setEditorHtml(selectedNote.text);
       setLoaded(true);
     }
     if (editorHtml) {
-
-
       return;
     }
+//     rerender when the active note changes
   }, [selectedNote, setSelectedNote]);
-  
+//   save function grabs the content of the quill editor and dispatches the edit action
   const handleSaveNote = async () => {
     let noteTitleHtmlCollection = document.getElementsByClassName('grab-note-title');
     let noteTitle = noteTitleHtmlCollection["notebook-name"]?.textContent ? noteTitleHtmlCollection["notebook-name"]?.textContent : document.getElementById("note-title-input").value 
@@ -125,27 +116,28 @@ const Note = (props) => {
   }
   const addNewNote = async () => {
     let defaultNotebook;
-
+// finds the default notebook
     defaultNotebook = notebooks.filter(
       (notebook) => notebook.default_notebook
     )[0];
+//     adds the note to the default notebook
     const defaultNote = {
       Title: "Default Note",
       Text: "<p>Start writing your note</p>",
       notebook_id: defaultNotebook.id,
     };
+//     adds the default note and sets as the active note
     let newNote = await dispatch(createNote(defaultNote, user.id));
     setSelectedNote(newNote);
     history.push(`/notes`);
   };
-  // let quill = new Quill('#editor__container', {
-  // });
-  const modules = {
+  
+// for quill to handle toolbar functions 
+ const modules = {
     toolbar: {
       container: "#toolbar",
       handlers: {
         undo: undoChange,
-        // autoSave: autoSave,
       },
       history: {
         delay: 500,
@@ -170,17 +162,20 @@ const Note = (props) => {
     "image",
     "color",
   ];
+  
+  
   return (
     <div>
       <div className="text-editor" id="editor__container">
         <div className="editor__container" id="toolbar">
           <CustomToolbar />
+//     autosave!!
           <div onBlur={handleSaveNote} onFocus={() => setSaving("saving...")}>
+//     check if the active note's HTML is in the editor, if so, display it. 
           {editorHtml ? (
             <ReactQuill
               value={editorHtml}
               bounds={"#editor__container"}
-              // placeholder={props.placeholder}
               modules={modules}
               formats={formats}
               id="reactQuillShell"
